@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+    
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    
+    <meta name="renderer" content="webkit"/>
+    <meta name="force-rendering" content="webkit"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <script>if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMode)) window.location.href="https://support.dmeng.net/upgrade-your-browser.html?referrer="+encodeURIComponent(window.location.href); </script>
+    
+    
+    
+    
+        <link rel="shortcut icon" href="https://raw.githubusercontent.com/f1shf1sh/Picture/master/Markdown/favicon.png">
+    
+
+    
+    
+        
+<link rel="stylesheet" href="/css/mdui.min.v1.0.0.css">
+
+    
+    
+<link rel="stylesheet" href="/css/main.css">
+<link rel="stylesheet" href="/css/iconfont.css">
+
+
+    
+    
+
+
+
+
+
+
+
+
+
+
+
+
+          
+
+
+    
+    
+    <title>
+        
+            🎦Win32学习记录-3(线程控制与临界区) | Fish
+        
+    </title>
+    
+    
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="Fish" type="application/atom+xml">
+</head>
+<body class="mdui-drawer-body-left mdui-appbar-with-toolbar mdui-theme-primary-white mdui-theme-accent-blue">
+  
+  <header class="mdui-appbar mdui-appbar-fixed">
+  <div id="toolbar" class="mdui-toolbar mdui-color-theme">
+    <button class="mdui-btn mdui-btn-icon" mdui-drawer="{target: '#sidebar', swipe: true}"><i class="iconfont icon-menu"></i></button>
+    <a href="/" class="mdui-typo-headline">Fish</a>
+    <a href="/" class="header-subtitle mdui-typo-headline"></a>
+    <div class="mdui-toolbar-spacer"></div>
+    <button class="mdui-btn mdui-btn-icon" mdui-dialog="{target: '#search'}" mdui-tooltip="{content: 'search'}"><i class="iconfont icon-search"></i></button>
+  </div>
+</header>
+
+<div class="mdui-dialog" id="search">
+  
+    <div class="search-form">
+      <input type="search" class="search-form-input" placeholder="Please input key words" onfocus="listenSearchFunc()">
+    </div>
+    <div class="search-result" data-resource="/search.xml"></div>
+  
+</div>
+
+  <aside id="sidebar" class="mdui-drawer">
+    <div class="mdui-tab" mdui-tab>
+        <a href="#sidebar-tab1" id="sidebartab" class="mdui-ripple mdui-tab-active">Overview</a>
+        <a href="#sidebar-tab2" id="sidebartab" class="mdui-ripple">About</a>
+    </div>
+
+    
+    <div id="sidebar-tab1" class="mdui-p-a-1">
+        <div class="mdui-list">
+            
+                
+                <a href="/" class="mdui-list-item mdui-ripple">
+                    <div class="mdui-list-item-icon">
+                        <i class="iconfont icon-home"></i>
+                    </div>
+                    <div class="mdui-list-item-content">Home</div>
+                </a>
+            
+                
+                <a href="/tags/" class="mdui-list-item mdui-ripple">
+                    <div class="mdui-list-item-icon">
+                        <i class="iconfont icon-bookmark"></i>
+                    </div>
+                    <div class="mdui-list-item-content">Tags</div>
+                </a>
+            
+                
+                <a href="/categories/" class="mdui-list-item mdui-ripple">
+                    <div class="mdui-list-item-icon">
+                        <i class="iconfont icon-folder"></i>
+                    </div>
+                    <div class="mdui-list-item-content">Categories</div>
+                </a>
+            
+                
+                <a href="/archives/" class="mdui-list-item mdui-ripple">
+                    <div class="mdui-list-item-icon">
+                        <i class="iconfont icon-archive"></i>
+                    </div>
+                    <div class="mdui-list-item-content">Archives</div>
+                </a>
+            
+                
+                <a href="/tools/" class="mdui-list-item mdui-ripple">
+                    <div class="mdui-list-item-icon">
+                        <i class="iconfont icon-tools"></i>
+                    </div>
+                    <div class="mdui-list-item-content">Toolbox</div>
+                </a>
+            
+                
+                <a href="/about/" class="mdui-list-item mdui-ripple">
+                    <div class="mdui-list-item-icon">
+                        <i class="iconfont icon-user"></i>
+                    </div>
+                    <div class="mdui-list-item-content">About</div>
+                </a>
+            
+            <div class="mdui-list-item mdui-ripple">
+                <div class="mdui-list-item-icon">
+                    <i class="iconfont icon-moon"></i>
+                </div>
+                <div class="mdui-list-item-content">Night Mode</div>
+                <label class="mdui-switch" id="darkmode">
+                  <input type="checkbox" id="nightmode_switch"/>
+                  <i class="mdui-switch-icon"></i>
+                </label>
+            </div>           
+        </div>
+    </div>
+
+    
+    <div id="sidebar-tab2" class="mdui-p-a-1">
+        <div class="sidebar-overview">
+            <div class="sidebar-avatar">
+                
+                    <img src="https://raw.githubusercontent.com/f1shf1sh/Picture/master/Markdown/avatar.JPG"/>
+                
+            </div>
+            <div class="sidebar-author-name">Fish</div>
+            <div class="sidebar-description"></div>
+        </div>
+        <div class="sidebar-links">
+            
+                
+                <div class="mdui-chip">
+                    <span class="mdui-chip-icon"><i class="iconfont icon-github"></i></span>
+                    <a target="_blank" rel="noopener" href="https://github.com/f1shf1sh" class="mdui-chip-title">GitHub</a>
+                </div>
+            
+                
+                <div class="mdui-chip">
+                    <span class="mdui-chip-icon"><i class="iconfont icon-twitter"></i></span>
+                    <a target="_blank" rel="noopener" href="https:twitter.com/@Fish12427018" class="mdui-chip-title">Twitter</a>
+                </div>
+            
+        </div>
+        <ul class="mdui-list" mdui-collapse="{accordion: true}">
+            <li class="mdui-collapse-item">
+                <div class="mdui-collapse-item-header mdui-list-item mdui-ripple">
+                    <div class="mdui-list-item-icon">
+                        <i class="iconfont icon-link"></i>
+                    </div>
+                    <div class="mdui-list-item-content">Links</div>
+                    <div class="mdui-collapse-item-arrow">
+                        <i class="mdui-list-item-icon iconfont icon-angle-down"></i>
+                    </div>
+                </div>
+                <ul id="linksList" class="mdui-collapse-item-body mdui-list mdui-list-dense">
+                    
+                        <a target="_blank" rel="noopener" href="https://google.com" class="mdui-list-item mdui-ripple">
+                            Google
+                        </a>
+                    
+                </ul>
+            </li>
+        </ul>
+    </div>
+
+    <div class="mdui-divider"></div>
+    
+    
+</aside>
+  
+  <main id="main-contain" class="mdui-container mdui-m-t-5">
+    <article id="article" class="mdui-card mdui-p-b-2 mdui-m-b-5">
+  <header class="mdui-card-media">
+    
+    
+      <div class="post-header"> 
+  <a class="post-header-title" href="/36839/">🎦Win32学习记录-3(线程控制与临界区)</a>
+  <div class="post-header-meta">
+    <span>
+      <span class="iconfont icon-calendar"></span>
+      Posted on:&nbsp;2021-07-14
+    </span>
+    <span>
+      <span class="iconfont icon-calendar-check"></span>
+      Edited on:&nbsp;2021-08-08
+    </span>
+    <span>
+      <span class="iconfont icon-folder"></span>
+      In:&nbsp;<a class="category-link" href="/categories/Windows/">Windows</a> > <a class="category-link" href="/categories/Windows/win32/">win32</a> > <a class="category-link" href="/categories/Windows/win32/%E7%BA%BF%E7%A8%8B/">线程</a>
+    </span>
+    
+      <span>
+        <span class="iconfont icon-eye"></span>
+        Views:&nbsp;
+        <span id="busuanzi_container_page_pv"><span id="busuanzi_value_page_pv"></span></span>
+      </span>
+    
+  </div>
+</div>   
+    
+
+
+
+    
+    
+    <div class="mdui-card-menu">
+    
+      <button class="mdui-btn mdui-btn-icon mdui-text-color-teal" mdui-menu="{target: '#share_menu', align: 'right'}"><i class="iconfont icon-share"></i></button>
+      <ul class="mdui-menu" id="share_menu">
+        <li class="mdui-menu-item">
+          <a href="http://service.weibo.com/share/share.php?appkey=&title=🎦Win32学习记录-3(线程控制与临界区)&url=http://example.com/36839/&pic=http://example.comhttps://raw.githubusercontent.com/f1shf1sh/Picture/master/Markdown/favicon.png&searchPic=false&style=simple" target="_blank" class="mdui-ripple">Share to Weibo</a>
+        </li>
+        <li class="mdui-menu-item">
+          <a href="https://twitter.com/intent/tweet?text=🎦Win32学习记录-3(线程控制与临界区)&url=http://example.com/36839/&via=Fish" target="_blank" class="mdui-ripple">Share to Twitter</a>
+        </li>
+        <li class="mdui-menu-item">
+          <a href="https://www.facebook.com/sharer/sharer.php?u=http://example.com/36839/" target="_blank" class="mdui-ripple">Share to Facebook</a>
+        </li>
+        <li class="mdui-menu-item">
+          <a href="https://plus.google.com/share?url=http://example.com/36839/" target="_blank" class="mdui-ripple">Share to Google+</a>
+        </li>
+        <li class="mdui-menu-item">
+          <a href="https://www.linkedin.com/shareArticle?mini=true&url=http://example.com/36839/&title=🎦Win32学习记录-3(线程控制与临界区)" target="_blank" class="mdui-ripple">Share to LinkedIn</a>
+        </li>
+        <li class="mdui-menu-item">
+          <a href="http://connect.qq.com/widget/shareqq/index.html?site=Fish&title=🎦Win32学习记录-3(线程控制与临界区)&summary=&pics=http://example.comhttps://raw.githubusercontent.com/f1shf1sh/Picture/master/Markdown/favicon.png&url=http://example.com/36839/" target="_blank" class="mdui-ripple">Share to QQ</a>
+        </li>
+        <li class="mdui-menu-item">
+          <a href="https://telegram.me/share/url?url=http://example.com/36839/&text=🎦Win32学习记录-3(线程控制与临界区)" target="_blank" class="mdui-ripple">Share to Telegram</a>
+        </li>
+      </ul>
+    
+  </div>
+  </header>
+  
+  
+  
+  
+  <div class="post-tags">
+    
+      <i class="iconfont icon-tag">
+        <a rel="tag" href = /tags/%E7%BC%96%E7%A8%8B/ >编程</a>
+      </i>
+    
+  </div>
+
+  
+  <div class="mdui-card-content mdui-typo mdui-p-x-4">
+    <span id="more"></span>
+
+<h3 id="多线程之间的资源抢占问题"><a href="#多线程之间的资源抢占问题" class="headerlink" title="多线程之间的资源抢占问题"></a>多线程之间的资源抢占问题</h3><p>​        当多个线程使用同一个资源时，会出现资源抢占问题</p>
+<h4 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h4><img src="Win32-3.assets/image-20201103194832013.png" style="zoom:80%;" />
+
+<p>​        这个程序功能为向文本框中加数字，每一次加一，两个线程同时加，每一个线程最多加到1000，当两个线程结束后，文本框中的期望值为2000。但是当同时按下两个按钮等待线程结束后，文本框中的结果却与期望值有偏差</p>
+<img src="Win32-3.assets/image-20201103195026242.png" style="zoom:80%;" />
+
+
+
+<ul>
+<li><p>线程函数1 代码</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">DWORD WINAPI <span class="title">ThreadProc1</span><span class="params">(LPVOID lpParameter)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	TCHAR szBuffer[<span class="number">10</span>];</span><br><span class="line">	DWORD dwIndex = <span class="number">0</span>;</span><br><span class="line">	DWORD dwCount;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">while</span> (dwIndex &lt; <span class="number">1000</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">GetWindowText</span>(hEDIT, szBuffer, <span class="number">10</span>);</span><br><span class="line">		<span class="keyword">int</span> check = <span class="built_in">sscanf</span>(szBuffer, <span class="string">&quot;%d&quot;</span>, &amp;dwCount);</span><br><span class="line">		dwCount++;</span><br><span class="line">		<span class="built_in">memset</span>(szBuffer, <span class="number">0</span>, <span class="number">10</span>);</span><br><span class="line">		<span class="built_in">sprintf</span>(szBuffer, <span class="string">&quot;%d&quot;</span>, dwCount);</span><br><span class="line">		<span class="built_in">SetWindowText</span>(hEDIT, szBuffer);</span><br><span class="line">		dwIndex++;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>线程函数2 代码</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">DWORD WINAPI <span class="title">ThreadProc2</span><span class="params">(LPVOID lpParameter)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	TCHAR szBuffer[<span class="number">10</span>];</span><br><span class="line">	DWORD dwIndex = <span class="number">0</span>;</span><br><span class="line">	DWORD dwCount;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">while</span> (dwIndex &lt; <span class="number">1000</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">GetWindowText</span>(hEDIT, szBuffer, <span class="number">10</span>);</span><br><span class="line">		<span class="keyword">int</span> check = <span class="built_in">sscanf</span>(szBuffer, <span class="string">&quot;%d&quot;</span>, &amp;dwCount);</span><br><span class="line">		dwCount++;</span><br><span class="line">		<span class="built_in">memset</span>(szBuffer, <span class="number">0</span>, <span class="number">10</span>);</span><br><span class="line">		<span class="built_in">sprintf</span>(szBuffer, <span class="string">&quot;%d&quot;</span>, dwCount);</span><br><span class="line">		<span class="built_in">SetWindowText</span>(hEDIT, szBuffer);</span><br><span class="line">		dwIndex++;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>两个线程函数步骤如下</p>
+<ol>
+<li>文本框中取值</li>
+<li>字符串 -&gt; 数字</li>
+<li>数字自加1</li>
+<li>数字 -&gt; 字符串</li>
+<li>放回文本框中</li>
+</ol>
+</li>
+</ul>
+<h4 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h4><p>  ​        在windows系统中，一个线程使用一个CUP,但是电脑中的CPU有限，而电脑中又有很多进程，每一个进程中又存在很多线程，所以开发人员在设计的时候规定每一个线程使用CPU的时间为20ms，当一个线程20ms的时间用尽，只有等待下次为他分配时间时才可以继续工作。所以当两个线程同时操作一个全局变量时就会出现问题。</p>
+<p>  <img src="Win32-3.assets/image-20201105194833216.png" style="zoom: 67%;" /><img src="https://f1sh-blog.oss-cn-beijing.aliyuncs.com/img/image-20201105195059526.png"></p>
+<h5 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h5><p>​        Windows设计出了临界区来解决线程抢占资源的问题</p>
+<p>​        当多个设计程序多个线程都涉及到某个全局变量时，可以使用临界区来解决这个问题，临界区可以理解为给这个全局变量假定了一个令牌，这个令牌在程序中只有个块，只有拿到令牌的人才可以对全局变量进行操作。</p>
+<img src="Win32-3.assets/image-20201105203720477.png" style="zoom:67%;" />
+
+<p>​        将上面的线程函数做如下下修改，就可以解决多线程使用同一个全局变量的问题。</p>
+<img src="Win32-3.assets/image-20201105204003677.png" style="zoom:80%;" />
+
+<h4 id="临界区结构体部分成员解释"><a href="#临界区结构体部分成员解释" class="headerlink" title="临界区结构体部分成员解释"></a>临界区结构体部分成员解释</h4><p>结构体定义如下</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> _<span class="title">RTL_CRITICAL_SECTION</span> &#123;</span></span><br><span class="line">    PRTL_CRITICAL_SECTION_DEBUG DebugInfo;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//</span></span><br><span class="line">    <span class="comment">//  The following three fields control entering and exiting the critical</span></span><br><span class="line">    <span class="comment">//  section for the resource</span></span><br><span class="line">    <span class="comment">//</span></span><br><span class="line"></span><br><span class="line">    LONG LockCount;</span><br><span class="line">    LONG RecursionCount;</span><br><span class="line">    HANDLE OwningThread;        <span class="comment">// from the thread&#x27;s ClientId-&gt;UniqueThread</span></span><br><span class="line">    HANDLE LockSemaphore;</span><br><span class="line">    ULONG_PTR SpinCount;        <span class="comment">// force size on 64-bit systems when packed</span></span><br><span class="line">&#125; RTL_CRITICAL_SECTION, *PRTL_CRITICAL_SECTION;</span><br></pre></td></tr></table></figure>
+
+<img src="Win32-3.assets/image-20201105204447624.png" style="zoom:80%;" />
+
+<h3 id="死锁"><a href="#死锁" class="headerlink" title="死锁"></a>死锁</h3><p>​        临界区使用不当可能会造成死锁，当定义两个锁及以上使用需要格外小心，否则程序就可能造成死锁。下图就是死锁的基本原理，当使用临界区时，应该尽量注意将使用锁的使用顺序，经量将锁的使用顺序变成一样的。</p>
+<p><img src="Win32-3.assets/image-20201105210326244.png"></p>
+<h4 id="试写死锁程序"><a href="#试写死锁程序" class="headerlink" title="试写死锁程序"></a>试写死锁程序</h4><p>​         死锁程序没有任何作用，但是可以加深对临界区的理解，且所谓的死锁程序只是逻辑上的，当写出来后也不一定会立刻生效。</p>
+<ul>
+<li><p>线程1代码</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">DWORD WINAPI <span class="title">ThreadProc1</span><span class="params">(LPVOID lpParameter)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	TCHAR szBuffer[<span class="number">10</span>];</span><br><span class="line">	DWORD dwIndex = <span class="number">0</span>;</span><br><span class="line">	DWORD dwCount;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">while</span> (dwIndex &lt; <span class="number">1000</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">EnterCriticalSection</span>(&amp;cs1);<span class="comment">//锁1</span></span><br><span class="line">		***********容易产生死锁的位置***********</span><br><span class="line">		<span class="built_in">EnterCriticalSection</span>(&amp;cs2);<span class="comment">//锁2</span></span><br><span class="line"></span><br><span class="line">		<span class="built_in">GetWindowText</span>(hEDIT, szBuffer, <span class="number">10</span>);</span><br><span class="line">		<span class="keyword">int</span> check = <span class="built_in">sscanf</span>(szBuffer, <span class="string">&quot;%d&quot;</span>, &amp;dwCount);</span><br><span class="line">		dwCount++;</span><br><span class="line">		<span class="built_in">memset</span>(szBuffer, <span class="number">0</span>, <span class="number">10</span>);</span><br><span class="line">		<span class="built_in">sprintf</span>(szBuffer, <span class="string">&quot;%d&quot;</span>, dwCount);</span><br><span class="line">		<span class="built_in">SetWindowText</span>(hEDIT, szBuffer);</span><br><span class="line">		dwIndex++;</span><br><span class="line">		<span class="built_in">LeaveCriticalSection</span>(&amp;cs2);</span><br><span class="line"></span><br><span class="line">		<span class="built_in">LeaveCriticalSection</span>(&amp;cs1);</span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>线程2代码</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">DWORD WINAPI <span class="title">ThreadProc2</span><span class="params">(LPVOID lpParameter)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	TCHAR szBuffer[<span class="number">10</span>];</span><br><span class="line">	DWORD dwIndex = <span class="number">0</span>;</span><br><span class="line">	DWORD dwCount;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">while</span> (dwIndex &lt; <span class="number">1000</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">EnterCriticalSection</span>(&amp;cs2);<span class="comment">//锁2</span></span><br><span class="line">		***********容易产生死锁的位置***********</span><br><span class="line">		<span class="built_in">EnterCriticalSection</span>(&amp;cs1);<span class="comment">//锁1</span></span><br><span class="line"></span><br><span class="line">		<span class="built_in">GetWindowText</span>(hEDIT, szBuffer, <span class="number">10</span>);</span><br><span class="line">		<span class="keyword">int</span> check = <span class="built_in">sscanf</span>(szBuffer, <span class="string">&quot;%d&quot;</span>, &amp;dwCount);</span><br><span class="line">		dwCount++;</span><br><span class="line">		<span class="built_in">memset</span>(szBuffer, <span class="number">0</span>, <span class="number">10</span>);</span><br><span class="line">		<span class="built_in">sprintf</span>(szBuffer, <span class="string">&quot;%d&quot;</span>, dwCount);</span><br><span class="line">		<span class="built_in">SetWindowText</span>(hEDIT, szBuffer);</span><br><span class="line">		dwIndex++;</span><br><span class="line"></span><br><span class="line">		<span class="built_in">LeaveCriticalSection</span>(&amp;cs1);</span><br><span class="line"></span><br><span class="line">		<span class="built_in">LeaveCriticalSection</span>(&amp;cs2);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+
+  </div>
+  <!--文末结束语-->
+  
+  <!--页脚广告-->
+  
+  <div class="mdui-divider"></div>
+  
+  <nav>
+    
+      <a rel="prev" class="post-nav-item mdui-float-left" href="/1833/">
+        <i class="iconfont icon-angle-left"></i>
+        <span>🎦Win32学习记录-2(创建线程)</span>
+      </a>
+    
+    
+      <a rel="next" class="post-nav-item mdui-float-right" href="/4540/">
+        <span>Python正则表达式练习</span>
+        <i class="iconfont icon-angle-right"></i>
+      </a>
+    
+  </nav>
+</article>
+
+
+
+
+  <div class="toc-button"  style="z-index: 100;">
+    <button class="mdui-fab mdui-ripple mdui-color-teal" mdui-menu="{target: '#toc'}"><i class="iconfont icon-list"></i></button>
+    <ul class="mdui-menu" id="toc">
+      <li class="mdui-menu-item">
+        <a href="/36839/" id="toc-header" class="mdui-ripple">Table of Contents</a>
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%9A%E7%BA%BF%E7%A8%8B%E4%B9%8B%E9%97%B4%E7%9A%84%E8%B5%84%E6%BA%90%E6%8A%A2%E5%8D%A0%E9%97%AE%E9%A2%98"><span class="toc-number">1.</span> <span class="toc-text">多线程之间的资源抢占问题</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BE%8B%E5%AD%90"><span class="toc-number">1.1.</span> <span class="toc-text">例子</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%97%AE%E9%A2%98"><span class="toc-number">1.2.</span> <span class="toc-text">问题</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88"><span class="toc-number">1.2.1.</span> <span class="toc-text">解决方案</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%B4%E7%95%8C%E5%8C%BA%E7%BB%93%E6%9E%84%E4%BD%93%E9%83%A8%E5%88%86%E6%88%90%E5%91%98%E8%A7%A3%E9%87%8A"><span class="toc-number">1.3.</span> <span class="toc-text">临界区结构体部分成员解释</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%AD%BB%E9%94%81"><span class="toc-number">2.</span> <span class="toc-text">死锁</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%AF%95%E5%86%99%E6%AD%BB%E9%94%81%E7%A8%8B%E5%BA%8F"><span class="toc-number">2.1.</span> <span class="toc-text">试写死锁程序</span></a></li></ol></li></ol>
+      </li>
+    </ul>
+  </div>
+
+
+
+  </main>
+  <footer id="footer" class="mdui-text-center mdui-m-t-5 mdui-p-b-2 mdui-p-t-4 mdui-color-theme">
+  <div class="mdui-container">
+    <div class="mdui-row">
+      
+        <a href="https://beian.miit.gov.cn" rel="noopener" target="_blank"></a>
+      
+      <span>
+        &copy; 2015 - 2021 
+        
+          <span style="color:#d9333f" class="iconfont icon-heart"></span>
+        
+        Fish
+      </span>
+    </div>
+    <div class="mdui-row">
+      
+        <div class="mdui-col-xs-6 mdui-text-right">
+          <span>Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a></span>
+        </div>
+        <div class="mdui-col-xs-6 mdui-text-left">
+          <span>Theme: <a href="https://github.com/kb1000fx/Meadow" rel="noopener" target="_blank">Meadow</a></span>
+        </div>
+      
+    </div>
+    <div class="mdui-row">
+      
+        <div class="mdui-col-xs-6 mdui-text-right">
+          <span id="busuanzi_container_site_uv" style="display: none;"> <span class="iconfont icon-user"></span>Total Visitors <span id="busuanzi_value_site_uv"></span></span>
+        </div>
+        <div class="mdui-col-xs-6 mdui-text-left">
+          <span id="busuanzi_container_site_pv" style="display: none;"> <span class="iconfont icon-eye"></span>Total Views <span id="busuanzi_value_site_pv"></span></span>
+        </div>
+      
+    </div>
+ </div>
+</footer>
+  
+  <button id="gotop" class="mdui-fab mdui-fab-fixed mdui-fab-hide mdui-ripple mdui-color-teal" style="z-index:100;"><i class="iconfont icon-arrowup"></i></button>
+  
+  
+
+    <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@8.4.8/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({
+        startOnLoad: true,
+        theme: "forest"
+    });</script>
+
+
+
+
+    
+<script src="/js/mdui.min.v1.0.0.js"></script>
+
+
+
+
+<script src="/js/meadow.js"></script>
+
+</body>
+</html >

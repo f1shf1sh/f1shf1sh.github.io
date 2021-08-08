@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+    
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    
+    <meta name="renderer" content="webkit"/>
+    <meta name="force-rendering" content="webkit"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <script>if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMode)) window.location.href="https://support.dmeng.net/upgrade-your-browser.html?referrer="+encodeURIComponent(window.location.href); </script>
+    
+    
+    
+    
+        <link rel="shortcut icon" href="https://raw.githubusercontent.com/f1shf1sh/Picture/master/Markdown/favicon.png">
+    
+
+    
+    
+        
+<link rel="stylesheet" href="/css/mdui.min.v1.0.0.css">
+
+    
+    
+<link rel="stylesheet" href="/css/main.css">
+<link rel="stylesheet" href="/css/iconfont.css">
+
+
+    
+    
+
+
+
+
+
+
+
+
+
+
+
+
+          
+
+
+    
+    
+    <title>
+        
+            Python正则表达式练习 | Fish
+        
+    </title>
+    
+    
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="Fish" type="application/atom+xml">
+</head>
+<body class="mdui-drawer-body-left mdui-appbar-with-toolbar mdui-theme-primary-white mdui-theme-accent-blue">
+  
+  <header class="mdui-appbar mdui-appbar-fixed">
+  <div id="toolbar" class="mdui-toolbar mdui-color-theme">
+    <button class="mdui-btn mdui-btn-icon" mdui-drawer="{target: '#sidebar', swipe: true}"><i class="iconfont icon-menu"></i></button>
+    <a href="/" class="mdui-typo-headline">Fish</a>
+    <a href="/" class="header-subtitle mdui-typo-headline"></a>
+    <div class="mdui-toolbar-spacer"></div>
+    <button class="mdui-btn mdui-btn-icon" mdui-dialog="{target: '#search'}" mdui-tooltip="{content: 'search'}"><i class="iconfont icon-search"></i></button>
+  </div>
+</header>
+
+<div class="mdui-dialog" id="search">
+  
+    <div class="search-form">
+      <input type="search" class="search-form-input" placeholder="Please input key words" onfocus="listenSearchFunc()">
+    </div>
+    <div class="search-result" data-resource="/search.xml"></div>
+  
+</div>
+
+  <aside id="sidebar" class="mdui-drawer">
+    <div class="mdui-tab" mdui-tab>
+        <a href="#sidebar-tab1" id="sidebartab" class="mdui-ripple mdui-tab-active">Overview</a>
+        <a href="#sidebar-tab2" id="sidebartab" class="mdui-ripple">About</a>
+    </div>
+
+    
+    <div id="sidebar-tab1" class="mdui-p-a-1">
+        <div class="mdui-list">
+            
+                
+                <a href="/" class="mdui-list-item mdui-ripple">
+                    <div class="mdui-list-item-icon">
+                        <i class="iconfont icon-home"></i>
+                    </div>
+                    <div class="mdui-list-item-content">Home</div>
+                </a>
+            
+                
+                <a href="/tags/" class="mdui-list-item mdui-ripple">
+                    <div class="mdui-list-item-icon">
+                        <i class="iconfont icon-bookmark"></i>
+                    </div>
+                    <div class="mdui-list-item-content">Tags</div>
+                </a>
+            
+                
+                <a href="/categories/" class="mdui-list-item mdui-ripple">
+                    <div class="mdui-list-item-icon">
+                        <i class="iconfont icon-folder"></i>
+                    </div>
+                    <div class="mdui-list-item-content">Categories</div>
+                </a>
+            
+                
+                <a href="/archives/" class="mdui-list-item mdui-ripple">
+                    <div class="mdui-list-item-icon">
+                        <i class="iconfont icon-archive"></i>
+                    </div>
+                    <div class="mdui-list-item-content">Archives</div>
+                </a>
+            
+                
+                <a href="/tools/" class="mdui-list-item mdui-ripple">
+                    <div class="mdui-list-item-icon">
+                        <i class="iconfont icon-tools"></i>
+                    </div>
+                    <div class="mdui-list-item-content">Toolbox</div>
+                </a>
+            
+                
+                <a href="/about/" class="mdui-list-item mdui-ripple">
+                    <div class="mdui-list-item-icon">
+                        <i class="iconfont icon-user"></i>
+                    </div>
+                    <div class="mdui-list-item-content">About</div>
+                </a>
+            
+            <div class="mdui-list-item mdui-ripple">
+                <div class="mdui-list-item-icon">
+                    <i class="iconfont icon-moon"></i>
+                </div>
+                <div class="mdui-list-item-content">Night Mode</div>
+                <label class="mdui-switch" id="darkmode">
+                  <input type="checkbox" id="nightmode_switch"/>
+                  <i class="mdui-switch-icon"></i>
+                </label>
+            </div>           
+        </div>
+    </div>
+
+    
+    <div id="sidebar-tab2" class="mdui-p-a-1">
+        <div class="sidebar-overview">
+            <div class="sidebar-avatar">
+                
+                    <img src="https://raw.githubusercontent.com/f1shf1sh/Picture/master/Markdown/avatar.JPG"/>
+                
+            </div>
+            <div class="sidebar-author-name">Fish</div>
+            <div class="sidebar-description"></div>
+        </div>
+        <div class="sidebar-links">
+            
+                
+                <div class="mdui-chip">
+                    <span class="mdui-chip-icon"><i class="iconfont icon-github"></i></span>
+                    <a target="_blank" rel="noopener" href="https://github.com/f1shf1sh" class="mdui-chip-title">GitHub</a>
+                </div>
+            
+                
+                <div class="mdui-chip">
+                    <span class="mdui-chip-icon"><i class="iconfont icon-twitter"></i></span>
+                    <a target="_blank" rel="noopener" href="https:twitter.com/@Fish12427018" class="mdui-chip-title">Twitter</a>
+                </div>
+            
+        </div>
+        <ul class="mdui-list" mdui-collapse="{accordion: true}">
+            <li class="mdui-collapse-item">
+                <div class="mdui-collapse-item-header mdui-list-item mdui-ripple">
+                    <div class="mdui-list-item-icon">
+                        <i class="iconfont icon-link"></i>
+                    </div>
+                    <div class="mdui-list-item-content">Links</div>
+                    <div class="mdui-collapse-item-arrow">
+                        <i class="mdui-list-item-icon iconfont icon-angle-down"></i>
+                    </div>
+                </div>
+                <ul id="linksList" class="mdui-collapse-item-body mdui-list mdui-list-dense">
+                    
+                        <a target="_blank" rel="noopener" href="https://google.com" class="mdui-list-item mdui-ripple">
+                            Google
+                        </a>
+                    
+                </ul>
+            </li>
+        </ul>
+    </div>
+
+    <div class="mdui-divider"></div>
+    
+    
+</aside>
+  
+  <main id="main-contain" class="mdui-container mdui-m-t-5">
+    <article id="article" class="mdui-card mdui-p-b-2 mdui-m-b-5">
+  <header class="mdui-card-media">
+    
+    
+      <div class="post-header"> 
+  <a class="post-header-title" href="/4540/">Python正则表达式练习</a>
+  <div class="post-header-meta">
+    <span>
+      <span class="iconfont icon-calendar"></span>
+      Posted on:&nbsp;2021-07-14
+    </span>
+    <span>
+      <span class="iconfont icon-calendar-check"></span>
+      Edited on:&nbsp;2021-08-08
+    </span>
+    <span>
+      <span class="iconfont icon-folder"></span>
+      In:&nbsp;
+    </span>
+    
+      <span>
+        <span class="iconfont icon-eye"></span>
+        Views:&nbsp;
+        <span id="busuanzi_container_page_pv"><span id="busuanzi_value_page_pv"></span></span>
+      </span>
+    
+  </div>
+</div>   
+    
+
+
+
+    
+    
+    <div class="mdui-card-menu">
+    
+      <button class="mdui-btn mdui-btn-icon mdui-text-color-teal" mdui-menu="{target: '#share_menu', align: 'right'}"><i class="iconfont icon-share"></i></button>
+      <ul class="mdui-menu" id="share_menu">
+        <li class="mdui-menu-item">
+          <a href="http://service.weibo.com/share/share.php?appkey=&title=Python正则表达式练习&url=http://example.com/4540/&pic=http://example.comhttps://raw.githubusercontent.com/f1shf1sh/Picture/master/Markdown/favicon.png&searchPic=false&style=simple" target="_blank" class="mdui-ripple">Share to Weibo</a>
+        </li>
+        <li class="mdui-menu-item">
+          <a href="https://twitter.com/intent/tweet?text=Python正则表达式练习&url=http://example.com/4540/&via=Fish" target="_blank" class="mdui-ripple">Share to Twitter</a>
+        </li>
+        <li class="mdui-menu-item">
+          <a href="https://www.facebook.com/sharer/sharer.php?u=http://example.com/4540/" target="_blank" class="mdui-ripple">Share to Facebook</a>
+        </li>
+        <li class="mdui-menu-item">
+          <a href="https://plus.google.com/share?url=http://example.com/4540/" target="_blank" class="mdui-ripple">Share to Google+</a>
+        </li>
+        <li class="mdui-menu-item">
+          <a href="https://www.linkedin.com/shareArticle?mini=true&url=http://example.com/4540/&title=Python正则表达式练习" target="_blank" class="mdui-ripple">Share to LinkedIn</a>
+        </li>
+        <li class="mdui-menu-item">
+          <a href="http://connect.qq.com/widget/shareqq/index.html?site=Fish&title=Python正则表达式练习&summary=&pics=http://example.comhttps://raw.githubusercontent.com/f1shf1sh/Picture/master/Markdown/favicon.png&url=http://example.com/4540/" target="_blank" class="mdui-ripple">Share to QQ</a>
+        </li>
+        <li class="mdui-menu-item">
+          <a href="https://telegram.me/share/url?url=http://example.com/4540/&text=Python正则表达式练习" target="_blank" class="mdui-ripple">Share to Telegram</a>
+        </li>
+      </ul>
+    
+  </div>
+  </header>
+  
+  
+  
+  
+  <div class="post-tags">
+    
+      <i class="iconfont icon-tag">
+        <a rel="tag" href = /tags/python/ >python</a>
+      </i>
+    
+  </div>
+
+  
+  <div class="mdui-card-content mdui-typo mdui-p-x-4">
+    <h2 id="字符分类"><a href="#字符分类" class="headerlink" title="字符分类"></a>字符分类</h2><ul>
+<li><code>\d</code> —– 0-9的任何数字</li>
+<li><code>\D</code> —– 除开0-9的任何数字</li>
+<li><code>\w</code> —– 任何字母，数字或下划线字符</li>
+<li><code>\W</code> —– 除开字母，数字和下划线以外的任何字符</li>
+<li><code>\s</code> —– 空格，制表符或换行符</li>
+<li><code>\S</code> —– 除空格，制表符和换行符以外的任何字符</li>
+</ul>
+<h2 id="正则表达式基础"><a href="#正则表达式基础" class="headerlink" title="正则表达式基础"></a>正则表达式基础</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> re <span class="comment"># 后面的代码中将默认引入</span></span><br><span class="line">msg = <span class="string">&#x27;My number is 415-555-4242 and 111-222-3333&#x27;</span> <span class="comment"># 下面例子中所使用的测试字符串</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>example_1</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># search和findall的使用</span></span><br><span class="line">phoneNumRegex = re.<span class="built_in">compile</span>(<span class="string">r&#x27;\d\d\d-\d\d\d-\d\d\d\d&#x27;</span>)</span><br><span class="line">mo_1 = phoneNumRegex.search(msg)</span><br><span class="line">mo_2 = phoneNumRegex.findall(msg)   <span class="comment"># findall方法返回一个列表，里面存储所有的正则匹配数据</span></span><br><span class="line"><span class="built_in">print</span>(mo_1.group())</span><br><span class="line"><span class="built_in">print</span>(mo_2[<span class="number">0</span>])</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">search:  415-555-4242</span><br><span class="line">  findall:  [&#x27;415-555-4242&#x27;, &#x27;111-222-3333&#x27;]</span><br></pre></td></tr></table></figure></li>
+<li><p>example_2</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">  <span class="comment"># 用括号分组</span></span><br><span class="line">  phoneNumRegex = re.<span class="built_in">compile</span>(<span class="string">r&#x27;(\d\d\d)-(\d\d\d-\d\d\d\d)&#x27;</span>) <span class="comment"># 加括号会返回一个元祖</span></span><br><span class="line">mo_1 = phoneNumRegex.search(msg) <span class="comment"># 将正则匹配到的数据用括号给定的范围分组，打包成元祖</span></span><br><span class="line">  mo_2 = phoneNumRegex.findall(msg) <span class="comment"># findall将所有打包好的元祖存放到列表中</span></span><br><span class="line">  <span class="built_in">print</span>(<span class="string">&#x27;mo_1 -&gt; group(0): &#x27;</span>,mo_1.group(<span class="number">0</span>))</span><br><span class="line">  <span class="built_in">print</span>(<span class="string">&#x27;mo_1 -&gt; group(1) and group(2): &#x27;</span>,mo_1.group(<span class="number">1</span>),mo_1.group(<span class="number">2</span>))</span><br><span class="line">  <span class="built_in">print</span>(<span class="string">&#x27;mo_2: &#x27;</span>,mo_2)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mo_1 -&gt; group(0):  415-555-4242</span><br><span class="line">mo_1 -&gt; group(1) and group(2):  415 555-4242</span><br><span class="line">mo_2:  [(&#x27;415&#x27;, &#x27;555-4242&#x27;), (&#x27;111&#x27;, &#x27;222-3333&#x27;)]</span><br></pre></td></tr></table></figure></li>
+<li><p>example_3</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 管道符号的使用</span></span><br><span class="line">msg = <span class="string">&#x27;Tina Fey and Batman.&#x27;</span></span><br><span class="line">heroRegex = re.<span class="built_in">compile</span>(<span class="string">r&#x27;Batman|Tina Fey&#x27;</span>) <span class="comment"># |为管道符号，如果使用search方法只匹配到最近的一个，finddown会将可选项全部匹配</span></span><br><span class="line">mo_1 = heroRegex.search(msg)</span><br><span class="line">mo_2 = heroRegex.findall(msg)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;mo_1.group(): &#x27;</span>,mo_1.group())</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mo_1.group():  Tina Fey</span><br><span class="line">mo_2:  [&#x27;Tina Fey&#x27;, &#x27;Batman&#x27;]</span><br></pre></td></tr></table></figure></li>
+<li><p>example_4</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 管道符号多模式匹配</span></span><br><span class="line">batRegex = re.<span class="built_in">compile</span>(<span class="string">r&#x27;Bat(man|mobile|copter|bat)&#x27;</span>) <span class="comment"># 若前缀相同则后缀部分可以用括号与管道符将其分开，减少输入</span></span><br><span class="line">mo = batRegex.search(<span class="string">&#x27;Batmobile lost a wheel&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;mo.group&#x27;</span>, mo.group())</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mo.group():  Batmobile</span><br></pre></td></tr></table></figure></li>
+<li><p>example_5</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 问号实现可选匹配</span></span><br><span class="line">batRegex = re.<span class="built_in">compile</span>(<span class="string">r&#x27;Bat(wo)?man&#x27;</span>) <span class="comment"># 简单来说，括号里面的存在匹配时就加上，不存在就忽略括号里面的</span></span><br><span class="line">mo = batRegex.search(<span class="string">&#x27;The Adventures of Batman&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;output: &#x27;</span>,mo.group())</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">output:  Batman</span><br></pre></td></tr></table></figure></li>
+<li><p>example_6</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#  用*号实现多次匹配</span></span><br><span class="line">batRegex = re.<span class="built_in">compile</span>(<span class="string">r&#x27;Bat(wo)*man&#x27;</span>) <span class="comment"># *号代表缺省</span></span><br><span class="line">mo = batRegex.search(<span class="string">&#x27;The Adventures of Batwowowowowoman&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;output: &#x27;</span>,mo.group())</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">output:  Batwowowowowoman</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## 用+号匹配一次或多次</span></span><br><span class="line">batRegex = re.<span class="built_in">compile</span>(<span class="string">r&#x27;Bat(wo)+man&#x27;</span>) <span class="comment"># +号需要括号中的内容至少出现一次</span></span><br></pre></td></tr></table></figure></li>
+<li><p>example_7</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 用花括号匹配特定的次数</span></span><br><span class="line">haRegex = re.<span class="built_in">compile</span>(<span class="string">r&#x27;Ha&#123;3&#125;&#x27;</span>) <span class="comment"># 指定三次</span></span><br><span class="line">haRegex = re.<span class="built_in">compile</span>(<span class="string">r&#x27;Ha&#123;3,5&#125;&#x27;</span>) <span class="comment"># 有存在3-5个的都可以</span></span><br><span class="line">haRegex = re.<span class="built_in">compile</span>(<span class="string">r&#x27;Ha&#123;,5&#125;&#x27;</span>) <span class="comment"># 匹配0-5个</span></span><br><span class="line">haRegex = re.<span class="built_in">compile</span>(<span class="string">r&#x27;Ha&#123;3,&#125;&#x27;</span>) <span class="comment"># 匹配3或更多次 </span></span><br></pre></td></tr></table></figure></li>
+<li><p>example_8</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># example_6 贪心匹配和非贪心匹配 (好像在python3.8版本中被废弃？)</span></span><br><span class="line"><span class="comment">## 贪心</span></span><br><span class="line">greedyHaRegex = re.<span class="built_in">compile</span>(<span class="string">r&#x27;(Ha)&#123;3, 5&#125;?&#x27;</span>)</span><br><span class="line">mo1 = greedyHaRegex.search(<span class="string">&#x27;HaHaHaHaHa&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(mo1) <span class="comment">## 输出报错</span></span><br><span class="line"></span><br><span class="line"><span class="comment">## 非贪心</span></span><br><span class="line">notGreedyHaRegex = re.<span class="built_in">compile</span>(<span class="string">r&#x27;(Ha)&#123;3,5&#125;&#x27;</span>)</span><br><span class="line">mo2 = notGreedyHaRegex.search(<span class="string">&#x27;HaHaHaHaHa&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(mo2) <span class="comment">## 输出报错</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="建立字符分类"><a href="#建立字符分类" class="headerlink" title="建立字符分类"></a>建立字符分类</h2><ul>
+<li><p>example_1</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">vowelRegex = re.<span class="built_in">compile</span>(<span class="string">r&#x27;[aeiouAEIOU]&#x27;</span>) <span class="comment"># 中括号中就是用户需要匹配的字符</span></span><br><span class="line">mo = vowelRegex.findall(<span class="string">&#x27;RoboCop eats baby food. BABY FOOD.&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;Output: &quot;</span>, mo)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Output:  [&#x27;o&#x27;, &#x27;o&#x27;, &#x27;o&#x27;, &#x27;e&#x27;, &#x27;a&#x27;, &#x27;a&#x27;, &#x27;o&#x27;, &#x27;o&#x27;, &#x27;A&#x27;, &#x27;O&#x27;, &#x27;O&#x27;]</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">vowelRegex = re.<span class="built_in">compile</span>(<span class="string">r&#x27;[^aeiouAEIOU]&#x27;</span>) <span class="comment"># 如果在前面加上^符号就代表不匹配这些字符</span></span><br><span class="line">mo = vowelRegex.findall(<span class="string">&#x27;RoboCop eats baby food. BABY FOOD.&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;Output: &quot;</span>, mo)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Output:  [&#x27;R&#x27;, &#x27;b&#x27;, &#x27;C&#x27;, &#x27;p&#x27;, &#x27; &#x27;, &#x27;t&#x27;, &#x27;s&#x27;, &#x27; &#x27;, &#x27;b&#x27;, &#x27;b&#x27;, &#x27;y&#x27;, &#x27; &#x27;, &#x27;f&#x27;, &#x27;d&#x27;, &#x27;.&#x27;, &#x27; &#x27;, &#x27;B&#x27;, &#x27;B&#x27;, &#x27;Y&#x27;, &#x27; &#x27;, &#x27;F&#x27;, &#x27;D&#x27;, &#x27;.&#x27;]</span><br></pre></td></tr></table></figure></li>
+<li><p>example_2</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ext...</span><br></pre></td></tr></table></figure></li>
+</ul>
+
+  </div>
+  <!--文末结束语-->
+  
+  <!--页脚广告-->
+  
+  <div class="mdui-divider"></div>
+  
+  <nav>
+    
+      <a rel="prev" class="post-nav-item mdui-float-left" href="/36839/">
+        <i class="iconfont icon-angle-left"></i>
+        <span>🎦Win32学习记录-3(线程控制与临界区)</span>
+      </a>
+    
+    
+      <a rel="next" class="post-nav-item mdui-float-right" href="/32351/">
+        <span>TCP/IP</span>
+        <i class="iconfont icon-angle-right"></i>
+      </a>
+    
+  </nav>
+</article>
+
+
+
+
+  <div class="toc-button"  style="z-index: 100;">
+    <button class="mdui-fab mdui-ripple mdui-color-teal" mdui-menu="{target: '#toc'}"><i class="iconfont icon-list"></i></button>
+    <ul class="mdui-menu" id="toc">
+      <li class="mdui-menu-item">
+        <a href="/4540/" id="toc-header" class="mdui-ripple">Table of Contents</a>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AD%97%E7%AC%A6%E5%88%86%E7%B1%BB"><span class="toc-number">1.</span> <span class="toc-text">字符分类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%9F%BA%E7%A1%80"><span class="toc-number">2.</span> <span class="toc-text">正则表达式基础</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BB%BA%E7%AB%8B%E5%AD%97%E7%AC%A6%E5%88%86%E7%B1%BB"><span class="toc-number">3.</span> <span class="toc-text">建立字符分类</span></a></li></ol>
+      </li>
+    </ul>
+  </div>
+
+
+
+  </main>
+  <footer id="footer" class="mdui-text-center mdui-m-t-5 mdui-p-b-2 mdui-p-t-4 mdui-color-theme">
+  <div class="mdui-container">
+    <div class="mdui-row">
+      
+        <a href="https://beian.miit.gov.cn" rel="noopener" target="_blank"></a>
+      
+      <span>
+        &copy; 2015 - 2021 
+        
+          <span style="color:#d9333f" class="iconfont icon-heart"></span>
+        
+        Fish
+      </span>
+    </div>
+    <div class="mdui-row">
+      
+        <div class="mdui-col-xs-6 mdui-text-right">
+          <span>Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a></span>
+        </div>
+        <div class="mdui-col-xs-6 mdui-text-left">
+          <span>Theme: <a href="https://github.com/kb1000fx/Meadow" rel="noopener" target="_blank">Meadow</a></span>
+        </div>
+      
+    </div>
+    <div class="mdui-row">
+      
+        <div class="mdui-col-xs-6 mdui-text-right">
+          <span id="busuanzi_container_site_uv" style="display: none;"> <span class="iconfont icon-user"></span>Total Visitors <span id="busuanzi_value_site_uv"></span></span>
+        </div>
+        <div class="mdui-col-xs-6 mdui-text-left">
+          <span id="busuanzi_container_site_pv" style="display: none;"> <span class="iconfont icon-eye"></span>Total Views <span id="busuanzi_value_site_pv"></span></span>
+        </div>
+      
+    </div>
+ </div>
+</footer>
+  
+  <button id="gotop" class="mdui-fab mdui-fab-fixed mdui-fab-hide mdui-ripple mdui-color-teal" style="z-index:100;"><i class="iconfont icon-arrowup"></i></button>
+  
+  
+
+    <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@8.4.8/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({
+        startOnLoad: true,
+        theme: "forest"
+    });</script>
+
+
+
+
+    
+<script src="/js/mdui.min.v1.0.0.js"></script>
+
+
+
+
+<script src="/js/meadow.js"></script>
+
+</body>
+</html >

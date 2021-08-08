@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+    
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    
+    <meta name="renderer" content="webkit"/>
+    <meta name="force-rendering" content="webkit"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <script>if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMode)) window.location.href="https://support.dmeng.net/upgrade-your-browser.html?referrer="+encodeURIComponent(window.location.href); </script>
+    
+    
+    
+    
+        <link rel="shortcut icon" href="https://raw.githubusercontent.com/f1shf1sh/Picture/master/Markdown/favicon.png">
+    
+
+    
+    
+        
+<link rel="stylesheet" href="/css/mdui.min.v1.0.0.css">
+
+    
+    
+<link rel="stylesheet" href="/css/main.css">
+<link rel="stylesheet" href="/css/iconfont.css">
+
+
+    
+    
+
+
+
+
+
+
+
+
+
+
+
+
+          
+
+
+    
+    
+    <title>
+        
+            Leetcode(1) | Fish
+        
+    </title>
+    
+    
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="Fish" type="application/atom+xml">
+</head>
+<body class="mdui-drawer-body-left mdui-appbar-with-toolbar mdui-theme-primary-white mdui-theme-accent-blue">
+  
+  <header class="mdui-appbar mdui-appbar-fixed">
+  <div id="toolbar" class="mdui-toolbar mdui-color-theme">
+    <button class="mdui-btn mdui-btn-icon" mdui-drawer="{target: '#sidebar', swipe: true}"><i class="iconfont icon-menu"></i></button>
+    <a href="/" class="mdui-typo-headline">Fish</a>
+    <a href="/" class="header-subtitle mdui-typo-headline"></a>
+    <div class="mdui-toolbar-spacer"></div>
+    <button class="mdui-btn mdui-btn-icon" mdui-dialog="{target: '#search'}" mdui-tooltip="{content: 'search'}"><i class="iconfont icon-search"></i></button>
+  </div>
+</header>
+
+<div class="mdui-dialog" id="search">
+  
+    <div class="search-form">
+      <input type="search" class="search-form-input" placeholder="Please input key words" onfocus="listenSearchFunc()">
+    </div>
+    <div class="search-result" data-resource="/search.xml"></div>
+  
+</div>
+
+  <aside id="sidebar" class="mdui-drawer">
+    <div class="mdui-tab" mdui-tab>
+        <a href="#sidebar-tab1" id="sidebartab" class="mdui-ripple mdui-tab-active">Overview</a>
+        <a href="#sidebar-tab2" id="sidebartab" class="mdui-ripple">About</a>
+    </div>
+
+    
+    <div id="sidebar-tab1" class="mdui-p-a-1">
+        <div class="mdui-list">
+            
+                
+                <a href="/" class="mdui-list-item mdui-ripple">
+                    <div class="mdui-list-item-icon">
+                        <i class="iconfont icon-home"></i>
+                    </div>
+                    <div class="mdui-list-item-content">Home</div>
+                </a>
+            
+                
+                <a href="/tags/" class="mdui-list-item mdui-ripple">
+                    <div class="mdui-list-item-icon">
+                        <i class="iconfont icon-bookmark"></i>
+                    </div>
+                    <div class="mdui-list-item-content">Tags</div>
+                </a>
+            
+                
+                <a href="/categories/" class="mdui-list-item mdui-ripple">
+                    <div class="mdui-list-item-icon">
+                        <i class="iconfont icon-folder"></i>
+                    </div>
+                    <div class="mdui-list-item-content">Categories</div>
+                </a>
+            
+                
+                <a href="/archives/" class="mdui-list-item mdui-ripple">
+                    <div class="mdui-list-item-icon">
+                        <i class="iconfont icon-archive"></i>
+                    </div>
+                    <div class="mdui-list-item-content">Archives</div>
+                </a>
+            
+                
+                <a href="/tools/" class="mdui-list-item mdui-ripple">
+                    <div class="mdui-list-item-icon">
+                        <i class="iconfont icon-tools"></i>
+                    </div>
+                    <div class="mdui-list-item-content">Toolbox</div>
+                </a>
+            
+                
+                <a href="/about/" class="mdui-list-item mdui-ripple">
+                    <div class="mdui-list-item-icon">
+                        <i class="iconfont icon-user"></i>
+                    </div>
+                    <div class="mdui-list-item-content">About</div>
+                </a>
+            
+            <div class="mdui-list-item mdui-ripple">
+                <div class="mdui-list-item-icon">
+                    <i class="iconfont icon-moon"></i>
+                </div>
+                <div class="mdui-list-item-content">Night Mode</div>
+                <label class="mdui-switch" id="darkmode">
+                  <input type="checkbox" id="nightmode_switch"/>
+                  <i class="mdui-switch-icon"></i>
+                </label>
+            </div>           
+        </div>
+    </div>
+
+    
+    <div id="sidebar-tab2" class="mdui-p-a-1">
+        <div class="sidebar-overview">
+            <div class="sidebar-avatar">
+                
+                    <img src="https://raw.githubusercontent.com/f1shf1sh/Picture/master/Markdown/avatar.JPG"/>
+                
+            </div>
+            <div class="sidebar-author-name">Fish</div>
+            <div class="sidebar-description"></div>
+        </div>
+        <div class="sidebar-links">
+            
+                
+                <div class="mdui-chip">
+                    <span class="mdui-chip-icon"><i class="iconfont icon-github"></i></span>
+                    <a target="_blank" rel="noopener" href="https://github.com/f1shf1sh" class="mdui-chip-title">GitHub</a>
+                </div>
+            
+                
+                <div class="mdui-chip">
+                    <span class="mdui-chip-icon"><i class="iconfont icon-twitter"></i></span>
+                    <a target="_blank" rel="noopener" href="https:twitter.com/@Fish12427018" class="mdui-chip-title">Twitter</a>
+                </div>
+            
+        </div>
+        <ul class="mdui-list" mdui-collapse="{accordion: true}">
+            <li class="mdui-collapse-item">
+                <div class="mdui-collapse-item-header mdui-list-item mdui-ripple">
+                    <div class="mdui-list-item-icon">
+                        <i class="iconfont icon-link"></i>
+                    </div>
+                    <div class="mdui-list-item-content">Links</div>
+                    <div class="mdui-collapse-item-arrow">
+                        <i class="mdui-list-item-icon iconfont icon-angle-down"></i>
+                    </div>
+                </div>
+                <ul id="linksList" class="mdui-collapse-item-body mdui-list mdui-list-dense">
+                    
+                        <a target="_blank" rel="noopener" href="https://google.com" class="mdui-list-item mdui-ripple">
+                            Google
+                        </a>
+                    
+                </ul>
+            </li>
+        </ul>
+    </div>
+
+    <div class="mdui-divider"></div>
+    
+    
+</aside>
+  
+  <main id="main-contain" class="mdui-container mdui-m-t-5">
+    <article id="article" class="mdui-card mdui-p-b-2 mdui-m-b-5">
+  <header class="mdui-card-media">
+    
+    
+      <div class="post-header"> 
+  <a class="post-header-title" href="/41353/">Leetcode(1)</a>
+  <div class="post-header-meta">
+    <span>
+      <span class="iconfont icon-calendar"></span>
+      Posted on:&nbsp;2021-07-14
+    </span>
+    <span>
+      <span class="iconfont icon-calendar-check"></span>
+      Edited on:&nbsp;2021-08-08
+    </span>
+    <span>
+      <span class="iconfont icon-folder"></span>
+      In:&nbsp;
+    </span>
+    
+      <span>
+        <span class="iconfont icon-eye"></span>
+        Views:&nbsp;
+        <span id="busuanzi_container_page_pv"><span id="busuanzi_value_page_pv"></span></span>
+      </span>
+    
+  </div>
+</div>   
+    
+
+
+
+    
+    
+    <div class="mdui-card-menu">
+    
+      <button class="mdui-btn mdui-btn-icon mdui-text-color-teal" mdui-menu="{target: '#share_menu', align: 'right'}"><i class="iconfont icon-share"></i></button>
+      <ul class="mdui-menu" id="share_menu">
+        <li class="mdui-menu-item">
+          <a href="http://service.weibo.com/share/share.php?appkey=&title=Leetcode(1)&url=http://example.com/41353/&pic=http://example.comhttps://raw.githubusercontent.com/f1shf1sh/Picture/master/Markdown/favicon.png&searchPic=false&style=simple" target="_blank" class="mdui-ripple">Share to Weibo</a>
+        </li>
+        <li class="mdui-menu-item">
+          <a href="https://twitter.com/intent/tweet?text=Leetcode(1)&url=http://example.com/41353/&via=Fish" target="_blank" class="mdui-ripple">Share to Twitter</a>
+        </li>
+        <li class="mdui-menu-item">
+          <a href="https://www.facebook.com/sharer/sharer.php?u=http://example.com/41353/" target="_blank" class="mdui-ripple">Share to Facebook</a>
+        </li>
+        <li class="mdui-menu-item">
+          <a href="https://plus.google.com/share?url=http://example.com/41353/" target="_blank" class="mdui-ripple">Share to Google+</a>
+        </li>
+        <li class="mdui-menu-item">
+          <a href="https://www.linkedin.com/shareArticle?mini=true&url=http://example.com/41353/&title=Leetcode(1)" target="_blank" class="mdui-ripple">Share to LinkedIn</a>
+        </li>
+        <li class="mdui-menu-item">
+          <a href="http://connect.qq.com/widget/shareqq/index.html?site=Fish&title=Leetcode(1)&summary=&pics=http://example.comhttps://raw.githubusercontent.com/f1shf1sh/Picture/master/Markdown/favicon.png&url=http://example.com/41353/" target="_blank" class="mdui-ripple">Share to QQ</a>
+        </li>
+        <li class="mdui-menu-item">
+          <a href="https://telegram.me/share/url?url=http://example.com/41353/&text=Leetcode(1)" target="_blank" class="mdui-ripple">Share to Telegram</a>
+        </li>
+      </ul>
+    
+  </div>
+  </header>
+  
+  
+  
+  
+  
+  <div class="mdui-card-content mdui-typo mdui-p-x-4">
+    <h2 id="towsum"><a href="#towsum" class="headerlink" title="towsum"></a>towsum</h2><p><img src="https://f1sh-blog.oss-cn-beijing.aliyuncs.com/img/image-20210426220730463.png"></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">int</span>[] twoSum(<span class="keyword">int</span>[] nums, <span class="keyword">int</span> target) &#123;</span><br><span class="line">       <span class="keyword">int</span>[] index = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">2</span>];</span><br><span class="line">       <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; nums.length; i++) &#123;</span><br><span class="line">           <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; nums.length; j++) &#123;</span><br><span class="line">               <span class="keyword">if</span> (nums[i] + nums[j] == target &amp;&amp; i != j) &#123;</span><br><span class="line">                   index[<span class="number">0</span>] = i;</span><br><span class="line">                   index[<span class="number">1</span>] = j;</span><br><span class="line">               &#125;</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="keyword">return</span> index;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>hashMap</p>
+<p>上面的方法在时间复杂堵上为O(n*n)，在数据过大时十分暴力，可以采用哈希表来检索</p>
+</li>
+</ul>
+<h2 id="reverse"><a href="#reverse" class="headerlink" title="reverse"></a>reverse</h2><p><img src="https://f1sh-blog.oss-cn-beijing.aliyuncs.com/img/image-20210426220647641.png"></p>
+<p>看到别人的做法才感觉好厉害，思路非常灵活。</p>
+<p><img src="https://f1sh-blog.oss-cn-beijing.aliyuncs.com/img/image-20210413000228867.png"></p>
+<p>这种根据原理判断整数是否溢出虽然比较科学，但感觉没有榜一大哥那么有灵性</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">reverse</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> ret = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span>(x != <span class="number">0</span>)&#123;</span><br><span class="line">            <span class="comment">// 先判断倒序数字是否满足条件</span></span><br><span class="line">            <span class="keyword">if</span>(ret&gt;Integer.MAX_VALUE/<span class="number">10</span> || (ret==Integer.MAX_VALUE/<span class="number">10</span> &amp;&amp; x&gt;<span class="number">7</span>))&#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(ret&lt;Integer.MIN_VALUE/<span class="number">10</span> || (ret==Integer.MIN_VALUE/<span class="number">10</span> &amp;&amp; x&lt;-<span class="number">8</span>))&#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            ret = ret*<span class="number">10</span>+x%<span class="number">10</span>;</span><br><span class="line">            x /= <span class="number">10</span>;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ret;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="isPalindrome"><a href="#isPalindrome" class="headerlink" title="isPalindrome"></a>isPalindrome</h2><img src="https://f1sh-blog.oss-cn-beijing.aliyuncs.com/img/image-20210413003108936.png" style="zoom:80%;" />
+
+<p>这道题和上面将数字倒序的思想是一样的</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isPalindrome</span><span class="params">(<span class="keyword">int</span> x)</span></span>&#123;</span><br><span class="line">     <span class="comment">// 判断负数</span></span><br><span class="line">     <span class="keyword">if</span>(x&lt;<span class="number">0</span>)&#123;</span><br><span class="line">         <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">     &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">         <span class="keyword">int</span> temp = x, cmpNum=<span class="number">0</span>;</span><br><span class="line">         <span class="keyword">while</span> (temp != <span class="number">0</span>)&#123;</span><br><span class="line">             cmpNum = cmpNum*<span class="number">10</span> + temp%<span class="number">10</span>;</span><br><span class="line">             temp /= <span class="number">10</span>;</span><br><span class="line">         &#125;</span><br><span class="line">         <span class="keyword">if</span>(cmpNum==x)&#123;</span><br><span class="line">             <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">         &#125;</span><br><span class="line">         <span class="keyword">return</span>  <span class="keyword">false</span>;</span><br><span class="line">     &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://f1sh-blog.oss-cn-beijing.aliyuncs.com/img/image-20210413003236573.png"></p>
+<h2 id="romanToInt"><a href="#romanToInt" class="headerlink" title="romanToInt"></a>romanToInt</h2><p><img src="https://f1sh-blog.oss-cn-beijing.aliyuncs.com/img/image-20210413214054861.png"></p>
+<p>这道题也可以用打表的思路，将不能单个字符表示的罗马数字全部穷举出来，这里只有6组，然后上哈希表</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">4, 9, 40, 90, 400, 900</span><br><span class="line">IV IX XL  XC  CD   CM</span><br></pre></td></tr></table></figure>
+
+<p>从右到左来切割判断</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">romanToInt</span><span class="params">(String s)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> ret = <span class="number">0</span>;</span><br><span class="line">        String[] strArr = &#123;<span class="string">&quot;I&quot;</span>,<span class="string">&quot;IV&quot;</span>,<span class="string">&quot;V&quot;</span>,<span class="string">&quot;IX&quot;</span>,<span class="string">&quot;X&quot;</span>,<span class="string">&quot;XL&quot;</span>,<span class="string">&quot;L&quot;</span>,<span class="string">&quot;XC&quot;</span>,<span class="string">&quot;C&quot;</span>,<span class="string">&quot;CD&quot;</span>,<span class="string">&quot;D&quot;</span>,<span class="string">&quot;CM&quot;</span>,<span class="string">&quot;M&quot;</span>&#125;;</span><br><span class="line">        <span class="keyword">int</span>[] num = &#123;<span class="number">1</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">9</span>,<span class="number">10</span>,<span class="number">40</span>,<span class="number">50</span>,<span class="number">90</span>,<span class="number">100</span>,<span class="number">400</span>,<span class="number">500</span>,<span class="number">900</span>,<span class="number">1000</span>&#125;;</span><br><span class="line"></span><br><span class="line">        HashMap&lt;String, Integer&gt; map = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; strArr.length; i++) &#123;</span><br><span class="line">            map.put(strArr[i],num[i]);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; s.length();) &#123;</span><br><span class="line">            <span class="keyword">if</span> (i+<span class="number">2</span>&lt;=s.length() &amp;&amp; (map.containsKey(s.substring(i,i+<span class="number">2</span>))))&#123;</span><br><span class="line">                ret += map.get(s.substring(i,i+<span class="number">2</span>));</span><br><span class="line">                i += <span class="number">2</span>;</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            ret += map.get(s.substring(i,i+<span class="number">1</span>));</span><br><span class="line">            i += <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ret;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="largestNumber"><a href="#largestNumber" class="headerlink" title="largestNumber"></a>largestNumber</h2><p><img src="https://f1sh-blog.oss-cn-beijing.aliyuncs.com/img/image-20210413213455765.png"></p>
+<p>这道题折磨了一天，需要用到别人感觉并不复杂但是我看不懂的数学证明，所以数学证明是不可能证明的，用字符串解决</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">largestNumber</span><span class="params">(<span class="keyword">int</span>[] nums)</span></span>&#123;</span><br><span class="line">        <span class="comment">/// 不能用顺序排列</span></span><br><span class="line">    	<span class="comment">/// 数字排序和字符串排序思路都不同</span></span><br><span class="line">        <span class="keyword">int</span> n = nums.length;</span><br><span class="line">        String[] numStr = <span class="keyword">new</span> String[n];</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">            numStr[i] = String.valueOf(nums[i]);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">/// compareTo返回前字符串比较字符ASCII与后字符串比较字母ASCII的差值</span></span><br><span class="line">        Arrays.sort(numStr,(a, b)-&gt;&#123;     <span class="comment">// 使用lambda重写sort函数，使其字符串逆序排序</span></span><br><span class="line">            <span class="keyword">return</span> (b+a).compareTo(a+b); <span class="comment">// 如果后面加起来比前面大的话，返回1</span></span><br><span class="line">                                         <span class="comment">// 否则返回0</span></span><br><span class="line">        &#125;);</span><br><span class="line">        System.out.println(Arrays.toString(numStr));</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(numStr[<span class="number">0</span>].equals(<span class="string">&quot;0&quot;</span>))&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="string">&quot;0&quot;</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        StringBuilder ret = <span class="keyword">new</span> StringBuilder();</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; numStr.length; i++) &#123;</span><br><span class="line">            ret.append(numStr[i]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ret.toString();</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="黑白方格画"><a href="#黑白方格画" class="headerlink" title="黑白方格画"></a>黑白方格画</h2><p><img src="https://f1sh-blog.oss-cn-beijing.aliyuncs.com/img/image-20210421164744748.png"></p>
+<p>一道纯考排列组合的数学题，两年没有碰过这些考智商的东西，脑袋没转过弯来，虽然里面包含的数学知识也不是很复杂，</p>
+<p><img src="https://f1sh-blog.oss-cn-beijing.aliyuncs.com/img/image-20210426222142215.png"></p>
+<p><img src="https://f1sh-blog.oss-cn-beijing.aliyuncs.com/img/image-20210426222211918.png"></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">factorial</span><span class="params">(<span class="keyword">int</span> a)</span></span>&#123;</span><br><span class="line">       <span class="keyword">if</span>(a == <span class="number">1</span> || a == <span class="number">0</span>)</span><br><span class="line">           <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">       <span class="keyword">return</span> factorial(a-<span class="number">1</span>)*a;</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">combine</span><span class="params">(<span class="keyword">int</span> n, <span class="keyword">int</span> a)</span></span>&#123;</span><br><span class="line">       <span class="keyword">return</span> factorial(n)/(factorial(a)*factorial(n-a));</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">paintingPlan</span><span class="params">(<span class="keyword">int</span> n, <span class="keyword">int</span> k)</span> </span>&#123;</span><br><span class="line">       <span class="keyword">if</span> (n*n == k)&#123;</span><br><span class="line">           <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">       &#125;<span class="keyword">else</span> <span class="keyword">if</span>(n &gt; k)&#123;</span><br><span class="line">           <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="keyword">int</span> ret = <span class="number">0</span>;</span><br><span class="line">       <span class="keyword">for</span>(<span class="keyword">int</span> a=<span class="number">0</span>; a&lt;=n; a++)&#123;</span><br><span class="line">           <span class="keyword">for</span>(<span class="keyword">int</span> b=<span class="number">0</span>; b&lt;=n; b++)&#123;</span><br><span class="line">               <span class="keyword">if</span>(k == n*(a+b)-a*b)&#123;</span><br><span class="line">                   ret += combine(n, a)*combine(n, b);</span><br><span class="line">               &#125;</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="keyword">return</span> ret;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="跳水板-amp-amp-青蛙跳台阶"><a href="#跳水板-amp-amp-青蛙跳台阶" class="headerlink" title="跳水板 &amp;&amp; 青蛙跳台阶"></a>跳水板 &amp;&amp; 青蛙跳台阶</h2><p><img src="https://f1sh-blog.oss-cn-beijing.aliyuncs.com/img/image-20210421194225407.png"></p>
+<p><img src="https://f1sh-blog.oss-cn-beijing.aliyuncs.com/img/image-20210423194542590.png"></p>
+<p>这道题如果用纯递归的方法去做属实不行，时间复杂度太高了<code>&lt;O(2^n)&gt;</code>，斐波那契数列的性质是一样的，前面两个数决定后一个数，动态规划</p>
+<ul>
+<li>递归方法</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">divingBoard</span><span class="params">(<span class="keyword">int</span> shorter, <span class="keyword">int</span> longer, <span class="keyword">int</span> k)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (k &lt; <span class="number">0</span>)<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">if</span> (k == <span class="number">0</span>)<span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">return</span> climb(shorter, longer, k - <span class="number">1</span>) + climb(shorter, longer, k - <span class="number">2</span>);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>非递归方法</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">int</span>[] divingBoard(<span class="keyword">int</span> shorter, <span class="keyword">int</span> longer, <span class="keyword">int</span> k) &#123;</span><br><span class="line">        <span class="keyword">if</span>(k == <span class="number">0</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">0</span>];</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (shorter == longer)&#123;</span><br><span class="line">            <span class="keyword">int</span>[] ret = &#123;shorter * k&#125;;</span><br><span class="line">            <span class="keyword">return</span> ret;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span>[] board = <span class="keyword">new</span> <span class="keyword">int</span>[k + <span class="number">1</span>];</span><br><span class="line">        <span class="keyword">int</span> shortest = k * shorter;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; k + <span class="number">1</span>; i++) &#123;</span><br><span class="line">            board[i] = shortest + i * (longer - shorter);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> board;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="重要的员工"><a href="#重要的员工" class="headerlink" title="重要的员工"></a>重要的员工</h2><p><img src="https://f1sh-blog.oss-cn-beijing.aliyuncs.com/img/image-20210425111336020.png"></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">retSubImp</span><span class="params">(Employee pre, List&lt;Employee&gt; employees)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (pre.subordinates.isEmpty())&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> imp = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (Integer sub :</span><br><span class="line">                pre.subordinates) &#123;</span><br><span class="line">            <span class="keyword">for</span> (Employee employee :</span><br><span class="line">                   employees ) &#123;</span><br><span class="line">                <span class="keyword">if</span> (sub == employee.id)&#123;</span><br><span class="line">                    imp += employee.importance;</span><br><span class="line">                    imp += retSubImp(employee, employees);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> imp;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getImportance</span><span class="params">(List&lt;Employee&gt; employees, <span class="keyword">int</span> id)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> imp = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (Employee staff :</span><br><span class="line">                employees) &#123;</span><br><span class="line">            <span class="keyword">if</span> (staff.id == id)&#123;</span><br><span class="line">                imp += staff.importance;</span><br><span class="line">                <span class="keyword">for</span> (Integer subid :</span><br><span class="line">                        staff.subordinates) &#123;</span><br><span class="line">                    imp += retSubImp(staff, employees);</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> imp;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="扫雷"><a href="#扫雷" class="headerlink" title="扫雷"></a>扫雷</h2><p><img src="https://f1sh-blog.oss-cn-beijing.aliyuncs.com/img/image-20210426190824816.png"></p>
+<p>这道题有点好玩😛，dfs搜索一共三个步骤</p>
+<ul>
+<li>判断该坐标是否为雷，如果是雷就直接结束游戏</li>
+<li>如果不是雷，判断坐标周围雷的个数，如果个数不为0，则标记雷的个数，结束游戏</li>
+<li>如果周围没有雷，则递归检索周围没有越界的坐标</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> width;</span><br><span class="line"><span class="keyword">int</span> height;</span><br><span class="line"><span class="keyword">int</span> countBomb = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">int</span>[][] step = &#123;&#123;<span class="number">1</span>, <span class="number">0</span>&#125;, &#123;-<span class="number">1</span>, <span class="number">0</span>&#125;, &#123;<span class="number">0</span>, <span class="number">1</span>&#125;, &#123;<span class="number">0</span>, -<span class="number">1</span>&#125;,</span><br><span class="line">                &#123;-<span class="number">1</span>, -<span class="number">1</span>&#125;, &#123;-<span class="number">1</span>, <span class="number">1</span>&#125;, &#123;<span class="number">1</span>, -<span class="number">1</span>&#125;, &#123;<span class="number">1</span>, <span class="number">1</span>&#125;&#125;;</span><br><span class="line"><span class="keyword">char</span>[] dic = &#123;<span class="string">&#x27;0&#x27;</span>, <span class="string">&#x27;1&#x27;</span>,<span class="string">&#x27;2&#x27;</span>,<span class="string">&#x27;3&#x27;</span>,<span class="string">&#x27;4&#x27;</span>,<span class="string">&#x27;5&#x27;</span>,<span class="string">&#x27;6&#x27;</span>,<span class="string">&#x27;7&#x27;</span>,<span class="string">&#x27;8&#x27;</span>&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">updateBoardDfs</span><span class="params">(<span class="keyword">char</span>[][] board, <span class="keyword">int</span> x, <span class="keyword">int</span> y, <span class="keyword">int</span>[][] sign)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (x &gt;= height || x &lt; <span class="number">0</span> || y &gt;= width || y &lt; <span class="number">0</span> || sign[x][y] == <span class="number">1</span>)&#123;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 首先判断周围8个方向是否有雷</span></span><br><span class="line">    getCountBomb(board, x, y);</span><br><span class="line">    <span class="keyword">if</span> (countBomb != <span class="number">0</span>)&#123;</span><br><span class="line">        board[x][y] = dic[countBomb];</span><br><span class="line">        countBomb = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 八个方向</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">8</span>; i++) &#123;</span><br><span class="line">        <span class="keyword">int</span> post_x = x + step[i][<span class="number">0</span>];</span><br><span class="line">        <span class="keyword">int</span> post_y = y + step[i][<span class="number">1</span>];</span><br><span class="line">        board[x][y] = <span class="string">&#x27;B&#x27;</span>;</span><br><span class="line">        sign[x][y] = <span class="number">1</span>;</span><br><span class="line">        updateBoardDfs(board, post_x, post_y, sign);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">getCountBomb</span><span class="params">(<span class="keyword">char</span>[][] board, <span class="keyword">int</span> x, <span class="keyword">int</span> y)</span></span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">8</span>; i++) &#123;</span><br><span class="line">        <span class="keyword">int</span> post_x = x + step[i][<span class="number">0</span>];</span><br><span class="line">        <span class="keyword">int</span> post_y = y + step[i][<span class="number">1</span>];</span><br><span class="line">        <span class="keyword">if</span> (post_x &gt;= height || post_x &lt; <span class="number">0</span> || post_y &gt;= width || post_y &lt; <span class="number">0</span>) <span class="keyword">continue</span>;</span><br><span class="line">        <span class="keyword">if</span> (board[post_x][post_y] == <span class="string">&#x27;M&#x27;</span>)</span><br><span class="line">            countBomb++;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * 判断点击是否为雷</span></span><br><span class="line"><span class="comment"> * 检索周围8个方向是否有雷，无雷标记为B</span></span><br><span class="line"><span class="comment"> * 有雷标检索有雷个数，然后标记数字</span></span><br><span class="line"><span class="comment"> * */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">char</span>[][] updateBoard(<span class="keyword">char</span>[][] board, <span class="keyword">int</span>[] click)&#123;</span><br><span class="line">    width = board[<span class="number">0</span>].length;</span><br><span class="line">    height = board.length;</span><br><span class="line">    <span class="keyword">int</span>[][] sign = <span class="keyword">new</span> <span class="keyword">int</span>[height][width];</span><br><span class="line">    <span class="comment">// 玩家点击矩阵坐标</span></span><br><span class="line">    <span class="keyword">char</span> playerClickPot = board[click[<span class="number">0</span>]][click[<span class="number">1</span>]];</span><br><span class="line">    <span class="keyword">if</span> (playerClickPot == <span class="string">&#x27;M&#x27;</span>)&#123;</span><br><span class="line">        board[click[<span class="number">0</span>]][click[<span class="number">1</span>]] = <span class="string">&#x27;X&#x27;</span>;</span><br><span class="line">    &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">        updateBoardDfs(board, click[<span class="number">0</span>], click[<span class="number">1</span>],  sign);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> board;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="在D天内送达包裹的能力"><a href="#在D天内送达包裹的能力" class="headerlink" title="在D天内送达包裹的能力"></a>在D天内送达包裹的能力</h2><p><img src="https://f1sh-blog.oss-cn-beijing.aliyuncs.com/img/image-20210426220019030.png"></p>
+<p><img src="https://f1sh-blog.oss-cn-beijing.aliyuncs.com/img/image-20210426220051541.png"></p>
+<p>看题解打卡下班</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">     <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">shipWithinDays</span><span class="params">(<span class="keyword">int</span>[] weights, <span class="keyword">int</span> D)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> left = Arrays.stream(weights).max().getAsInt();</span><br><span class="line">        <span class="keyword">int</span> right = Arrays.stream(weights).sum();</span><br><span class="line">        <span class="keyword">while</span> (left &lt; right)&#123;</span><br><span class="line">            <span class="keyword">int</span> middle = (left+right) &gt;&gt; <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">int</span> needDay = <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">int</span> sum = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> goodWeight : weights)&#123;</span><br><span class="line">                <span class="keyword">if</span> (sum + goodWeight &gt; middle)&#123;</span><br><span class="line">                    needDay++;</span><br><span class="line">                    sum = <span class="number">0</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                sum += goodWeight;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (needDay &lt;= D)&#123;</span><br><span class="line">                right = middle;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                left = middle + <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> right;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+  </div>
+  <!--文末结束语-->
+  
+  <!--页脚广告-->
+  
+  <div class="mdui-divider"></div>
+  
+  <nav>
+    
+      <a rel="prev" class="post-nav-item mdui-float-left" href="/32351/">
+        <i class="iconfont icon-angle-left"></i>
+        <span>TCP/IP</span>
+      </a>
+    
+    
+      <a rel="next" class="post-nav-item mdui-float-right" href="/37154/">
+        <span>leetcode(2)</span>
+        <i class="iconfont icon-angle-right"></i>
+      </a>
+    
+  </nav>
+</article>
+
+
+
+
+  <div class="toc-button"  style="z-index: 100;">
+    <button class="mdui-fab mdui-ripple mdui-color-teal" mdui-menu="{target: '#toc'}"><i class="iconfont icon-list"></i></button>
+    <ul class="mdui-menu" id="toc">
+      <li class="mdui-menu-item">
+        <a href="/41353/" id="toc-header" class="mdui-ripple">Table of Contents</a>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#towsum"><span class="toc-number">1.</span> <span class="toc-text">towsum</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#reverse"><span class="toc-number">2.</span> <span class="toc-text">reverse</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#isPalindrome"><span class="toc-number">3.</span> <span class="toc-text">isPalindrome</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#romanToInt"><span class="toc-number">4.</span> <span class="toc-text">romanToInt</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#largestNumber"><span class="toc-number">5.</span> <span class="toc-text">largestNumber</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%BB%91%E7%99%BD%E6%96%B9%E6%A0%BC%E7%94%BB"><span class="toc-number">6.</span> <span class="toc-text">黑白方格画</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B7%B3%E6%B0%B4%E6%9D%BF-amp-amp-%E9%9D%92%E8%9B%99%E8%B7%B3%E5%8F%B0%E9%98%B6"><span class="toc-number">7.</span> <span class="toc-text">跳水板 &amp;&amp; 青蛙跳台阶</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%87%8D%E8%A6%81%E7%9A%84%E5%91%98%E5%B7%A5"><span class="toc-number">8.</span> <span class="toc-text">重要的员工</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%89%AB%E9%9B%B7"><span class="toc-number">9.</span> <span class="toc-text">扫雷</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9C%A8D%E5%A4%A9%E5%86%85%E9%80%81%E8%BE%BE%E5%8C%85%E8%A3%B9%E7%9A%84%E8%83%BD%E5%8A%9B"><span class="toc-number">10.</span> <span class="toc-text">在D天内送达包裹的能力</span></a></li></ol>
+      </li>
+    </ul>
+  </div>
+
+
+
+  </main>
+  <footer id="footer" class="mdui-text-center mdui-m-t-5 mdui-p-b-2 mdui-p-t-4 mdui-color-theme">
+  <div class="mdui-container">
+    <div class="mdui-row">
+      
+        <a href="https://beian.miit.gov.cn" rel="noopener" target="_blank"></a>
+      
+      <span>
+        &copy; 2015 - 2021 
+        
+          <span style="color:#d9333f" class="iconfont icon-heart"></span>
+        
+        Fish
+      </span>
+    </div>
+    <div class="mdui-row">
+      
+        <div class="mdui-col-xs-6 mdui-text-right">
+          <span>Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a></span>
+        </div>
+        <div class="mdui-col-xs-6 mdui-text-left">
+          <span>Theme: <a href="https://github.com/kb1000fx/Meadow" rel="noopener" target="_blank">Meadow</a></span>
+        </div>
+      
+    </div>
+    <div class="mdui-row">
+      
+        <div class="mdui-col-xs-6 mdui-text-right">
+          <span id="busuanzi_container_site_uv" style="display: none;"> <span class="iconfont icon-user"></span>Total Visitors <span id="busuanzi_value_site_uv"></span></span>
+        </div>
+        <div class="mdui-col-xs-6 mdui-text-left">
+          <span id="busuanzi_container_site_pv" style="display: none;"> <span class="iconfont icon-eye"></span>Total Views <span id="busuanzi_value_site_pv"></span></span>
+        </div>
+      
+    </div>
+ </div>
+</footer>
+  
+  <button id="gotop" class="mdui-fab mdui-fab-fixed mdui-fab-hide mdui-ripple mdui-color-teal" style="z-index:100;"><i class="iconfont icon-arrowup"></i></button>
+  
+  
+
+    <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@8.4.8/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({
+        startOnLoad: true,
+        theme: "forest"
+    });</script>
+
+
+
+
+    
+<script src="/js/mdui.min.v1.0.0.js"></script>
+
+
+
+
+<script src="/js/meadow.js"></script>
+
+</body>
+</html >
