@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+    
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    
+    <meta name="renderer" content="webkit"/>
+    <meta name="force-rendering" content="webkit"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <script>if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMode)) window.location.href="https://support.dmeng.net/upgrade-your-browser.html?referrer="+encodeURIComponent(window.location.href); </script>
+    
+    
+    
+    
+        <link rel="shortcut icon" href="https://raw.githubusercontent.com/f1shf1sh/Picture/master/Markdown/fish.png">
+    
+
+    
+    
+        
+<link rel="stylesheet" href="/css/mdui.min.v1.0.0.css">
+
+    
+    
+<link rel="stylesheet" href="/css/main.css">
+<link rel="stylesheet" href="/css/iconfont.css">
+
+
+    
+    
+
+
+
+
+
+
+
+
+
+
+
+
+          
+
+
+    
+    
+    <title>
+        
+            🎦Win32学习记录-2(创建线程) | Fish
+        
+    </title>
+    
+    
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="Fish" type="application/atom+xml">
+</head>
+<body class="mdui-drawer-body-left mdui-appbar-with-toolbar mdui-theme-primary-teal mdui-theme-accent-blue">
+  
+  <header class="mdui-appbar mdui-appbar-fixed">
+  <div id="toolbar" class="mdui-toolbar mdui-color-theme">
+    <button class="mdui-btn mdui-btn-icon" mdui-drawer="{target: '#sidebar', swipe: true}"><i class="iconfont icon-menu"></i></button>
+    <a href="/" class="mdui-typo-headline">Fish</a>
+    <a href="/" class="header-subtitle mdui-typo-headline"></a>
+    <div class="mdui-toolbar-spacer"></div>
+    <button class="mdui-btn mdui-btn-icon" mdui-dialog="{target: '#search'}" mdui-tooltip="{content: 'search'}"><i class="iconfont icon-search"></i></button>
+  </div>
+</header>
+
+<div class="mdui-dialog" id="search">
+  
+    <div class="search-form">
+      <input type="search" class="search-form-input" placeholder="Please input key words" onfocus="listenSearchFunc()">
+    </div>
+    <div class="search-result" data-resource="/search.xml"></div>
+  
+</div>
+
+  <aside id="sidebar" class="mdui-drawer">
+    <div class="mdui-tab" mdui-tab>
+        <a href="#sidebar-tab1" id="sidebartab" class="mdui-ripple mdui-tab-active">站点概览</a>
+        <a href="#sidebar-tab2" id="sidebartab" class="mdui-ripple">关于</a>
+    </div>
+
+    
+    <div id="sidebar-tab1" class="mdui-p-a-1">
+        <div class="mdui-list">
+            
+                
+                <a href="/" class="mdui-list-item mdui-ripple">
+                    <div class="mdui-list-item-icon">
+                        <i class="iconfont icon-home"></i>
+                    </div>
+                    <div class="mdui-list-item-content">主页</div>
+                </a>
+            
+                
+                <a href="/tags/" class="mdui-list-item mdui-ripple">
+                    <div class="mdui-list-item-icon">
+                        <i class="iconfont icon-bookmark"></i>
+                    </div>
+                    <div class="mdui-list-item-content">标签</div>
+                </a>
+            
+                
+                <a href="/categories/" class="mdui-list-item mdui-ripple">
+                    <div class="mdui-list-item-icon">
+                        <i class="iconfont icon-folder"></i>
+                    </div>
+                    <div class="mdui-list-item-content">分类</div>
+                </a>
+            
+                
+                <a href="/archives/" class="mdui-list-item mdui-ripple">
+                    <div class="mdui-list-item-icon">
+                        <i class="iconfont icon-archive"></i>
+                    </div>
+                    <div class="mdui-list-item-content">归档</div>
+                </a>
+            
+                
+                <a href="/tools/" class="mdui-list-item mdui-ripple">
+                    <div class="mdui-list-item-icon">
+                        <i class="iconfont icon-tools"></i>
+                    </div>
+                    <div class="mdui-list-item-content">工具箱</div>
+                </a>
+            
+                
+                <a href="/about/" class="mdui-list-item mdui-ripple">
+                    <div class="mdui-list-item-icon">
+                        <i class="iconfont icon-user"></i>
+                    </div>
+                    <div class="mdui-list-item-content">关于</div>
+                </a>
+            
+            <div class="mdui-list-item mdui-ripple">
+                <div class="mdui-list-item-icon">
+                    <i class="iconfont icon-moon"></i>
+                </div>
+                <div class="mdui-list-item-content">夜间模式</div>
+                <label class="mdui-switch" id="darkmode">
+                  <input type="checkbox" id="nightmode_switch"/>
+                  <i class="mdui-switch-icon"></i>
+                </label>
+            </div>           
+        </div>
+    </div>
+
+    
+    <div id="sidebar-tab2" class="mdui-p-a-1">
+        <div class="sidebar-overview">
+            <div class="sidebar-avatar">
+                
+                    <img src="https://raw.githubusercontent.com/f1shf1sh/Picture/master/Markdown/avatar.JPG"/>
+                
+            </div>
+            <div class="sidebar-author-name">Fish</div>
+            <div class="sidebar-description"></div>
+        </div>
+        <div class="sidebar-links">
+            
+                
+                <div class="mdui-chip">
+                    <span class="mdui-chip-icon"><i class="iconfont icon-github"></i></span>
+                    <a target="_blank" rel="noopener" href="https://github.com/f1shf1sh" class="mdui-chip-title">GitHub</a>
+                </div>
+            
+                
+                <div class="mdui-chip">
+                    <span class="mdui-chip-icon"><i class="iconfont icon-twitter"></i></span>
+                    <a target="_blank" rel="noopener" href="https:twitter.com/@Fish12427018" class="mdui-chip-title">Twitter</a>
+                </div>
+            
+        </div>
+        <ul class="mdui-list" mdui-collapse="{accordion: true}">
+            <li class="mdui-collapse-item">
+                <div class="mdui-collapse-item-header mdui-list-item mdui-ripple">
+                    <div class="mdui-list-item-icon">
+                        <i class="iconfont icon-link"></i>
+                    </div>
+                    <div class="mdui-list-item-content">友情链接</div>
+                    <div class="mdui-collapse-item-arrow">
+                        <i class="mdui-list-item-icon iconfont icon-angle-down"></i>
+                    </div>
+                </div>
+                <ul id="linksList" class="mdui-collapse-item-body mdui-list mdui-list-dense">
+                    
+                        <a href="https://google.com || icon-google" class="mdui-list-item mdui-ripple">
+                            Google
+                        </a>
+                    
+                </ul>
+            </li>
+        </ul>
+    </div>
+
+    <div class="mdui-divider"></div>
+    
+    
+</aside>
+  
+  <main id="main-contain" class="mdui-container mdui-m-t-5">
+    <div class="mdui-card mdui-p-b-2 mdui-m-b-5">
+    <div class="post-header"> 
+        <a class="post-header-title" href="/%E4%B8%8D%E6%83%B3%E9%83%A8%E7%BD%B2%E7%9A%84/windows/Win32-2.html">🎦Win32学习记录-2(创建线程)</a>
+    </div>
+    <div id="page-card" class="mdui-card-content mdui-p-x-4">
+        
+            
+            
+            
+            <span id="more"></span>
+
+<p>✈✈图形化界面创建过程略过✈✈</p>
+<h3 id="CreateThread函数介绍"><a href="#CreateThread函数介绍" class="headerlink" title="CreateThread函数介绍"></a>CreateThread函数介绍</h3><ul>
+<li><p>MSDN对CreateThread的解释</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">HANDLE <span class="title">CreateThread</span><span class="params">(</span></span></span><br><span class="line"><span class="params"><span class="function">  LPSECURITY_ATTRIBUTES   lpThreadAttributes,</span></span></span><br><span class="line"><span class="params"><span class="function">  SIZE_T                  dwStackSize,</span></span></span><br><span class="line"><span class="params"><span class="function">  LPTHREAD_START_ROUTINE  lpStartAddress,</span></span></span><br><span class="line"><span class="params"><span class="function">  __drv_aliasesMem LPVOID lpParameter,</span></span></span><br><span class="line"><span class="params"><span class="function">  DWORD                   dwCreationFlags,</span></span></span><br><span class="line"><span class="params"><span class="function">  LPDWORD                 lpThreadId</span></span></span><br><span class="line"><span class="params"><span class="function">)</span></span>;</span><br></pre></td></tr></table></figure></li>
+<li><p>中文版</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">HANDLE <span class="title">CreateThread</span><span class="params">(				</span></span></span><br><span class="line"><span class="params"><span class="function">  LPSECURITY_ATTRIBUTES lpThreadAttributes, <span class="comment">// 安全属性 通常为NULL				</span></span></span></span><br><span class="line"><span class="params"><span class="function">  SIZE_T dwStackSize,                       <span class="comment">// 参数用于设定线程可以将多少地址空间用于它自己的堆栈	</span></span></span></span><br><span class="line"><span class="params"><span class="function">    </span></span></span><br><span class="line"><span class="params"><span class="function"><span class="comment">// 每个线程拥有它自己的堆栈</span></span></span></span><br><span class="line"><span class="params"><span class="function">  LPTHREAD_START_ROUTINE lpStartAddress,    <span class="comment">// 参数用于指明想要新线程执行的线程函数的地址				</span></span></span></span><br><span class="line"><span class="params"><span class="function">  LPVOID lpParameter,                       <span class="comment">// 线程函数的参数	</span></span></span></span><br><span class="line"><span class="params"><span class="function">    </span></span></span><br><span class="line"><span class="params"><span class="function"><span class="comment">// 在线程启动执行时将该参数传递给线程函数</span></span></span></span><br><span class="line"><span class="params"><span class="function"><span class="comment">// 既可以是数字，也可以是指向包含其他信息的一个数据结构的指针</span></span></span></span><br><span class="line"><span class="params"><span class="function">  DWORD dwCreationFlags,                    <span class="comment">// 0 创建完毕立即调度  CREATE_SUSPENDED创建后挂起				</span></span></span></span><br><span class="line"><span class="params"><span class="function">  LPDWORD lpThreadId                        <span class="comment">// 线程ID 				</span></span></span></span><br><span class="line"><span class="params"><span class="function">)</span></span>;				</span><br><span class="line"><span class="comment">// 返回值：线程句柄</span></span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="界面资源介绍"><a href="#界面资源介绍" class="headerlink" title="界面资源介绍"></a>界面资源介绍</h3><p><img src="Win32-2.assets/image-20201102222253640.png"></p>
+<h3 id="WinMain函数"><a href="#WinMain函数" class="headerlink" title="WinMain函数"></a>WinMain函数</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> WINAPI <span class="title">WinMain</span><span class="params">(</span></span></span><br><span class="line"><span class="params"><span class="function">	HINSTANCE hInstance,</span></span></span><br><span class="line"><span class="params"><span class="function">	HINSTANCE hPrevInstance,</span></span></span><br><span class="line"><span class="params"><span class="function">	LPSTR lpCmdLine,</span></span></span><br><span class="line"><span class="params"><span class="function">	<span class="keyword">int</span> nCmdShow</span></span></span><br><span class="line"><span class="params"><span class="function">)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">DialogBox</span>(hInstance, <span class="built_in">MAKEINTRESOURCE</span>(IDD_DIALOG_MAIN), <span class="literal">NULL</span>, DiaLogProc);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="DiaLogProc函数（消息回调函数）"><a href="#DiaLogProc函数（消息回调函数）" class="headerlink" title="DiaLogProc函数（消息回调函数）"></a>DiaLogProc函数（消息回调函数）</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">BOOL CALLBACK <span class="title">DiaLogProc</span><span class="params">(</span></span></span><br><span class="line"><span class="params"><span class="function">	HWND hwndDlg,</span></span></span><br><span class="line"><span class="params"><span class="function">	UINT uMsg,</span></span></span><br><span class="line"><span class="params"><span class="function">	WPARAM wParam,</span></span></span><br><span class="line"><span class="params"><span class="function">	LPARAM lParam</span></span></span><br><span class="line"><span class="params"><span class="function">)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in"><span class="keyword">switch</span></span> (uMsg)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">case</span> WM_INITDIALOG:</span><br><span class="line">		&#123;</span><br><span class="line">            ********************************获得两个窗口句柄***************************</span><br><span class="line">			hEDIT_ONE = <span class="built_in">GetDlgItem</span>(hwndDlg, IDC_EDIT_ONE);</span><br><span class="line">			hEDIT_TWO = <span class="built_in">GetDlgItem</span>(hwndDlg, IDC_EDIT_TWO);</span><br><span class="line">            ************************************************************************</span><br><span class="line">            </span><br><span class="line">            ********************************初始化窗口********************************</span><br><span class="line">			<span class="built_in">SetWindowText</span>(hEDIT_ONE, <span class="string">&quot;1000&quot;</span>);</span><br><span class="line">			<span class="built_in">SetWindowText</span>(hEDIT_TWO, <span class="string">&quot;0&quot;</span>);</span><br><span class="line">            ************************************************************************</span><br><span class="line">                </span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">case</span> WM_COMMAND:</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="built_in"><span class="keyword">switch</span></span> (<span class="built_in">LOWORD</span>(wParam))</span><br><span class="line">			&#123;</span><br><span class="line">				<span class="keyword">case</span> IDC_BUTTON:</span><br><span class="line">				&#123;</span><br><span class="line">                    </span><br><span class="line">                    *****************************创建了两个线程*****************************</span><br><span class="line">					HANDLE hThread1 = ::<span class="built_in">CreateThread</span>(<span class="literal">NULL</span>, <span class="number">0</span>, ThreadProc1, <span class="literal">NULL</span>, <span class="number">0</span>, <span class="literal">NULL</span>);</span><br><span class="line">					HANDLE hThread2 = ::<span class="built_in">CreateThread</span>(<span class="literal">NULL</span>, <span class="number">0</span>, ThreadProc2, <span class="literal">NULL</span>, <span class="number">0</span>, <span class="literal">NULL</span>);</span><br><span class="line">                    **********************************************************************</span><br><span class="line">                        </span><br><span class="line">					::<span class="built_in">CloseHandle</span>(hThread1);</span><br><span class="line">					::<span class="built_in">CloseHandle</span>(hThread2);</span><br><span class="line">					<span class="keyword">return</span> TRUE;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">case</span> WM_CLOSE:</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="built_in">DestroyWindow</span>(hwndDlg);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">default</span>:</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="built_in">DefWindowProc</span>(hwndDlg, uMsg, wParam, lParam);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">break</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="线程函数1"><a href="#线程函数1" class="headerlink" title="线程函数1"></a>线程函数1</h3><p><strong>注意这里直接将返回值(线程句柄)设置为0</strong>，另外一个线程函数与这个相似，不在贴出来。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">DWORD WINAPI <span class="title">ThreadProc1</span><span class="params">(</span></span></span><br><span class="line"><span class="params"><span class="function">	LPVOID lpParameter</span></span></span><br><span class="line"><span class="params"><span class="function">)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">		<span class="comment">//将文本框中的输入传入Buffer中</span></span><br><span class="line">		TCHAR szBuffer[<span class="number">10</span>];</span><br><span class="line">		<span class="built_in">memset</span>(szBuffer, <span class="number">0</span>, <span class="number">10</span>);</span><br><span class="line">		<span class="built_in">GetWindowText</span>(hEDIT_ONE, szBuffer, <span class="number">10</span>);</span><br><span class="line">		<span class="comment">//将Buffer中的字符串转为数字</span></span><br><span class="line">		DWORD dwTimer;</span><br><span class="line">		<span class="keyword">int</span> check = <span class="built_in">sscanf</span>((<span class="keyword">const</span> <span class="keyword">char</span>*)szBuffer, <span class="string">&quot;%d&quot;</span>, &amp;dwTimer);</span><br><span class="line">		<span class="keyword">while</span> (dwTimer &gt; <span class="number">0</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="built_in">Sleep</span>(<span class="number">100</span>);</span><br><span class="line">			<span class="comment">//在将数字减1后变为字符串</span></span><br><span class="line">			<span class="built_in">memset</span>(szBuffer, <span class="number">0</span>, <span class="number">10</span>);</span><br><span class="line">			<span class="built_in">sprintf</span>((<span class="keyword">char</span>*)szBuffer, <span class="string">&quot;%d&quot;</span>, --dwTimer);</span><br><span class="line">			<span class="comment">//将字符串放回到文本框中</span></span><br><span class="line">			<span class="built_in">SetWindowText</span>(hEDIT_ONE, szBuffer);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> <span class="number">0</span>; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="效果"><a href="#效果" class="headerlink" title="效果"></a>效果</h4><p><img src="Win32-2.assets/image-20201102230457022.png"></p>
+
+            
+        </div>
+    </div>
+    
+
+
+  </main>
+  <footer id="footer" class="mdui-text-center mdui-m-t-5 mdui-p-b-2 mdui-p-t-4 mdui-color-theme">
+  <div class="mdui-container">
+    <div class="mdui-row">
+      
+        <a href="https://beian.miit.gov.cn" rel="noopener" target="_blank"></a>
+      
+      <span>
+        &copy; 2015 - 2021 
+        
+          <span style="color:#d9333f" class="iconfont icon-heart"></span>
+        
+        Fish
+      </span>
+    </div>
+    <div class="mdui-row">
+      
+        <div class="mdui-col-xs-6 mdui-text-right">
+          <span>Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a></span>
+        </div>
+        <div class="mdui-col-xs-6 mdui-text-left">
+          <span>Theme: <a href="https://github.com/kb1000fx/Meadow" rel="noopener" target="_blank">Meadow</a></span>
+        </div>
+      
+    </div>
+    <div class="mdui-row">
+      
+        <div class="mdui-col-xs-6 mdui-text-right">
+          <span id="busuanzi_container_site_uv" style="display: none;"> <span class="iconfont icon-user"></span>总访客量 <span id="busuanzi_value_site_uv"></span></span>
+        </div>
+        <div class="mdui-col-xs-6 mdui-text-left">
+          <span id="busuanzi_container_site_pv" style="display: none;"> <span class="iconfont icon-eye"></span>总访问量 <span id="busuanzi_value_site_pv"></span></span>
+        </div>
+      
+    </div>
+ </div>
+</footer>
+  
+  <button id="gotop" class="mdui-fab mdui-fab-fixed mdui-fab-hide mdui-ripple mdui-color-teal" style="z-index:100;"><i class="iconfont icon-arrowup"></i></button>
+  
+  
+
+    <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+
+    
+<script src="/js/mdui.min.v1.0.0.js"></script>
+
+
+
+
+<script src="/js/meadow.js"></script>
+
+</body>
+</html >

@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+    
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    
+    <meta name="renderer" content="webkit"/>
+    <meta name="force-rendering" content="webkit"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <script>if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMode)) window.location.href="https://support.dmeng.net/upgrade-your-browser.html?referrer="+encodeURIComponent(window.location.href); </script>
+    
+    
+    
+    
+        <link rel="shortcut icon" href="https://raw.githubusercontent.com/f1shf1sh/Picture/master/Markdown/fish.png">
+    
+
+    
+    
+        
+<link rel="stylesheet" href="/css/mdui.min.v1.0.0.css">
+
+    
+    
+<link rel="stylesheet" href="/css/main.css">
+<link rel="stylesheet" href="/css/iconfont.css">
+
+
+    
+    
+
+
+
+
+
+
+
+
+
+
+
+
+          
+
+
+    
+    
+    <title>
+        
+            🕵️‍♂️IDA中交叉引用和绘图功能 | Fish
+        
+    </title>
+    
+    
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="Fish" type="application/atom+xml">
+</head>
+<body class="mdui-drawer-body-left mdui-appbar-with-toolbar mdui-theme-primary-teal mdui-theme-accent-blue">
+  
+  <header class="mdui-appbar mdui-appbar-fixed">
+  <div id="toolbar" class="mdui-toolbar mdui-color-theme">
+    <button class="mdui-btn mdui-btn-icon" mdui-drawer="{target: '#sidebar', swipe: true}"><i class="iconfont icon-menu"></i></button>
+    <a href="/" class="mdui-typo-headline">Fish</a>
+    <a href="/" class="header-subtitle mdui-typo-headline"></a>
+    <div class="mdui-toolbar-spacer"></div>
+    <button class="mdui-btn mdui-btn-icon" mdui-dialog="{target: '#search'}" mdui-tooltip="{content: 'search'}"><i class="iconfont icon-search"></i></button>
+  </div>
+</header>
+
+<div class="mdui-dialog" id="search">
+  
+    <div class="search-form">
+      <input type="search" class="search-form-input" placeholder="Please input key words" onfocus="listenSearchFunc()">
+    </div>
+    <div class="search-result" data-resource="/search.xml"></div>
+  
+</div>
+
+  <aside id="sidebar" class="mdui-drawer">
+    <div class="mdui-tab" mdui-tab>
+        <a href="#sidebar-tab1" id="sidebartab" class="mdui-ripple mdui-tab-active">站点概览</a>
+        <a href="#sidebar-tab2" id="sidebartab" class="mdui-ripple">关于</a>
+    </div>
+
+    
+    <div id="sidebar-tab1" class="mdui-p-a-1">
+        <div class="mdui-list">
+            
+                
+                <a href="/" class="mdui-list-item mdui-ripple">
+                    <div class="mdui-list-item-icon">
+                        <i class="iconfont icon-home"></i>
+                    </div>
+                    <div class="mdui-list-item-content">主页</div>
+                </a>
+            
+                
+                <a href="/tags/" class="mdui-list-item mdui-ripple">
+                    <div class="mdui-list-item-icon">
+                        <i class="iconfont icon-bookmark"></i>
+                    </div>
+                    <div class="mdui-list-item-content">标签</div>
+                </a>
+            
+                
+                <a href="/categories/" class="mdui-list-item mdui-ripple">
+                    <div class="mdui-list-item-icon">
+                        <i class="iconfont icon-folder"></i>
+                    </div>
+                    <div class="mdui-list-item-content">分类</div>
+                </a>
+            
+                
+                <a href="/archives/" class="mdui-list-item mdui-ripple">
+                    <div class="mdui-list-item-icon">
+                        <i class="iconfont icon-archive"></i>
+                    </div>
+                    <div class="mdui-list-item-content">归档</div>
+                </a>
+            
+                
+                <a href="/tools/" class="mdui-list-item mdui-ripple">
+                    <div class="mdui-list-item-icon">
+                        <i class="iconfont icon-tools"></i>
+                    </div>
+                    <div class="mdui-list-item-content">工具箱</div>
+                </a>
+            
+                
+                <a href="/about/" class="mdui-list-item mdui-ripple">
+                    <div class="mdui-list-item-icon">
+                        <i class="iconfont icon-user"></i>
+                    </div>
+                    <div class="mdui-list-item-content">关于</div>
+                </a>
+            
+            <div class="mdui-list-item mdui-ripple">
+                <div class="mdui-list-item-icon">
+                    <i class="iconfont icon-moon"></i>
+                </div>
+                <div class="mdui-list-item-content">夜间模式</div>
+                <label class="mdui-switch" id="darkmode">
+                  <input type="checkbox" id="nightmode_switch"/>
+                  <i class="mdui-switch-icon"></i>
+                </label>
+            </div>           
+        </div>
+    </div>
+
+    
+    <div id="sidebar-tab2" class="mdui-p-a-1">
+        <div class="sidebar-overview">
+            <div class="sidebar-avatar">
+                
+                    <img src="https://raw.githubusercontent.com/f1shf1sh/Picture/master/Markdown/avatar.JPG"/>
+                
+            </div>
+            <div class="sidebar-author-name">Fish</div>
+            <div class="sidebar-description"></div>
+        </div>
+        <div class="sidebar-links">
+            
+                
+                <div class="mdui-chip">
+                    <span class="mdui-chip-icon"><i class="iconfont icon-github"></i></span>
+                    <a target="_blank" rel="noopener" href="https://github.com/f1shf1sh" class="mdui-chip-title">GitHub</a>
+                </div>
+            
+                
+                <div class="mdui-chip">
+                    <span class="mdui-chip-icon"><i class="iconfont icon-twitter"></i></span>
+                    <a target="_blank" rel="noopener" href="https:twitter.com/@Fish12427018" class="mdui-chip-title">Twitter</a>
+                </div>
+            
+        </div>
+        <ul class="mdui-list" mdui-collapse="{accordion: true}">
+            <li class="mdui-collapse-item">
+                <div class="mdui-collapse-item-header mdui-list-item mdui-ripple">
+                    <div class="mdui-list-item-icon">
+                        <i class="iconfont icon-link"></i>
+                    </div>
+                    <div class="mdui-list-item-content">友情链接</div>
+                    <div class="mdui-collapse-item-arrow">
+                        <i class="mdui-list-item-icon iconfont icon-angle-down"></i>
+                    </div>
+                </div>
+                <ul id="linksList" class="mdui-collapse-item-body mdui-list mdui-list-dense">
+                    
+                        <a href="https://google.com || icon-google" class="mdui-list-item mdui-ripple">
+                            Google
+                        </a>
+                    
+                </ul>
+            </li>
+        </ul>
+    </div>
+
+    <div class="mdui-divider"></div>
+    
+    
+</aside>
+  
+  <main id="main-contain" class="mdui-container mdui-m-t-5">
+    <div class="mdui-card mdui-p-b-2 mdui-m-b-5">
+    <div class="post-header"> 
+        <a class="post-header-title" href="/%E4%B8%8D%E6%83%B3%E9%83%A8%E7%BD%B2%E7%9A%84/IDA/IDA%E4%BA%A4%E5%8F%89%E5%BC%95%E7%94%A8%E4%B8%8E%E7%BB%98%E5%9B%BE%E5%8A%9F%E8%83%BD.html">🕵️‍♂️IDA中交叉引用和绘图功能</a>
+    </div>
+    <div id="page-card" class="mdui-card-content mdui-p-x-4">
+        
+            
+            
+            
+            <span id="more"></span>
+
+<p><strong>文章所使用源码</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">depth_2_1</span><span class="params">()</span> </span>&#123;</span><br><span class="line">   <span class="built_in">printf</span>(<span class="string">&quot;inside depth_2_1\n&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">depth_2_2</span><span class="params">()</span> </span>&#123;</span><br><span class="line">   <span class="built_in">fprintf</span>(<span class="built_in">stderr</span>, <span class="string">&quot;inside depth_2_2\n&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">depth_1</span><span class="params">()</span> </span>&#123;</span><br><span class="line">   depth_2_1();</span><br><span class="line">   depth_2_2();</span><br><span class="line">   <span class="built_in">printf</span>(<span class="string">&quot;inside depth_1\n&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">   depth_1();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h4 id="交叉引用"><a href="#交叉引用" class="headerlink" title="交叉引用"></a>交叉引用</h4><p>交叉引用分为两种类型</p>
+<ol>
+<li><strong>代码交叉引用</strong></li>
+</ol>
+<ul>
+<li><img src="IDA%E4%BA%A4%E5%8F%89%E5%BC%95%E7%94%A8%E4%B8%8E%E7%BB%98%E5%9B%BE%E5%8A%9F%E8%83%BD.assets/image-20201028105437882.png"></li>
+</ul>
+<ol start="2">
+<li><strong>数据交叉引用</strong></li>
+</ol>
+<p><img src="IDA%E4%BA%A4%E5%8F%89%E5%BC%95%E7%94%A8%E4%B8%8E%E7%BB%98%E5%9B%BE%E5%8A%9F%E8%83%BD.assets/image-20201028105538721.png"></p>
+<h4 id="交叉引用源头解释"><a href="#交叉引用源头解释" class="headerlink" title="交叉引用源头解释"></a>交叉引用源头解释</h4><p>交叉引用源头一共有4个部分组成`</p>
+<p><img src="IDA%E4%BA%A4%E5%8F%89%E5%BC%95%E7%94%A8%E4%B8%8E%E7%BB%98%E5%9B%BE%E5%8A%9F%E8%83%BD.assets/image-20201028110418024.png"></p>
+<ul>
+<li><p>组成1：引用者名字</p>
+<p>表示是在**___tmainCRTStartup**的函数中提出引用 </p>
+</li>
+<li><p>组成2：开始字节</p>
+<p>15A表示引用开始是在函数的第0x15A个字节处</p>
+</li>
+<li><p>组成3：引用位置相对目前的位置</p>
+<p>箭头表示引用位置的相对方向，图中箭头向下，表示操作者需要向下滑动才可以看到，反之亦然</p>
+</li>
+<li><p>组成4：识别后缀</p>
+<ul>
+<li>在IDA中，指令转交控制权的方式叫做流。IDA中有3中基本流：普通流，跳转流，基本流</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="left">类型</th>
+<th>英文名称</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">普通流</td>
+<td>ordinary flow</td>
+</tr>
+<tr>
+<td align="left">跳转流</td>
+<td>jump flow</td>
+</tr>
+<tr>
+<td align="left">调用流</td>
+<td>call flow</td>
+</tr>
+</tbody></table>
+<ul>
+<li>后缀意义</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>符号</th>
+<th>引用方式</th>
+<th>全称</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>p</td>
+<td>代码交叉引用</td>
+<td>Procedure</td>
+</tr>
+<tr>
+<td>w</td>
+<td>写入交叉引用</td>
+<td>write</td>
+</tr>
+<tr>
+<td>r</td>
+<td>读取交叉引用</td>
+<td>read</td>
+</tr>
+<tr>
+<td>o</td>
+<td>偏移交叉引用</td>
+<td>offset(偏移)</td>
+</tr>
+</tbody></table>
+</li>
+</ul>
+<h4 id="交叉引用列表"><a href="#交叉引用列表" class="headerlink" title="交叉引用列表"></a>交叉引用列表</h4><p>  快捷键X，可以显示所有的交叉引用源，在这个文件中，write_it只被调用了三次</p>
+<p><img src="IDA%E4%BA%A4%E5%8F%89%E5%BC%95%E7%94%A8%E4%B8%8E%E7%BB%98%E5%9B%BE%E5%8A%9F%E8%83%BD.assets/image-20201028122835393.png"></p>
+<h4 id="函数列表"><a href="#函数列表" class="headerlink" title="函数列表"></a>函数列表</h4><p><img src="IDA%E4%BA%A4%E5%8F%89%E5%BC%95%E7%94%A8%E4%B8%8E%E7%BB%98%E5%9B%BE%E5%8A%9F%E8%83%BD.assets/image-20201028123515652.png"></p>
+<h4 id="函数外部调用图"><a href="#函数外部调用图" class="headerlink" title="函数外部调用图"></a>函数外部调用图</h4><ul>
+<li>IDA函数调用图</li>
+</ul>
+<img src="IDA%E4%BA%A4%E5%8F%89%E5%BC%95%E7%94%A8%E4%B8%8E%E7%BB%98%E5%9B%BE%E5%8A%9F%E8%83%BD.assets/image-20201028124526033.png" alt="" style="zoom:67%;" />
+
+<h4 id="外部交叉引用图"><a href="#外部交叉引用图" class="headerlink" title="外部交叉引用图"></a>外部交叉引用图</h4><p>外部交叉引用有两种类型</p>
+<ul>
+<li><strong>目标符号</strong>交叉引用 [Xrefs <strong>To</strong>]</li>
+<li><strong>源符号</strong>交叉引用 [Xrefs <strong>From</strong>]</li>
+</ul>
+<h5 id="Xrefs-To"><a href="#Xrefs-To" class="headerlink" title="Xrefs To"></a>Xrefs To</h5><p>​    IDA生成<strong>“交叉引用目标”</strong>图形，必须执行递归上升操作，即回溯所有以选定目标的符号为目标的交叉引用，直到到达一个没有其他符号引用的符号</p>
+<ul>
+<li>puts函数(printf函数)<strong>XrefsTo图形</strong>，显示了所有到达puts函数的路径</li>
+</ul>
+<img src="IDA%E4%BA%A4%E5%8F%89%E5%BC%95%E7%94%A8%E4%B8%8E%E7%BB%98%E5%9B%BE%E5%8A%9F%E8%83%BD.assets/image-20201028125217629.png" alt="" style="zoom:67%;" />
+
+<h5 id="Xrefs-From"><a href="#Xrefs-From" class="headerlink" title="Xrefs From"></a>Xrefs From</h5><p>​                    生成<strong>“交叉引用源头”</strong>图，需要执行递归下降操作，即跟踪所有以选定的符号为源头的交叉引用</p>
+<ul>
+<li>main函数<strong>“交叉引用源头图”</strong></li>
+</ul>
+<img src="IDA%E4%BA%A4%E5%8F%89%E5%BC%95%E7%94%A8%E4%B8%8E%E7%BB%98%E5%9B%BE%E5%8A%9F%E8%83%BD.assets/image-20201028203719048.png" alt="" style="zoom: 80%;" />
+
+<ul>
+<li>depth_1函数<strong>“交叉引用源头图”</strong></li>
+</ul>
+<img src="IDA%E4%BA%A4%E5%8F%89%E5%BC%95%E7%94%A8%E4%B8%8E%E7%BB%98%E5%9B%BE%E5%8A%9F%E8%83%BD.assets/image-20201028204040474.png" alt="" style="zoom:67%;" />
+
+<h5 id="简单理解"><a href="#简单理解" class="headerlink" title="简单理解"></a>简单理解</h5><ul>
+<li><p>To表示源头，IDA可以递归出所有到达该源头的路径</p>
+</li>
+<li><p>From表示目标，IDA从选定处源头开始递归，找到从从源头开始的所有路径</p>
+</li>
+</ul>
+<p>对IDA来说来说To就是IDA从目标处向上递归，From就是IDA从目标处向下递归</p>
+
+            
+        </div>
+    </div>
+    
+
+
+  </main>
+  <footer id="footer" class="mdui-text-center mdui-m-t-5 mdui-p-b-2 mdui-p-t-4 mdui-color-theme">
+  <div class="mdui-container">
+    <div class="mdui-row">
+      
+        <a href="https://beian.miit.gov.cn" rel="noopener" target="_blank"></a>
+      
+      <span>
+        &copy; 2015 - 2021 
+        
+          <span style="color:#d9333f" class="iconfont icon-heart"></span>
+        
+        Fish
+      </span>
+    </div>
+    <div class="mdui-row">
+      
+        <div class="mdui-col-xs-6 mdui-text-right">
+          <span>Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a></span>
+        </div>
+        <div class="mdui-col-xs-6 mdui-text-left">
+          <span>Theme: <a href="https://github.com/kb1000fx/Meadow" rel="noopener" target="_blank">Meadow</a></span>
+        </div>
+      
+    </div>
+    <div class="mdui-row">
+      
+        <div class="mdui-col-xs-6 mdui-text-right">
+          <span id="busuanzi_container_site_uv" style="display: none;"> <span class="iconfont icon-user"></span>总访客量 <span id="busuanzi_value_site_uv"></span></span>
+        </div>
+        <div class="mdui-col-xs-6 mdui-text-left">
+          <span id="busuanzi_container_site_pv" style="display: none;"> <span class="iconfont icon-eye"></span>总访问量 <span id="busuanzi_value_site_pv"></span></span>
+        </div>
+      
+    </div>
+ </div>
+</footer>
+  
+  <button id="gotop" class="mdui-fab mdui-fab-fixed mdui-fab-hide mdui-ripple mdui-color-teal" style="z-index:100;"><i class="iconfont icon-arrowup"></i></button>
+  
+  
+
+    <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+
+    
+<script src="/js/mdui.min.v1.0.0.js"></script>
+
+
+
+
+<script src="/js/meadow.js"></script>
+
+</body>
+</html >

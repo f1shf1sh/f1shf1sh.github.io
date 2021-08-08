@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+    
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    
+    <meta name="renderer" content="webkit"/>
+    <meta name="force-rendering" content="webkit"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <script>if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMode)) window.location.href="https://support.dmeng.net/upgrade-your-browser.html?referrer="+encodeURIComponent(window.location.href); </script>
+    
+    
+    
+    
+        <link rel="shortcut icon" href="https://raw.githubusercontent.com/f1shf1sh/Picture/master/Markdown/fish.png">
+    
+
+    
+    
+        
+<link rel="stylesheet" href="/css/mdui.min.v1.0.0.css">
+
+    
+    
+<link rel="stylesheet" href="/css/main.css">
+<link rel="stylesheet" href="/css/iconfont.css">
+
+
+    
+    
+
+
+
+
+
+
+
+
+
+
+
+
+          
+
+
+    
+    
+    <title>
+        
+            TCP/IP | Fish
+        
+    </title>
+    
+    
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="Fish" type="application/atom+xml">
+</head>
+<body class="mdui-drawer-body-left mdui-appbar-with-toolbar mdui-theme-primary-teal mdui-theme-accent-blue">
+  
+  <header class="mdui-appbar mdui-appbar-fixed">
+  <div id="toolbar" class="mdui-toolbar mdui-color-theme">
+    <button class="mdui-btn mdui-btn-icon" mdui-drawer="{target: '#sidebar', swipe: true}"><i class="iconfont icon-menu"></i></button>
+    <a href="/" class="mdui-typo-headline">Fish</a>
+    <a href="/" class="header-subtitle mdui-typo-headline"></a>
+    <div class="mdui-toolbar-spacer"></div>
+    <button class="mdui-btn mdui-btn-icon" mdui-dialog="{target: '#search'}" mdui-tooltip="{content: 'search'}"><i class="iconfont icon-search"></i></button>
+  </div>
+</header>
+
+<div class="mdui-dialog" id="search">
+  
+    <div class="search-form">
+      <input type="search" class="search-form-input" placeholder="Please input key words" onfocus="listenSearchFunc()">
+    </div>
+    <div class="search-result" data-resource="/search.xml"></div>
+  
+</div>
+
+  <aside id="sidebar" class="mdui-drawer">
+    <div class="mdui-tab" mdui-tab>
+        <a href="#sidebar-tab1" id="sidebartab" class="mdui-ripple mdui-tab-active">站点概览</a>
+        <a href="#sidebar-tab2" id="sidebartab" class="mdui-ripple">关于</a>
+    </div>
+
+    
+    <div id="sidebar-tab1" class="mdui-p-a-1">
+        <div class="mdui-list">
+            
+                
+                <a href="/" class="mdui-list-item mdui-ripple">
+                    <div class="mdui-list-item-icon">
+                        <i class="iconfont icon-home"></i>
+                    </div>
+                    <div class="mdui-list-item-content">主页</div>
+                </a>
+            
+                
+                <a href="/tags/" class="mdui-list-item mdui-ripple">
+                    <div class="mdui-list-item-icon">
+                        <i class="iconfont icon-bookmark"></i>
+                    </div>
+                    <div class="mdui-list-item-content">标签</div>
+                </a>
+            
+                
+                <a href="/categories/" class="mdui-list-item mdui-ripple">
+                    <div class="mdui-list-item-icon">
+                        <i class="iconfont icon-folder"></i>
+                    </div>
+                    <div class="mdui-list-item-content">分类</div>
+                </a>
+            
+                
+                <a href="/archives/" class="mdui-list-item mdui-ripple">
+                    <div class="mdui-list-item-icon">
+                        <i class="iconfont icon-archive"></i>
+                    </div>
+                    <div class="mdui-list-item-content">归档</div>
+                </a>
+            
+                
+                <a href="/tools/" class="mdui-list-item mdui-ripple">
+                    <div class="mdui-list-item-icon">
+                        <i class="iconfont icon-tools"></i>
+                    </div>
+                    <div class="mdui-list-item-content">工具箱</div>
+                </a>
+            
+                
+                <a href="/about/" class="mdui-list-item mdui-ripple">
+                    <div class="mdui-list-item-icon">
+                        <i class="iconfont icon-user"></i>
+                    </div>
+                    <div class="mdui-list-item-content">关于</div>
+                </a>
+            
+            <div class="mdui-list-item mdui-ripple">
+                <div class="mdui-list-item-icon">
+                    <i class="iconfont icon-moon"></i>
+                </div>
+                <div class="mdui-list-item-content">夜间模式</div>
+                <label class="mdui-switch" id="darkmode">
+                  <input type="checkbox" id="nightmode_switch"/>
+                  <i class="mdui-switch-icon"></i>
+                </label>
+            </div>           
+        </div>
+    </div>
+
+    
+    <div id="sidebar-tab2" class="mdui-p-a-1">
+        <div class="sidebar-overview">
+            <div class="sidebar-avatar">
+                
+                    <img src="https://raw.githubusercontent.com/f1shf1sh/Picture/master/Markdown/avatar.JPG"/>
+                
+            </div>
+            <div class="sidebar-author-name">Fish</div>
+            <div class="sidebar-description"></div>
+        </div>
+        <div class="sidebar-links">
+            
+                
+                <div class="mdui-chip">
+                    <span class="mdui-chip-icon"><i class="iconfont icon-github"></i></span>
+                    <a target="_blank" rel="noopener" href="https://github.com/f1shf1sh" class="mdui-chip-title">GitHub</a>
+                </div>
+            
+                
+                <div class="mdui-chip">
+                    <span class="mdui-chip-icon"><i class="iconfont icon-twitter"></i></span>
+                    <a target="_blank" rel="noopener" href="https:twitter.com/@Fish12427018" class="mdui-chip-title">Twitter</a>
+                </div>
+            
+        </div>
+        <ul class="mdui-list" mdui-collapse="{accordion: true}">
+            <li class="mdui-collapse-item">
+                <div class="mdui-collapse-item-header mdui-list-item mdui-ripple">
+                    <div class="mdui-list-item-icon">
+                        <i class="iconfont icon-link"></i>
+                    </div>
+                    <div class="mdui-list-item-content">友情链接</div>
+                    <div class="mdui-collapse-item-arrow">
+                        <i class="mdui-list-item-icon iconfont icon-angle-down"></i>
+                    </div>
+                </div>
+                <ul id="linksList" class="mdui-collapse-item-body mdui-list mdui-list-dense">
+                    
+                        <a href="https://google.com || icon-google" class="mdui-list-item mdui-ripple">
+                            Google
+                        </a>
+                    
+                </ul>
+            </li>
+        </ul>
+    </div>
+
+    <div class="mdui-divider"></div>
+    
+    
+</aside>
+  
+  <main id="main-contain" class="mdui-container mdui-m-t-5">
+    <div class="mdui-card mdui-p-b-2 mdui-m-b-5">
+    <div class="post-header"> 
+        <a class="post-header-title" href="/%E4%B8%8D%E6%83%B3%E9%83%A8%E7%BD%B2%E7%9A%84/NetWork/TCP.html">TCP/IP</a>
+    </div>
+    <div id="page-card" class="mdui-card-content mdui-p-x-4">
+        
+            
+            
+            
+            <span id="more"></span>
+
+<h1 id="IP"><a href="#IP" class="headerlink" title="IP"></a>IP</h1><h2 id="常用的三种类别IP地址"><a href="#常用的三种类别IP地址" class="headerlink" title="常用的三种类别IP地址"></a>常用的三种类别IP地址</h2><h2 id="地址解析协议ARP"><a href="#地址解析协议ARP" class="headerlink" title="地址解析协议ARP"></a>地址解析协议ARP</h2><h2 id="IP数据包格式"><a href="#IP数据包格式" class="headerlink" title="IP数据包格式"></a>IP数据包格式</h2><h2 id="子网划分"><a href="#子网划分" class="headerlink" title="子网划分"></a>子网划分</h2><ul>
+<li>子网号不能为全0或全1</li>
+<li>判断两台主机是否在同一网段，本主机的子网掩码与对方的IP地址进行与运算，在与自己的网络号进行比较</li>
+</ul>
+<h3 id="子网掩码"><a href="#子网掩码" class="headerlink" title="子网掩码"></a>子网掩码</h3><h2 id="超网划分（无分类编址CIDR）"><a href="#超网划分（无分类编址CIDR）" class="headerlink" title="超网划分（无分类编址CIDR）"></a>超网划分（无分类编址CIDR）</h2><p>无分类的二级编址（**IP地址 ::= {&lt;网络前缀&gt;,&lt;主机号&gt;}**）</p>
+<h2 id="网际控制报文协议ICMP"><a href="#网际控制报文协议ICMP" class="headerlink" title="网际控制报文协议ICMP"></a>网际控制报文协议ICMP</h2><h1 id="TCP"><a href="#TCP" class="headerlink" title="TCP"></a>TCP</h1><p><img src="https://f1sh-blog.oss-cn-beijing.aliyuncs.com/img/032325597971641.jpg"></p>
+<h2 id="各字段意义"><a href="#各字段意义" class="headerlink" title="各字段意义"></a>各字段意义</h2><h4 id="序号"><a href="#序号" class="headerlink" title="序号"></a>序号</h4><p>如果报文数据部分长度为0，则默认增加1个字节</p>
+<ul>
+<li>占4字节</li>
+<li>首先，在传输过程的每一个字节都会有一个编号</li>
+<li>在建立连接后，<strong>序号</strong>代表：<strong>这一次传给对方的TCP数据部分的第一个字节的编号</strong></li>
+</ul>
+<img src="https://f1sh-blog.oss-cn-beijing.aliyuncs.com/img/image-20210518092619588.png" style="zoom: 67%;" />
+
+<h4 id="确认号"><a href="#确认号" class="headerlink" title="确认号"></a>确认号</h4><p>当标志位中的<code>ACK</code>为1时，确认号才有效</p>
+<ul>
+<li>占4字节</li>
+<li>确认收到前面的包</li>
+<li>在建立连接后，<strong>期望对方下一次发送的TCP数据部分第一个字节的开始序号</strong></li>
+</ul>
+<p><img src="https://f1sh-blog.oss-cn-beijing.aliyuncs.com/img/image-20210518092830883.png"></p>
+<p><img src="https://f1sh-blog.oss-cn-beijing.aliyuncs.com/img/image-20210518094254377.png"></p>
+<h4 id="数据偏移"><a href="#数据偏移" class="headerlink" title="数据偏移"></a>数据偏移</h4><p><img src="https://f1sh-blog.oss-cn-beijing.aliyuncs.com/img/image-20210502010252782.png"></p>
+<ul>
+<li>占4个bit（取值范围为5~15）</li>
+<li>Header Length乘5等于TCP首部长度（也等于数据偏移）</li>
+<li>首部长度范围（20~60）</li>
+</ul>
+<h4 id="保留"><a href="#保留" class="headerlink" title="保留"></a>保留</h4><p><img src="https://f1sh-blog.oss-cn-beijing.aliyuncs.com/img/image-20210502010551226.png"></p>
+<ul>
+<li>占6个bit，一般情况下全为0</li>
+</ul>
+<h4 id="U-A-P-R-S-F"><a href="#U-A-P-R-S-F" class="headerlink" title="U/A/P/R/S/F"></a>U/A/P/R/S/F</h4><p><img src="https://f1sh-blog.oss-cn-beijing.aliyuncs.com/img/image-20210502011017028.png"></p>
+<h5 id="URG（Urgent）"><a href="#URG（Urgent）" class="headerlink" title="URG（Urgent）"></a>URG（Urgent）</h5><p>当<code>URG = 1</code>时，紧急指针字段才有效。表明当前报文段中有紧急数据，应优先尽快传送</p>
+<h5 id="ACK（Acknowledgment）"><a href="#ACK（Acknowledgment）" class="headerlink" title="ACK（Acknowledgment）"></a>ACK（Acknowledgment）</h5><p>当<code>ACK = 1</code>时，确认号字段才有效</p>
+<h5 id="PSH（Push）"><a href="#PSH（Push）" class="headerlink" title="PSH（Push）"></a>PSH（Push）</h5><h5 id="RST（Reset）"><a href="#RST（Reset）" class="headerlink" title="RST（Reset）"></a>RST（Reset）</h5><p>当<code>RST = 1</code>时，表明连接中出现严重差错，必须释放连接，然后再重新建立连接</p>
+<h5 id="SYN（Synchronization）"><a href="#SYN（Synchronization）" class="headerlink" title="SYN（Synchronization）"></a>SYN（Synchronization）</h5><p>当<code>SYN = 1</code>、<code>ACK = 0</code> 时，表明这是一个建立连接的请求<br>若对方同意建立连接，则回复<code>SYN = 1</code>、<code>ACK = 1</code></p>
+<h5 id="FIN（Finish）"><a href="#FIN（Finish）" class="headerlink" title="FIN（Finish）"></a>FIN（Finish）</h5><p>当<code>FIN = 1</code>时，表明数据已经发送完毕，要求释放连接</p>
+<h4 id="窗口"><a href="#窗口" class="headerlink" title="窗口"></a>窗口</h4><h4 id="检验和"><a href="#检验和" class="headerlink" title="检验和"></a>检验和</h4><ul>
+<li><p>伪首部+首部+数据部分</p>
+<p>伪首部不会传输给下一层</p>
+</li>
+</ul>
+<h4 id="紧急指针"><a href="#紧急指针" class="headerlink" title="紧急指针"></a>紧急指针</h4><h2 id="可靠传输"><a href="#可靠传输" class="headerlink" title="可靠传输"></a>可靠传输</h2><h3 id="ARQ（Automatic-Repeat-reQuest）"><a href="#ARQ（Automatic-Repeat-reQuest）" class="headerlink" title="ARQ（Automatic Repeat-reQuest）"></a>ARQ（Automatic Repeat-reQuest）</h3><ul>
+<li><p>理想情况</p>
+<p><img src="https://f1sh-blog.oss-cn-beijing.aliyuncs.com/img/20210112202051753.png"></p>
+</li>
+<li><p>意外情况</p>
+<ol>
+<li><p>确认丢失</p>
+</li>
+<li><p>确认迟到</p>
+<p><img src="https://f1sh-blog.oss-cn-beijing.aliyuncs.com/img/20210112202117497.png"></p>
+</li>
+</ol>
+</li>
+<li><p>缺点：效率非常低</p>
+</li>
+</ul>
+<h3 id="连续ARQ-滑动窗口"><a href="#连续ARQ-滑动窗口" class="headerlink" title="连续ARQ+滑动窗口"></a>连续ARQ+滑动窗口</h3><ul>
+<li><p>SACK（selective 选择性确认）</p>
+<p>包含于TCP首部可选部分</p>
+</li>
+<li><p>意外情况</p>
+</li>
+</ul>
+<h2 id="流量控制"><a href="#流量控制" class="headerlink" title="流量控制"></a>流量控制</h2><h2 id="拥塞控制"><a href="#拥塞控制" class="headerlink" title="拥塞控制"></a>拥塞控制</h2><h2 id="建立连接-amp-amp-释放连接"><a href="#建立连接-amp-amp-释放连接" class="headerlink" title="建立连接 &amp;&amp; 释放连接"></a>建立连接 &amp;&amp; 释放连接</h2><p><img src="https://f1sh-blog.oss-cn-beijing.aliyuncs.com/img/image-20210518090802644.png"></p>
+<h3 id="三次握手"><a href="#三次握手" class="headerlink" title="三次握手"></a>三次握手</h3><p><img src="https://f1sh-blog.oss-cn-beijing.aliyuncs.com/img/20210114203206953.png"></p>
+<p><img src="https://f1sh-blog.oss-cn-beijing.aliyuncs.com/img/image-20210518085733679.png"></p>
+<ul>
+<li>第一次握手<br><img src="https://f1sh-blog.oss-cn-beijing.aliyuncs.com/img/image-20210518091504606.png"></li>
+<li>第二次握手<br><img src="https://f1sh-blog.oss-cn-beijing.aliyuncs.com/img/image-20210518091606585.png"></li>
+<li>第三次握手<br><img src="https://f1sh-blog.oss-cn-beijing.aliyuncs.com/img/image-20210518091653631.png"></li>
+</ul>
+<h3 id="四次挥手"><a href="#四次挥手" class="headerlink" title="四次挥手"></a>四次挥手</h3><p><img src="https://f1sh-blog.oss-cn-beijing.aliyuncs.com/img/20210117001106430.png"></p>
+<p>将2，3次挥手合并</p>
+<p><img src="https://f1sh-blog.oss-cn-beijing.aliyuncs.com/img/image-20210518095144039.png"></p>
+
+            
+        </div>
+    </div>
+    
+
+
+  </main>
+  <footer id="footer" class="mdui-text-center mdui-m-t-5 mdui-p-b-2 mdui-p-t-4 mdui-color-theme">
+  <div class="mdui-container">
+    <div class="mdui-row">
+      
+        <a href="https://beian.miit.gov.cn" rel="noopener" target="_blank"></a>
+      
+      <span>
+        &copy; 2015 - 2021 
+        
+          <span style="color:#d9333f" class="iconfont icon-heart"></span>
+        
+        Fish
+      </span>
+    </div>
+    <div class="mdui-row">
+      
+        <div class="mdui-col-xs-6 mdui-text-right">
+          <span>Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a></span>
+        </div>
+        <div class="mdui-col-xs-6 mdui-text-left">
+          <span>Theme: <a href="https://github.com/kb1000fx/Meadow" rel="noopener" target="_blank">Meadow</a></span>
+        </div>
+      
+    </div>
+    <div class="mdui-row">
+      
+        <div class="mdui-col-xs-6 mdui-text-right">
+          <span id="busuanzi_container_site_uv" style="display: none;"> <span class="iconfont icon-user"></span>总访客量 <span id="busuanzi_value_site_uv"></span></span>
+        </div>
+        <div class="mdui-col-xs-6 mdui-text-left">
+          <span id="busuanzi_container_site_pv" style="display: none;"> <span class="iconfont icon-eye"></span>总访问量 <span id="busuanzi_value_site_pv"></span></span>
+        </div>
+      
+    </div>
+ </div>
+</footer>
+  
+  <button id="gotop" class="mdui-fab mdui-fab-fixed mdui-fab-hide mdui-ripple mdui-color-teal" style="z-index:100;"><i class="iconfont icon-arrowup"></i></button>
+  
+  
+
+    <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+
+    
+<script src="/js/mdui.min.v1.0.0.js"></script>
+
+
+
+
+<script src="/js/meadow.js"></script>
+
+</body>
+</html >
