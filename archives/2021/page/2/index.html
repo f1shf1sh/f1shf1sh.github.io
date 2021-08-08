@@ -471,13 +471,13 @@
             <article class="cd-timeline-content" data-aos="fade-up">
                 <div class="article col s12 m6">
                     <div class="card">
-                        <a href="/2021/07/14/go/GoStudy-2/">
+                        <a href="/2021/07/14/go/GoStudy-1/">
                             <div class="card-image">
                                 
                                 
-                                <img src="/medias/featureimages/12.jpg" class="responsive-img" alt="go语言学习2（函数，匿名函数，闭包）">
+                                <img src="/medias/featureimages/17.jpg" class="responsive-img" alt="go语言学习1（变量类型与声明方式，循环）">
                                 
-                                <span class="card-title">go语言学习2（函数，匿名函数，闭包）</span>
+                                <span class="card-title">go语言学习1（变量类型与声明方式，循环）</span>
                             </div>
                         </a>
                         <div class="card-content article-content">
@@ -485,7 +485,16 @@
                                 
                                     
 
+命令xxx代表文件的绝对路径
 
+只运行不编译
+1go run xxx
+编译文件
+1go build xxx
+生成工程项目
+1go install
+小知识点
+go语言中每一个工程项目都需要有一个main包，这个包中的main函数是程序的入
                                 
                             </div>
                             <div class="publish-info">
@@ -532,28 +541,25 @@
             <article class="cd-timeline-content" data-aos="fade-up">
                 <div class="article col s12 m6">
                     <div class="card">
-                        <a href="/2021/07/14/CTF/wp/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019/">
+                        <a href="/2021/07/14/CTF/wp/HWSCTF/">
                             <div class="card-image">
                                 
                                 
-                                <img src="/medias/featureimages/1.jpg" class="responsive-img" alt="Buuoj-极客大挑战 2019">
+                                <img src="/medias/featureimages/3.jpg" class="responsive-img" alt="HWS计划2021硬件安全冬令营线上选拔赛">
                                 
-                                <span class="card-title">Buuoj-极客大挑战 2019</span>
+                                <span class="card-title">HWS计划2021硬件安全冬令营线上选拔赛</span>
                             </div>
                         </a>
                         <div class="card-content article-content">
                             <div class="summary block-with-text">
                                 
-                                    [极客大挑战 2019]EasySQL万能密码直接出
-11&#x27; and &#x27;1&#x27; = &#x27;1 
+                                    
 
-[极客大挑战 2019]LoveSQL
-首先查出单引号报错
-
-
+babyre
+一道hook题，ida打开代码还是比较清晰的，首先判断长度然后在加密，但是我没有搞清楚这个hook的流程，听别的师傅说的在CRT的时候，从r3到r0时候hook的😥（听的不是很懂），但是我瞎找找到这两个函数
+资源解密
 
 
-尝试用万能密码登录，发现只是一个无用的值
                                 
                             </div>
                             <div class="publish-info">
@@ -562,16 +568,8 @@
                                 </span>
                                 <span class="publish-author">
                                     
-                                    <i class="fas fa-bookmark fa-fw icon-category"></i>
-                                    
-                                    <a href="/categories/CTF/" class="post-category">
-                                    CTF
-                                    </a>
-                                    
-                                    <a href="/categories/CTF/web/" class="post-category">
-                                    web
-                                    </a>
-                                    
+                                    <i class="fas fa-user fa-fw"></i>
+                                    John Doe
                                     
                                 </span>
                             </div>
@@ -580,11 +578,11 @@
                         
                         <div class="card-action article-tags">
                             
+                            <a href="/tags/re/"><span class="chip bg-color">re</span></a>
+                            
+                            <a href="/tags/CTF/"><span class="chip bg-color">CTF</span></a>
+                            
                             <a href="/tags/wp/"><span class="chip bg-color">wp</span></a>
-                            
-                            <a href="/tags/ctf/"><span class="chip bg-color">ctf</span></a>
-                            
-                            <a href="/tags/web/"><span class="chip bg-color">web</span></a>
                             
                         </div>
                         
@@ -677,25 +675,28 @@
             <article class="cd-timeline-content" data-aos="fade-up">
                 <div class="article col s12 m6">
                     <div class="card">
-                        <a href="/2021/07/14/CTF/wp/HWSCTF/">
+                        <a href="/2021/07/14/CTF/wp/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019/">
                             <div class="card-image">
                                 
                                 
-                                <img src="/medias/featureimages/3.jpg" class="responsive-img" alt="HWS计划2021硬件安全冬令营线上选拔赛">
+                                <img src="/medias/featureimages/1.jpg" class="responsive-img" alt="Buuoj-极客大挑战 2019">
                                 
-                                <span class="card-title">HWS计划2021硬件安全冬令营线上选拔赛</span>
+                                <span class="card-title">Buuoj-极客大挑战 2019</span>
                             </div>
                         </a>
                         <div class="card-content article-content">
                             <div class="summary block-with-text">
                                 
-                                    
+                                    [极客大挑战 2019]EasySQL万能密码直接出
+11&#x27; and &#x27;1&#x27; = &#x27;1 
 
-babyre
-一道hook题，ida打开代码还是比较清晰的，首先判断长度然后在加密，但是我没有搞清楚这个hook的流程，听别的师傅说的在CRT的时候，从r3到r0时候hook的😥（听的不是很懂），但是我瞎找找到这两个函数
-资源解密
+[极客大挑战 2019]LoveSQL
+首先查出单引号报错
 
 
+
+
+尝试用万能密码登录，发现只是一个无用的值
                                 
                             </div>
                             <div class="publish-info">
@@ -704,8 +705,16 @@ babyre
                                 </span>
                                 <span class="publish-author">
                                     
-                                    <i class="fas fa-user fa-fw"></i>
-                                    John Doe
+                                    <i class="fas fa-bookmark fa-fw icon-category"></i>
+                                    
+                                    <a href="/categories/CTF/" class="post-category">
+                                    CTF
+                                    </a>
+                                    
+                                    <a href="/categories/CTF/web/" class="post-category">
+                                    web
+                                    </a>
+                                    
                                     
                                 </span>
                             </div>
@@ -714,11 +723,11 @@ babyre
                         
                         <div class="card-action article-tags">
                             
-                            <a href="/tags/re/"><span class="chip bg-color">re</span></a>
-                            
-                            <a href="/tags/CTF/"><span class="chip bg-color">CTF</span></a>
+                            <a href="/tags/ctf/"><span class="chip bg-color">ctf</span></a>
                             
                             <a href="/tags/wp/"><span class="chip bg-color">wp</span></a>
+                            
+                            <a href="/tags/web/"><span class="chip bg-color">web</span></a>
                             
                         </div>
                         
