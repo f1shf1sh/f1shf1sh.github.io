@@ -152,9 +152,9 @@
     
     <category term="re" scheme="http://example.com/tags/re/"/>
     
-    <category term="ctf" scheme="http://example.com/tags/ctf/"/>
-    
     <category term="wp" scheme="http://example.com/tags/wp/"/>
+    
+    <category term="ctf" scheme="http://example.com/tags/ctf/"/>
     
   </entry>
   
@@ -184,9 +184,9 @@
     
     <category term="web" scheme="http://example.com/tags/web/"/>
     
-    <category term="ctf" scheme="http://example.com/tags/ctf/"/>
-    
     <category term="wp" scheme="http://example.com/tags/wp/"/>
+    
+    <category term="ctf" scheme="http://example.com/tags/ctf/"/>
     
   </entry>
   
@@ -216,9 +216,9 @@
     
     <category term="re" scheme="http://example.com/tags/re/"/>
     
-    <category term="ctf" scheme="http://example.com/tags/ctf/"/>
-    
     <category term="wp" scheme="http://example.com/tags/wp/"/>
+    
+    <category term="ctf" scheme="http://example.com/tags/ctf/"/>
     
   </entry>
   
@@ -248,9 +248,9 @@
     
     <category term="re" scheme="http://example.com/tags/re/"/>
     
-    <category term="ctf" scheme="http://example.com/tags/ctf/"/>
-    
     <category term="wp" scheme="http://example.com/tags/wp/"/>
+    
+    <category term="ctf" scheme="http://example.com/tags/ctf/"/>
     
   </entry>
   
@@ -280,9 +280,9 @@
     <category term="pwnable.kr" scheme="http://example.com/categories/ctf/pwn/pwnable-kr/"/>
     
     
-    <category term="ctf" scheme="http://example.com/tags/ctf/"/>
-    
     <category term="wp" scheme="http://example.com/tags/wp/"/>
+    
+    <category term="ctf" scheme="http://example.com/tags/ctf/"/>
     
     <category term="pwn" scheme="http://example.com/tags/pwn/"/>
     
@@ -315,9 +315,9 @@
     <category term="pwnable.kr" scheme="http://example.com/categories/ctf/pwn/pwnable-kr/"/>
     
     
-    <category term="ctf" scheme="http://example.com/tags/ctf/"/>
-    
     <category term="wp" scheme="http://example.com/tags/wp/"/>
+    
+    <category term="ctf" scheme="http://example.com/tags/ctf/"/>
     
     <category term="pwn" scheme="http://example.com/tags/pwn/"/>
     
@@ -349,9 +349,9 @@
     <category term="pwnable.kr" scheme="http://example.com/categories/ctf/pwn/pwnable-kr/"/>
     
     
-    <category term="ctf" scheme="http://example.com/tags/ctf/"/>
-    
     <category term="wp" scheme="http://example.com/tags/wp/"/>
+    
+    <category term="ctf" scheme="http://example.com/tags/ctf/"/>
     
     <category term="pwn" scheme="http://example.com/tags/pwn/"/>
     
@@ -384,9 +384,9 @@
     <category term="pwnable.kr" scheme="http://example.com/categories/ctf/pwn/pwnable-kr/"/>
     
     
-    <category term="ctf" scheme="http://example.com/tags/ctf/"/>
-    
     <category term="wp" scheme="http://example.com/tags/wp/"/>
+    
+    <category term="ctf" scheme="http://example.com/tags/ctf/"/>
     
     <category term="pwn" scheme="http://example.com/tags/pwn/"/>
     
@@ -419,9 +419,9 @@
     <category term="pwnable.kr" scheme="http://example.com/categories/ctf/pwn/pwnable-kr/"/>
     
     
-    <category term="ctf" scheme="http://example.com/tags/ctf/"/>
-    
     <category term="wp" scheme="http://example.com/tags/wp/"/>
+    
+    <category term="ctf" scheme="http://example.com/tags/ctf/"/>
     
     <category term="pwn" scheme="http://example.com/tags/pwn/"/>
     
@@ -453,9 +453,9 @@
     <category term="pwnable.kr" scheme="http://example.com/categories/ctf/pwn/pwnable-kr/"/>
     
     
-    <category term="ctf" scheme="http://example.com/tags/ctf/"/>
-    
     <category term="wp" scheme="http://example.com/tags/wp/"/>
+    
+    <category term="ctf" scheme="http://example.com/tags/ctf/"/>
     
     <category term="pwn" scheme="http://example.com/tags/pwn/"/>
     
@@ -506,9 +506,9 @@
     
     <category term="re" scheme="http://example.com/tags/re/"/>
     
-    <category term="angr" scheme="http://example.com/tags/angr/"/>
-    
     <category term="ctf" scheme="http://example.com/tags/ctf/"/>
+    
+    <category term="angr" scheme="http://example.com/tags/angr/"/>
     
   </entry>
   
