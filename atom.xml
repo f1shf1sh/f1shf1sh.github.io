@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2022-01-08T05:05:30.869Z</updated>
+  <updated>2022-02-08T16:19:47.167Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -15,6 +15,26 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>pwn环境搭建</title>
+    <link href="http://example.com/11927/"/>
+    <id>http://example.com/11927/</id>
+    <published>2022-02-07T16:18:50.621Z</published>
+    <updated>2022-02-08T16:19:47.167Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="使用Linux版本"><a href="#使用Linux版本" class="headerlink" title="使用Linux版本"></a>使用Linux版本</h2><p>ubuntu<a href="https://ubuntu.com/download/desktop/thank-you?version=20.04.3&architecture=amd64">20.04 LTS</a></p><h3 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h3><ul><li><p>安装ubuntu</p></li><li><p>vim安装</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install vim</span><br></pre></td></tr></table></figure></li><li><p>更换默认源</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo cp /etc/apt/sources.list /etc/apt/sources.list.bak</span><br></pre></td></tr></table></figure><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">deb http://mirrors.aliyun.com/ubuntu/ focal main restricted universe multiverse </span><br><span class="line"></span><br><span class="line">deb http://mirrors.aliyun.com/ubuntu/ focal-security main restricted universe multiverse </span><br><span class="line"></span><br><span class="line">deb http://mirrors.aliyun.com/ubuntu/ focal-updates main restricted universe multiverse </span><br><span class="line"></span><br><span class="line">deb http://mirrors.aliyun.com/ubuntu/ focal-proposed main restricted universe multiverse </span><br><span class="line"></span><br><span class="line">deb http://mirrors.aliyun.com/ubuntu/ focal-backports main restricted universe multiverse </span><br><span class="line"></span><br><span class="line">deb-src http://mirrors.aliyun.com/ubuntu/ focal main restricted universe multiverse </span><br><span class="line"></span><br><span class="line">deb-src http://mirrors.aliyun.com/ubuntu/ focal-security main restricted universe multiverse </span><br><span class="line"></span><br><span class="line">deb-src http://mirrors.aliyun.com/ubuntu/ focal-updates main restricted universe multiverse </span><br><span class="line"></span><br><span class="line">deb-src http://mirrors.aliyun.com/ubuntu/ focal-proposed main restricted universe multiverse </span><br><span class="line"></span><br><span class="line">deb-src http://mirrors.aliyun.com/ubuntu/ focal-backports main restricted universe multiverse focal</span><br></pre></td></tr></table></figure><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get upgrade</span><br></pre></td></tr></table></figure></li><li><p>跟换pip源</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mkdir .pip</span><br><span class="line">vim pip.conf</span><br></pre></td></tr></table></figure><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[global]</span><br><span class="line">index-url = https://pypi.tuna.tsinghua.edu.cn/simple</span><br></pre></td></tr></table></figure></li><li><p>安装tmux</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install tmux</span><br></pre></td></tr></table></figure></li><li><p>gdb安装</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install gdb</span><br></pre></td></tr></table></figure></li></ul><h3 id="pwntools安装"><a href="#pwntools安装" class="headerlink" title="pwntools安装"></a>pwntools安装</h3><p>需要进入root权限进行安装，否则checksec等工具无法安装成功</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo su</span><br><span class="line">pip3 install pwntool</span><br></pre></td></tr></table></figure><h3 id="pwndbg安装"><a href="#pwndbg安装" class="headerlink" title="pwndbg安装"></a>pwndbg安装</h3><p><a href="https://github.com/pwndbg/pwndbg">https://github.com/pwndbg/pwndbg</a></p><h3 id="pwngdb安装"><a href="#pwngdb安装" class="headerlink" title="pwngdb安装"></a>pwngdb安装</h3><p><a href="https://github.com/scwuaptx/Pwngdb">https://github.com/scwuaptx/Pwngdb</a></p><h3 id="tmux-bug解决"><a href="#tmux-bug解决" class="headerlink" title="tmux bug解决"></a>tmux bug解决</h3><p><a href="https://github.com/Gallopsled/pwntools/commit/f7283bf2ebcb978d977ef11b4198bb3e1f9373e3">https://github.com/Gallopsled/pwntools/commit/f7283bf2ebcb978d977ef11b4198bb3e1f9373e3</a></p><h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><ul><li>patchelf <a href="https://github.com/NixOS/patchelf">https://github.com/NixOS/patchelf</a></li><li>glibc-all-in-one <a href="https://github.com/matrix1001/glibc-all-in-one">https://github.com/matrix1001/glibc-all-in-one</a></li></ul>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h2 id=&quot;使用Linux版本&quot;&gt;&lt;a href=&quot;#使用Linux版本&quot; class=&quot;headerlink&quot; title=&quot;使用Linux版本&quot;&gt;&lt;/a&gt;使用Linux版本&lt;/h2&gt;&lt;p&gt;ubuntu&lt;a href=&quot;https://ubuntu.com/download</summary>
+      
+    
+    
+    
+    
+  </entry>
   
   <entry>
     <title>upload-lab</title>
