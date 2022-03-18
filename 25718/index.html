@@ -1,0 +1,194 @@
+<!DOCTYPE html><html lang="zh-Hans" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>IO | Fish</title><meta name="keywords" content="c++"><meta name="author" content="Fish"><meta name="copyright" content="Fish"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="IO大致分为三类，标准io，文件io，stringio。下面一张大图表示这几种io的继承方式，常用的三种io流都继承于ios基类  IO的条件状态这些IO条件状态用于在执行IO操作时判断当前IO的状态如何从而采取相应的措施 1234strm::badbit &#x2F;&#x2F; 流已崩溃strm::failbit &#x2F;&#x2F; IO操作失败strm::eofbit &#x2F;&#x2F; 用于指出已经到达流的末尾strm::goodbit">
+<meta property="og:type" content="article">
+<meta property="og:title" content="IO">
+<meta property="og:url" content="http://example.com/25718/index.html">
+<meta property="og:site_name" content="Fish">
+<meta property="og:description" content="IO大致分为三类，标准io，文件io，stringio。下面一张大图表示这几种io的继承方式，常用的三种io流都继承于ios基类  IO的条件状态这些IO条件状态用于在执行IO操作时判断当前IO的状态如何从而采取相应的措施 1234strm::badbit &#x2F;&#x2F; 流已崩溃strm::failbit &#x2F;&#x2F; IO操作失败strm::eofbit &#x2F;&#x2F; 用于指出已经到达流的末尾strm::goodbit">
+<meta property="og:locale">
+<meta property="og:image" content="http://example.com/img/%E6%B1%BD%E8%BD%A6%E5%B0%91%E5%A5%B3.jpg">
+<meta property="article:published_time" content="2022-03-18T15:31:15.261Z">
+<meta property="article:modified_time" content="2022-03-18T12:03:39.000Z">
+<meta property="article:author" content="Fish">
+<meta property="article:tag" content="c++">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/img/%E6%B1%BD%E8%BD%A6%E5%B0%91%E5%A5%B3.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/25718/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: 'Just',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'IO',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2022-03-18 20:03:39'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="Fish" type="application/atom+xml">
+</head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/avatar.JPG" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data is-center"><div class="data-item"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">25</div></a></div><div class="data-item"><a href="/tags/"><div class="headline">Tags</div><div class="length-num">10</div></a></div><div class="data-item"><a href="/categories/"><div class="headline">Categories</div><div class="length-num">5</div></a></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/img/%E6%B1%BD%E8%BD%A6%E5%B0%91%E5%A5%B3.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Fish</a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">IO</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2022-03-18T15:31:15.261Z" title="Created 2022-03-18 23:31:15">2022-03-18</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2022-03-18T12:03:39.000Z" title="Updated 2022-03-18 20:03:39">2022-03-18</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="IO"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post View:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h2 id="IO"><a href="#IO" class="headerlink" title="IO"></a>IO</h2><p>大致分为三类，标准io，文件io，<code>string</code>io。下面一张大图表示这几种io的继承方式，常用的三种io流都继承于<code>ios</code>基类</p>
+<p><img src="https://raw.githubusercontent.com/f1shf1sh/Picture/master/Archlinux/image-20220318093812646.png"></p>
+<h3 id="IO的条件状态"><a href="#IO的条件状态" class="headerlink" title="IO的条件状态"></a>IO的条件状态</h3><p>这些IO条件状态用于在执行IO操作时判断当前IO的状态如何从而采取相应的措施</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">strm::badbit <span class="comment">// 流已崩溃</span></span><br><span class="line">strm::failbit <span class="comment">// IO操作失败</span></span><br><span class="line">strm::eofbit <span class="comment">// 用于指出已经到达流的末尾</span></span><br><span class="line">strm::goodbit <span class="comment">// 用于指出流末尾处于错误状态</span></span><br></pre></td></tr></table></figure>
+
+<p>基础IO对象的成员如下</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">strm s; <span class="comment">// s为一个IO对象</span></span><br><span class="line">s.<span class="built_in">eof</span>() <span class="comment">// 如果流的eof位置位，返回true</span></span><br><span class="line">s.<span class="built_in">good</span>() <span class="comment">// 流处于有效状态返回true</span></span><br><span class="line">s.<span class="built_in">bad</span>() <span class="comment">// 流badbit置位返回true</span></span><br><span class="line">s.<span class="built_in">fail</span>() <span class="comment">// 流failbit位置位返回true</span></span><br><span class="line">s.<span class="built_in">clear</span>() <span class="comment">// 将流的所有位复位，状态位为有效</span></span><br><span class="line">s.<span class="built_in">clear</span>(flags) <span class="comment">// 指定流的特定位复位</span></span><br><span class="line">s.<span class="built_in">setstate</span>(flags) <span class="comment">// 指定流的特定位置位</span></span><br><span class="line">s.<span class="built_in">rdstate</span>() <span class="comment">// 返回流的当前状态，类型为ios::state</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="标准IO"><a href="#标准IO" class="headerlink" title="标准IO"></a>标准IO</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line">std::istream </span><br><span class="line">std::ostream</span><br></pre></td></tr></table></figure>
+<p>特别需要注意io对象不能复制和赋值，可以通过引用。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line">std::istream&amp; user_in = std::cin; <span class="comment">//正确，如果函数需要io参数，使用引用类型</span></span><br><span class="line">std::istream user_in = std::cin; <span class="comment">//错误，编译时报错</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="文件IO"><a href="#文件IO" class="headerlink" title="文件IO"></a>文件IO</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;fstream&gt;</span></span></span><br><span class="line"></span><br><span class="line">std::ifstream;</span><br><span class="line">std::ofstream;</span><br></pre></td></tr></table></figure>
+
+<p>这里一直没有搞懂的一点，用户输入和文件输入这两个的区别。用户输入指的是用户从键盘输入数据，而文件输入指的是从文件输入数据到某处。</p>
+<p>这里有两个例子，分别是代表文件io和标准io，他们的最终目标都是一个：将数据送入<code>buffer</code>中。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;fstream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="keyword">char</span> buf[<span class="number">256</span>];</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//标准IO输入操作</span></span><br><span class="line">    <span class="function">std::ifstream <span class="title">file_in</span><span class="params">(<span class="string">&quot;./example.txt&quot;</span>)</span></span>;</span><br><span class="line">    file_in.<span class="built_in">getline</span>(buf, <span class="number">256</span>); <span class="comment">// 将文件内如送入数组buf中</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">//文件IO输入操作</span></span><br><span class="line">    std::istream&amp; user_in = std::cin;</span><br><span class="line">    user_in.<span class="built_in">getline</span>(buf, <span class="number">256</span>); <span class="comment">// 将用户输入送入数组buf中</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>所以可以总结下什么是输入和输出。</p>
+<ul>
+<li><p>输入：不管对象如何，都是将这个对象的数据送入程序的<code>buffer</code>中，这种操作统称为输入。</p>
+</li>
+<li><p>输出：不管数据来源与何处，只要将数据送入对象中，这种操作统一称为输出。</p>
+</li>
+</ul>
+<h3 id="stringIO"><a href="#stringIO" class="headerlink" title="stringIO"></a>stringIO</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">std::istringstream</span><br><span class="line">std::ostringstream</span><br></pre></td></tr></table></figure>
+
+<p>常用两个对象，操作和上面两种IO的操作方式一样，只需要介绍下特有的操作</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sstream strm; <span class="comment">// 创建一个未绑定的stringstream对象</span></span><br><span class="line"><span class="function">sstream <span class="title">strm</span><span class="params">(str)</span></span>; <span class="comment">// 将str绑定到stringstream对象</span></span><br><span class="line">strm.<span class="built_in">str</span>(); <span class="comment">// 返回绑定对象的字符串</span></span><br><span class="line">strm.<span class="built_in">str</span>(str); <span class="comment">// 将字符串str拷贝到strm中</span></span><br></pre></td></tr></table></figure>
+<h3 id="文件打开方式"><a href="#文件打开方式" class="headerlink" title="文件打开方式"></a>文件打开方式</h3><p>介绍一个名词叫做<strong>文件截断</strong>，意思就是在进行写文件的操作时，在写结束后，如果文件后面还有内容那么后面的内容全部清除，所以如果要进行写文件操作一般采用<code>app</code>的方式打开。</p>
+<p>文件打开有五种方式：<code>in</code>，<code>out</code>，<code>app</code>，<code>ate</code>，<code>trunc</code>，<code>binnary</code></p>
+<img src="https://raw.githubusercontent.com/f1shf1sh/Picture/master/Archlinux/image-20220318101920558.png" style="zoom:50%;" />
+
+<p>如果使用<code>out</code>等模式打开默认是截断文件的</p>
+<h2 id="assert函数"><a href="#assert函数" class="headerlink" title="assert函数"></a>assert函数</h2><p>assert函数定义在头文件<code>cassert</code>中，使用方法为</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">assert</span>(<span class="literal">true</span>);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> NDEBUG</span></span><br><span class="line">	<span class="comment">// 需要输出的错误语句</span></span><br><span class="line">    cerr &lt;&lt; __func__ &lt;&lt; <span class="string">&quot;: string size is &quot;</span> &lt;&lt; s.<span class="built_in">size</span>() &lt;&lt; endl;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br></pre></td></tr></table></figure>
+
+<p>如果在编译时添加<code>-D NDEBUG</code>这个选项，则<code>#ifndef</code>部分的语句就不会输出</p>
+<p>常用的5个程序调试名字</p>
+<ul>
+<li>__<em>FILE</em>_: 存放文件名的字符串</li>
+<li>__LINE__: 存放当前行号</li>
+<li>__TIME__: 存放文件编译时间</li>
+<li>__DATE__: 存放文件编译日期</li>
+</ul>
+<p>完整代码和测试结果</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cassert&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span>* argv[])</span> </span>&#123;</span><br><span class="line">    <span class="function">string <span class="title">s</span><span class="params">(<span class="string">&quot;some string&quot;</span>)</span></span>;</span><br><span class="line">    <span class="built_in">assert</span>(s.<span class="built_in">size</span>() &gt; <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> NDEBUG</span></span><br><span class="line">    cerr &lt;&lt; <span class="string">&quot;__FILE__: &quot;</span> &lt;&lt; __FILE__ &lt;&lt; endl;</span><br><span class="line">    cerr &lt;&lt; <span class="string">&quot;__LINE__: &quot;</span> &lt;&lt; __LINE__ &lt;&lt; endl;</span><br><span class="line">    cerr &lt;&lt; <span class="string">&quot;__DATE__: &quot;</span> &lt;&lt; __DATE__ &lt;&lt; endl;</span><br><span class="line">    cerr &lt;&lt; <span class="string">&quot;__TIME__: &quot;</span> &lt;&lt; __TIME__ &lt;&lt; endl;</span><br><span class="line">    cerr &lt;&lt; <span class="string">&quot;__func__: &quot;</span> &lt;&lt; __func__ &lt;&lt; endl;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">__FILE__: main.cpp</span><br><span class="line">__LINE__: 31</span><br><span class="line">__DATE__: Mar  9 2022</span><br><span class="line">__TIME__: 23:41:29</span><br><span class="line">__func__: main</span><br></pre></td></tr></table></figure></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">Author: </span><span class="post-copyright-info"><a href="mailto:undefined">Fish</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">Link: </span><span class="post-copyright-info"><a href="http://example.com/25718/">http://example.com/25718/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/c/">c++</a></div><div class="post_share"><div class="social-share" data-image="/img/%E6%B1%BD%E8%BD%A6%E5%B0%91%E5%A5%B3.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/57586/"><img class="next-cover" src="/img/%E6%B1%BD%E8%BD%A6%E5%B0%91%E5%A5%B3.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">Next Post</div><div class="next_info">链接</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/avatar.JPG" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Fish</div><div class="author-info__description"></div></div><div class="card-info-data is-center"><div class="card-info-data-item"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">25</div></a></div><div class="card-info-data-item"><a href="/tags/"><div class="headline">Tags</div><div class="length-num">10</div></a></div><div class="card-info-data-item"><a href="/categories/"><div class="headline">Categories</div><div class="length-num">5</div></a></div></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/f1shf1sh"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Catalog</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#IO"><span class="toc-number">1.</span> <span class="toc-text">IO</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#IO%E7%9A%84%E6%9D%A1%E4%BB%B6%E7%8A%B6%E6%80%81"><span class="toc-number">1.1.</span> <span class="toc-text">IO的条件状态</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%87%E5%87%86IO"><span class="toc-number">1.2.</span> <span class="toc-text">标准IO</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%87%E4%BB%B6IO"><span class="toc-number">1.3.</span> <span class="toc-text">文件IO</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#stringIO"><span class="toc-number">1.4.</span> <span class="toc-text">stringIO</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E6%89%93%E5%BC%80%E6%96%B9%E5%BC%8F"><span class="toc-number">1.5.</span> <span class="toc-text">文件打开方式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#assert%E5%87%BD%E6%95%B0"><span class="toc-number">2.</span> <span class="toc-text">assert函数</span></a></li></ol></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2022 By Fish</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Read Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Toggle Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between single-column and double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table Of Contents"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="Back To Top"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/ni-j.model.json"},"display":{"position":"right","width":300,"height":600},"mobile":{"show":true},"react":{"opacity":0.7}});</script></body></html>
